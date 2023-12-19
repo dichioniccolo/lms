@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./env": "./src/env.mjs"
   },
   "license": "MIT",
   "scripts": {
@@ -17,7 +18,9 @@
   },
   "dependencies": {
     "@planetscale/database": "^1.11.0",
-    "drizzle-orm": "^0.29.1"
+    "@t3-oss/env-nextjs": "^0.7.1",
+    "drizzle-orm": "^0.29.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "^0.2.0",
