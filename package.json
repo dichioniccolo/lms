@@ -27,7 +27,7 @@
     "typescript": "^5.3.3"
   },
   "prettier": "@acme/prettier-config",
-  "packageManager": "bun@1.0.15",
+  "packageManager": "bun@1.0.18",
   "workspaces": [
     "apps/*",
     "packages/*",
