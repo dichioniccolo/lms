@@ -1,6 +1,6 @@
+import type { LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, ElementRef } from "react";
 import { forwardRef } from "react";
-import type { LinkProps } from "next/link";
 import NextLink from "next/link";
 
 export const Link = forwardRef<

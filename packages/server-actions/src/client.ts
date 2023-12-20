@@ -1,8 +1,8 @@
 "use client";
 
+import type { z } from "zod";
 import { useCallback, useOptimistic, useTransition } from "react";
 import { useFormState } from "react-dom";
-import type { z } from "zod";
 
 import type { EnrichedState, ServerAction } from "./types";
 import { SubmissionStatus } from "./types";

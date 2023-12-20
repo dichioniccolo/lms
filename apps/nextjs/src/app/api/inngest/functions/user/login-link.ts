@@ -2,7 +2,6 @@ import { createId, db, eq, schema } from "@acme/db";
 import { LoginLink } from "@acme/emails";
 import { inngest } from "@acme/inngest";
 
-import { env } from "~/env.mjs";
 import { sendMail } from "~/lib/email";
 
 export const userLoginLink = inngest.createFunction(
@@ -16,19 +15,20 @@ export const userLoginLink = inngest.createFunction(
   async ({ event }) => {
     const { email, url } = event.data;
 
-    const user = await db.query.user.findFirst({
-      where: eq(schema.user.email, email),
+    const user = await db.query.users.findFirst({
+      where: eq(schema.users.email, email),
       columns: {
         name: true,
       },
     });
 
     await sendMail({
-      type: "SECURITY",
+      // type: "SECURITY",
       to: email,
       subject: "Your login link",
       react: LoginLink({
-        siteName: env.NEXT_PUBLIC_APP_NAME,
+        siteName: "",
+        // siteName: env.NEXT_PUBLIC_APP_NAME,
         url,
         userName: user?.name,
         userEmail: email,
