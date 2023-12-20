@@ -19,7 +19,7 @@
     "tailwindcss": "3.4.0"
   },
   "devDependencies": {
-    "@acme/eslint-config": "^0.2.0",
+    "@acme/eslint-config": "^0.1.0",
     "@acme/prettier-config": "^0.1.0",
     "@acme/tsconfig": "^0.1.0",
     "eslint": "^8.56.0",

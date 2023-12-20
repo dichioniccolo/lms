@@ -1,0 +1,41 @@
+{
+  "name": "@acme/inngest",
+  "private": true,
+  "version": "0.1.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "dev": "inngest-cli dev -u http://localhost:3000/api/inngest",
+    "lint": "eslint .",
+    "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "inngest": "^3.7.4"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "^0.1.0",
+    "@acme/prettier-config": "^0.1.0",
+    "@acme/tsconfig": "^0.1.0",
+    "eslint": "^8.56.0",
+    "inngest-cli": "^0.23.1",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@acme/eslint-config/base"
+    ]
+  },
+  "prettier": "@acme/prettier-config"
+}

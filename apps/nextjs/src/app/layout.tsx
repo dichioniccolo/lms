@@ -6,7 +6,7 @@ import "~/styles/globals.css";
 import { cache } from "react";
 import { headers } from "next/headers";
 
-import { env } from "~/env";
+import { env } from "~/env.mjs";
 import { TRPCReactProvider } from "~/trpc/react";
 
 const fontSans = Inter({
@@ -14,24 +14,27 @@ const fontSans = Inter({
   variable: "--font-sans",
 });
 
+const title = "LMS Andrea Di Chio";
+const description = "LMS Andrea Di Chio";
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
-      ? "https://turbo.t3.gg"
+      ? "https://lms.andreadichio.it"
       : "http://localhost:3000",
   ),
-  title: "Create T3 Turbo",
-  description: "Simple monorepo with shared backend for web & mobile apps",
+  title,
+  description,
   openGraph: {
-    title: "Create T3 Turbo",
-    description: "Simple monorepo with shared backend for web & mobile apps",
-    url: "https://create-t3-turbo.vercel.app",
-    siteName: "Create T3 Turbo",
+    title,
+    description,
+    url: "https://lms.andreadichio.it",
+    siteName: title,
   },
   twitter: {
     card: "summary_large_image",
-    site: "@jullerino",
-    creator: "@jullerino",
+    site: "@dichioniccolo",
+    creator: "@dichioniccolo",
   },
 };
 
