@@ -11,7 +11,7 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "start": "bun with-env next start",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "doppler run --"
   },
   "dependencies": {
     "@acme/api": "^0.1.0",

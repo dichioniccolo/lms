@@ -1,6 +1,7 @@
 // Importing env files here to validate on build
 import "@acme/auth/env";
 import "@acme/db/env";
+import "@acme/inngest/env";
 import "./src/env.mjs";
 
 /** @type {import("next").NextConfig} */
