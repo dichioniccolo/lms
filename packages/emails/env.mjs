@@ -2,12 +2,16 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
+  shared: {
+    NODE_ENV: z
+      .enum(["development", "production", "test"])
+      .default("development"),
+  },
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app isn't
    * built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(["development", "production", "test"]),
     SMTP_HOST: z.string().min(1),
     SMTP_PORT: z.string().min(1).transform(Number),
     SMTP_USER: z.string().min(1),

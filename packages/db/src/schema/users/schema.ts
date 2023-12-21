@@ -1,7 +1,13 @@
 import { relations } from "drizzle-orm";
-import { mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core";
+import {
+  mysqlEnum,
+  mysqlTable,
+  timestamp,
+  varchar,
+} from "drizzle-orm/mysql-core";
 
 import { accounts } from "../accounts/schema";
+import { usersCourses } from "../usersCourses/schema";
 
 export const users = mysqlTable("user", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),
@@ -11,9 +17,14 @@ export const users = mysqlTable("user", {
     mode: "date",
     fsp: 3,
   }).defaultNow(),
+  role: mysqlEnum("role", ["ADMIN", "USER", "TEACHER"])
+    .notNull()
+    .default("USER"),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).unique(),
   image: varchar("image", { length: 255 }),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  courses: many(usersCourses),
 }));

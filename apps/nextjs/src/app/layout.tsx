@@ -3,11 +3,7 @@ import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 
-import { cache } from "react";
-import { headers } from "next/headers";
-
 import { env } from "~/env.mjs";
-import { TRPCReactProvider } from "~/trpc/react";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -38,16 +34,11 @@ export const metadata: Metadata = {
   },
 };
 
-// Lazy load headers
-const getHeaders = cache(() => Promise.resolve(headers()));
-
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={["font-sans", fontSans.variable].join(" ")}>
-        <TRPCReactProvider headersPromise={getHeaders()}>
-          {props.children}
-        </TRPCReactProvider>
+        {props.children}
       </body>
     </html>
   );
