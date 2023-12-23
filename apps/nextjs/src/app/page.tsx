@@ -1,8 +1,10 @@
+import type { ServerRuntime } from "next";
+
 import { AuthShowcase } from "./_components/auth-showcase";
 
 // import { CreatePostForm } from "./_components/posts";
 
-export const runtime = "edge";
+export const runtime: ServerRuntime = "edge";
 
 export default async function HomePage() {
   // You don't need to fetch these here, just showing different usages

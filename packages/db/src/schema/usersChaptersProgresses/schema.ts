@@ -1,9 +1,9 @@
 import { relations } from "drizzle-orm";
 import {
+  boolean,
   mysqlTable,
   primaryKey,
   timestamp,
-  tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -15,11 +15,7 @@ export const usersChaptersProgresses = mysqlTable(
   {
     userId: varchar("userId", { length: 255 }).notNull(),
     chapterId: varchar("chapterId", { length: 255 }).notNull(),
-    percentage: tinyint("percentage", {
-      unsigned: true,
-    })
-      .notNull()
-      .default(0),
+    completed: boolean("completed").notNull().default(false),
     createdAt: timestamp("createdAt", {
       mode: "date",
       fsp: 3,
