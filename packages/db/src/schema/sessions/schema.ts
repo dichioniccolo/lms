@@ -10,7 +10,7 @@ export const sessions = mysqlTable(
       .notNull()
       .primaryKey(),
     userId: varchar("userId", { length: 255 }).notNull(),
-    expires: timestamp("expires", { mode: "date" }).notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(), // here i left timestamp because the schema is used also by @auth/core
   },
   (session) => ({
     userIdIdx: index("userId_idx").on(session.userId),

@@ -1,8 +1,8 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
+  datetime,
   mysqlTable,
   primaryKey,
-  timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -14,13 +14,12 @@ export const usersCourses = mysqlTable(
   {
     userId: varchar("userId", { length: 255 }).notNull(),
     courseId: varchar("courseId", { length: 255 }).notNull(),
-    createdAt: timestamp("createdAt", {
+    createdAt: datetime("createdAt", {
       mode: "date",
       fsp: 3,
     })
       .notNull()
-      .defaultNow()
-      .onUpdateNow(),
+      .default(sql`(now())`),
   },
   (columns) => ({
     userIdCourseIdPk: primaryKey({

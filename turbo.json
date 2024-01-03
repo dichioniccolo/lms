@@ -9,6 +9,9 @@
         "^topo"
       ]
     },
+    "db:studio": {
+      "cache": false
+    },
     "build": {
       "dependsOn": [
         "^build"
@@ -21,6 +24,18 @@
         ".output/**",
         ".vercel/output/**"
       ]
+    },
+    "db:generate": {
+      "inputs": [
+        "src"
+      ],
+      "outputs": [
+        "drizzle/**"
+      ],
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
     },
     "dev": {
       "persistent": true,

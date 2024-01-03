@@ -1,9 +1,9 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
+  datetime,
   mysqlTable,
   serial,
   text,
-  timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -14,19 +14,18 @@ export const attachments = mysqlTable("attachments", {
   courseId: varchar("courseId", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   url: text("url").notNull(),
-  createdAt: timestamp("createdAt", {
+  createdAt: datetime("createdAt", {
     mode: "date",
     fsp: 3,
   })
     .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updatedAt", {
+    .default(sql`(now())`),
+  updatedAt: datetime("updatedAt", {
     mode: "date",
     fsp: 3,
   })
     .notNull()
-    .defaultNow()
-    .onUpdateNow(),
+    .default(sql`(now())`),
 });
 
 export const attachmentsRelations = relations(attachments, ({ one }) => ({

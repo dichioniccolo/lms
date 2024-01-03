@@ -1,9 +1,9 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   boolean,
+  datetime,
   mysqlTable,
   text,
-  timestamp,
   tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
@@ -23,19 +23,18 @@ export const chapters = mysqlTable("chapters", {
   }),
   published: boolean("published").notNull().default(false),
   free: boolean("free").notNull().default(false),
-  createdAt: timestamp("createdAt", {
+  createdAt: datetime("createdAt", {
     mode: "date",
     fsp: 3,
   })
     .notNull()
-    .defaultNow(),
-  updatedAt: timestamp("updatedAt", {
+    .default(sql`(now())`),
+  updatedAt: datetime("updatedAt", {
     mode: "date",
     fsp: 3,
   })
     .notNull()
-    .defaultNow()
-    .onUpdateNow(),
+    .default(sql`(now())`),
 });
 
 export const chaptersRelations = relations(chapters, ({ one, many }) => ({

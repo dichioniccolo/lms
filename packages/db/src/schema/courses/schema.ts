@@ -1,9 +1,10 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   boolean,
+  datetime,
+  index,
   mysqlTable,
   text,
-  timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -24,23 +25,22 @@ export const courses = mysqlTable(
     imageUrl: text("imageUrl"),
     price: price("price"),
     published: boolean("published").notNull().default(false),
-    createdAt: timestamp("createdAt", {
+    createdAt: datetime("createdAt", {
       mode: "date",
       fsp: 3,
     })
       .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updatedAt", {
+      .default(sql`(now())`),
+    updatedAt: datetime("updatedAt", {
       mode: "date",
       fsp: 3,
     })
       .notNull()
-      .defaultNow()
-      .onUpdateNow(),
+      .default(sql`(now())`),
   },
-  // (columns) => ({
-  //   // publishedIdx: index("published_idx").on(columns.published),
-  // }),
+  (columns) => ({
+    publishedIdx: index("published_idx").on(columns.published),
+  }),
 );
 
 export const coursesRelations = relations(courses, ({ one, many }) => ({
