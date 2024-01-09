@@ -24,10 +24,10 @@ interface LoginLinkProps {
 }
 
 export const LoginLink = ({
-  siteName = "MyBlog",
-  url = "https://google.com",
-  userName = "Niccolò Di Chio",
-  userEmail = "me@email.com",
+  siteName,
+  url,
+  userName,
+  userEmail,
 }: LoginLinkProps) => {
   const previewText = `Login link on ${siteName}`;
 

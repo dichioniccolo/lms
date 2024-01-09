@@ -24,7 +24,7 @@ export const categoriesCoursesRelations = relations(
       fields: [categoriesCourses.categoryId],
       references: [categories.id],
     }),
-    courseId: one(courses, {
+    course: one(courses, {
       fields: [categoriesCourses.courseId],
       references: [courses.id],
     }),

@@ -17,7 +17,7 @@ const description = "LMS Andrea Di Chio";
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
-      ? "https://lms.andreadichio.it"
+      ? env.NEXT_PUBLIC_APP_DOMAIN
       : "http://localhost:3000",
   ),
   title: {

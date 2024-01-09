@@ -33,7 +33,7 @@ export const usersCoursesRelations = relations(usersCourses, ({ one }) => ({
     fields: [usersCourses.userId],
     references: [users.id],
   }),
-  courseId: one(courses, {
+  course: one(courses, {
     fields: [usersCourses.courseId],
     references: [courses.id],
   }),

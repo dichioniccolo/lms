@@ -1,3 +1,5 @@
+"use server";
+
 import { z } from "zod";
 
 import { and, db, eq, schema } from "@acme/db";
@@ -5,13 +7,14 @@ import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 import { stripe } from "@acme/stripe";
 
+import { RequiredString } from "~/lib/validation";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
 export const purchaseCourse = createServerAction({
   actionName: "purchaseCourse",
   middlewares: authenticatedMiddlewares,
   schema: z.object({
-    courseId: z.string().min(1),
+    courseId: RequiredString,
   }),
   initialState: null as string | null,
   action: async ({ input: { courseId }, ctx: { user } }) => {

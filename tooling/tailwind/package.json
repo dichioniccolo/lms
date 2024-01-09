@@ -1,12 +1,12 @@
 {
   "name": "@acme/tailwind-config",
   "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "exports": {
-    ".": "./index.ts"
-  },
+  "main": "index.ts",
   "license": "MIT",
+  "files": [
+    "index.ts",
+    "postcss.js"
+  ],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
@@ -14,9 +14,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "tailwindcss": "3.4.0"
+    "postcss": "8.4.33",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "tailwindcss": "3.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-radix": "^2.8.0",
+    "uploadthing": "^6.1.1"
   },
   "devDependencies": {
     "@acme/eslint-config": "^0.1.0",

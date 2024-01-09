@@ -5,20 +5,21 @@
     "node": ">=20.10"
   },
   "scripts": {
-    "reinstall": "bun clean:workspaces && bun i",
+    "reinstall": "pnpm clean:workspaces && pnpm i",
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
-    "postinstall": "bun lint:ws",
+    "postinstall": "pnpm lint:ws",
     "db:generate": "turbo db:generate",
-    "db:push": "cd ./packages/db && bun db:push && cd ..",
-    "db:studio": "bun -F db studio",
-    "dev": "turbo dev --parallel",
+    "db:push": "cd ./packages/db && pnpm db:push && cd ..",
+    "db:studio": "pnpm -F db studio",
+    "dev": "pnpm with-env turbo dev --parallel",
+    "with-env": "doppler run --",
     "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
     "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
     "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:ws": "bunx sherif@latest",
+    "lint:ws": "npx sherif@latest",
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {
@@ -29,7 +30,7 @@
     "typescript": "^5.3.3"
   },
   "prettier": "@acme/prettier-config",
-  "packageManager": "bun@1.0.18",
+  "packageManager": "pnpm@8.14.0",
   "workspaces": [
     "apps/*",
     "packages/*",

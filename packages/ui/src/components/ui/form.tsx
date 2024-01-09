@@ -1,13 +1,13 @@
-import * as React from "react";
 import type * as LabelPrimitive from "@radix-ui/react-label";
-import { Slot } from "@radix-ui/react-slot";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
-import { Controller, useFormContext } from "react-hook-form";
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
-import { cn } from "../lib/utils";
-import { Label } from "./ui/label";
+import { cn } from "../../lib/utils";
+import { Label } from "./label";
 
-// const Form = FormProvider;
+const Form = FormProvider;
 
 interface FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -128,7 +128,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
   );
@@ -150,7 +150,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("text-destructive text-sm font-medium", className)}
       {...props}
     >
       {body}
@@ -159,8 +159,8 @@ const FormMessage = React.forwardRef<
 });
 FormMessage.displayName = "FormMessage";
 
-// Form
 export {
+  Form,
   FormControl,
   FormDescription,
   FormField,

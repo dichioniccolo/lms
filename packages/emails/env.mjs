@@ -12,16 +12,12 @@ export const env = createEnv({
    * built with invalid env vars.
    */
   server: {
-    SMTP_HOST: z.string().min(1),
-    SMTP_PORT: z.string().min(1).transform(Number),
-    SMTP_USER: z.string().min(1),
-    SMTP_PASSWORD: z.string().min(1),
-    SMTP_FROM: z.string().min(1),
     // z.preprocess(
     //   // get from the string the value between the < and > characters
     //   (str) => (typeof str === "string" ? str.match(/<(.*)>/)?.[1] : null),
     //   z.string().email(),
     // ),
+    SMTP_FROM: z.string().email(),
     RESEND_API_KEY: z.string().min(1),
   },
   /**
@@ -36,10 +32,6 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_PORT: process.env.SMTP_PORT,
-    SMTP_USER: process.env.SMTP_USER,
-    SMTP_PASSWORD: process.env.SMTP_PASSWORD,
     SMTP_FROM: process.env.SMTP_FROM,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXT_PUBLIC_APP_DOMAIN: process.env.NEXT_PUBLIC_APP_DOMAIN,

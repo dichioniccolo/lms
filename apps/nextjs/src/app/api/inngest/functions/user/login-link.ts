@@ -23,7 +23,6 @@ export const userLoginLink = inngest.createFunction(
     });
 
     await sendMail({
-      // type: "SECURITY",
       to: email,
       subject: "Your login link",
       react: LoginLink({

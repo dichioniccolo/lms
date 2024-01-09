@@ -5,6 +5,8 @@ import { auth } from "@acme/auth";
 import { and, asc, db, eq, exists, schema, sql } from "@acme/db";
 
 import { getCourseProgress } from "~/app/_api/get-course-progress";
+import { CourseNavbar } from "./_components/course-navbar";
+import { CourseSidebar } from "./_components/course-sidebar";
 
 export async function Layout({
   children,
@@ -12,7 +14,7 @@ export async function Layout({
 }: PropsWithChildren<{ params: { courseId: string } }>) {
   const session = await auth();
 
-  if (!session?.user) {
+  if (!session) {
     return redirect("/");
   }
 
@@ -33,11 +35,18 @@ export async function Layout({
       ),
     ),
     with: {
+      users: {
+        where: eq(schema.users.id, session.user.id),
+        limit: 1,
+      },
       chapters: {
         where: eq(schema.chapters.published, true),
         with: {
           progresses: {
             where: eq(schema.usersChaptersProgresses.userId, session.user.id),
+            columns: {
+              completed: true,
+            },
           },
         },
         orderBy: asc(schema.chapters.position),
@@ -51,13 +60,24 @@ export async function Layout({
 
   const courseProgress = await getCourseProgress(course.id);
 
+  const purchased = course.users.length > 0;
+
   return (
     <div className="h-full">
       <div className="fixed inset-y-0 z-50 h-20 w-full md:pl-80">
-        course navbar
+        <CourseNavbar
+          session={session}
+          purchased={purchased}
+          course={course}
+          courseProgress={courseProgress}
+        />
       </div>
       <div className="fixed inset-y-0 z-50 hidden h-full w-80 flex-col md:flex">
-        course sidebar
+        <CourseSidebar
+          purchased={purchased}
+          course={course}
+          courseProgress={courseProgress}
+        />
       </div>
       <main className="h-full pt-20 md:pl-80">{children}</main>
     </div>

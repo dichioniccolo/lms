@@ -19,12 +19,17 @@ export const env = createEnv({
    */
   server: {
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
+    MUX_TOKEN_ID: z.string().min(1),
+    MUX_TOKEN_SECRET: z.string().min(1),
   },
   /**
    * Specify your client-side environment variables schema here.
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_APP_DOMAIN: z.string().min(1),
+    NEXT_PUBLIC_TEACHER_EMAILS: z.string().min(1),
+  },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
    */
@@ -34,6 +39,10 @@ export const env = createEnv({
     PORT: process.env.PORT,
     NODE_ENV: process.env.NODE_ENV,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+    MUX_TOKEN_ID: process.env.MUX_TOKEN_ID,
+    MUX_TOKEN_SECRET: process.env.MUX_TOKEN_SECRET,
+    NEXT_PUBLIC_TEACHER_EMAILS: process.env.NEXT_PUBLIC_TEACHER_EMAILS,
+    NEXT_PUBLIC_APP_DOMAIN: process.env.NEXT_PUBLIC_APP_DOMAIN,
   },
   skipValidation:
     !!process.env.CI ||

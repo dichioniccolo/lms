@@ -1,5 +1,5 @@
-import { Resend } from "resend";
 import type { CreateEmailOptions } from "resend/build/src/emails/interfaces";
+import { Resend } from "resend";
 
 import { env } from "../env.mjs";
 
@@ -16,7 +16,6 @@ export async function sendMail({
     ...defaultOptions,
     ...options,
   } as CreateEmailOptions;
-
   const result = await resend.emails.send(payload);
 
   return result;

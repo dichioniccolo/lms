@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./types": "./src/types.ts",
     "./env": "./src/env.mjs"
   },
   "license": "MIT",
@@ -14,8 +15,8 @@
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "db:generate": "drizzle-kit generate:mysql",
-    "db:push": "bun with-env drizzle-kit push:mysql",
-    "db:studio": "bun with-env drizzle-kit studio",
+    "db:push": "pnpm with-env drizzle-kit push:mysql",
+    "db:studio": "pnpm with-env drizzle-kit studio",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
