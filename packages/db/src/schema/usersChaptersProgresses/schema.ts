@@ -13,8 +13,12 @@ import { users } from "../users/schema";
 export const usersChaptersProgresses = mysqlTable(
   "usersChaptersProgresses",
   {
-    userId: varchar("userId", { length: 255 }).notNull(),
-    chapterId: varchar("chapterId", { length: 255 }).notNull(),
+    userId: varchar("userId", { length: 255 })
+      .notNull()
+      .references(() => users.id),
+    chapterId: varchar("chapterId", { length: 255 })
+      .notNull()
+      .references(() => chapters.id),
     completed: boolean("completed").notNull().default(false),
     createdAt: datetime("createdAt", {
       mode: "date",

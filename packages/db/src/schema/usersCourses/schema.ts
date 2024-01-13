@@ -12,8 +12,12 @@ import { users } from "../users/schema";
 export const usersCourses = mysqlTable(
   "usersCourses",
   {
-    userId: varchar("userId", { length: 255 }).notNull(),
-    courseId: varchar("courseId", { length: 255 }).notNull(),
+    userId: varchar("userId", { length: 255 })
+      .notNull()
+      .references(() => users.id),
+    courseId: varchar("courseId", { length: 255 })
+      .notNull()
+      .references(() => courses.id),
     createdAt: datetime("createdAt", {
       mode: "date",
       fsp: 3,

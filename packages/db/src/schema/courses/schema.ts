@@ -19,7 +19,9 @@ export const courses = mysqlTable(
   "courses",
   {
     id: varchar("id", { length: 255 }).notNull().primaryKey(),
-    ownerId: varchar("ownerId", { length: 255 }).notNull(),
+    ownerId: varchar("ownerId", { length: 255 })
+      .notNull()
+      .references(() => users.id),
     title: text("title").notNull(),
     description: text("description"),
     imageUrl: text("imageUrl"),

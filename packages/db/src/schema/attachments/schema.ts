@@ -11,7 +11,9 @@ import { courses } from "../courses/schema";
 
 export const attachments = mysqlTable("attachments", {
   id: serial("id").notNull().autoincrement().primaryKey(),
-  courseId: varchar("courseId", { length: 255 }).notNull(),
+  courseId: varchar("courseId", { length: 255 })
+    .notNull()
+    .references(() => courses.id),
   name: varchar("name", { length: 255 }).notNull(),
   url: text("url").notNull(),
   createdAt: datetime("createdAt", {

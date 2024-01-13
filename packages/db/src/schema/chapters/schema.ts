@@ -14,7 +14,9 @@ import { usersChaptersProgresses } from "../usersChaptersProgresses/schema";
 
 export const chapters = mysqlTable("chapters", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),
-  courseId: varchar("courseId", { length: 255 }).notNull(),
+  courseId: varchar("courseId", { length: 255 })
+    .notNull()
+    .references(() => courses.id),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   videoUrl: text("videoUrl"),

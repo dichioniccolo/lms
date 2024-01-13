@@ -1,5 +1,11 @@
 import { relations } from "drizzle-orm";
-import { mysqlTable, primaryKey, varchar } from "drizzle-orm/mysql-core";
+import {
+  bigint,
+  mysqlTable,
+  serial,
+  uniqueIndex,
+  varchar,
+} from "drizzle-orm/mysql-core";
 
 import { categories } from "../categories/schema";
 import { courses } from "../courses/schema";
@@ -7,13 +13,22 @@ import { courses } from "../courses/schema";
 export const categoriesCourses = mysqlTable(
   "categoriesCourses",
   {
-    categoryId: varchar("categoryId", { length: 255 }).notNull(),
-    courseId: varchar("courseId", { length: 255 }).notNull(),
+    id: serial("id").notNull().autoincrement().primaryKey(),
+    categoryId: bigint("categoryId", {
+      mode: "number",
+      unsigned: true,
+    })
+      .notNull()
+      .references(() => categories.id),
+    courseId: varchar("courseId", { length: 255 })
+      .notNull()
+      .references(() => courses.id),
   },
   (columns) => ({
-    categoryIdCourseIdPk: primaryKey({
-      columns: [columns.categoryId, columns.courseId],
-    }),
+    categoryIdCourseIdPk: uniqueIndex("categoryIdCourseIdPk").on(
+      columns.categoryId,
+      columns.courseId,
+    ),
   }),
 );
 
