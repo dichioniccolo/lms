@@ -30,7 +30,7 @@ interface Props {
 
 export function CourseCard({ course, progress }: Props) {
   return (
-    <Link href={`/courses/${course.id}`}>
+    <Link href={`/dashboard/courses/${course.id}`}>
       <div className="group h-full overflow-hidden rounded-lg border p-3 transition hover:shadow-sm">
         <div className="relative aspect-video w-full overflow-hidden rounded-md">
           <Image

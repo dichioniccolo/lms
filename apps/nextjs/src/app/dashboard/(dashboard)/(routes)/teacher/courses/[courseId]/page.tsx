@@ -11,9 +11,12 @@ import { Banner } from "@acme/ui/components/banner";
 
 import { getCurrentUser } from "~/app/_api/get-user";
 import { IconBadge } from "~/app/_components/icon-badge";
+import { AttachmentsForm } from "./_components/attachments-form";
+import { CategoriesForm } from "./_components/categories-form";
+import { ChaptersForm } from "./_components/chapters-form";
 import { CourseActions } from "./_components/course-actions";
-import { DescriptionForm } from "./_components/description-form";
 import { ImageForm } from "./_components/image-form";
+import { PriceForm } from "./_components/price-form";
 import { TitleForm } from "./_components/title-form";
 
 interface Props {
@@ -35,20 +38,20 @@ export default async function Page({ params: { courseId } }: Props) {
       eq(schema.courses.ownerId, user.id),
     ),
     with: {
-      // chapters: {
-      //   orderBy: asc(schema.chapters.position),
-      // },
-      // attachments: {
-      //   orderBy: desc(schema.attachments.createdAt),
-      // },
-      // categories: {
-      //   orderBy: asc(schema.categories.name),
-      // },
+      chapters: {
+        orderBy: asc(schema.chapters.position),
+      },
+      attachments: true,
+      categories: {
+        with: {
+          category: true,
+        },
+      },
     },
   });
 
   if (!course) {
-    return redirect("/teacher/courses");
+    return redirect("/dashboard/teacher/courses");
   }
 
   const categories = await db.query.categories.findMany({
@@ -61,7 +64,7 @@ export default async function Page({ params: { courseId } }: Props) {
     course.imageUrl,
     course.price,
     // course.categories.some((x) => x.courseId === course.id),
-    // course.chapters.some((x) => x.published),
+    course.chapters.some((x) => x.published),
   ];
 
   const totalFields = requiredFields.length;
@@ -94,13 +97,19 @@ export default async function Page({ params: { courseId } }: Props) {
               <IconBadge icon={LayoutDashboard} />
               <h2 className="text-xl">Customize your course</h2>
             </div>
-            <TitleForm courseId={course.id} title={course.title} />
-            <DescriptionForm
+            <TitleForm
               courseId={course.id}
+              title={course.title}
               description={course.description}
             />
             <ImageForm courseId={course.id} imageUrl={course.imageUrl} />
-            <div>category form</div>
+            {categories.length > 0 && (
+              <CategoriesForm
+                courseId={course.id}
+                categories={course.categories.map((x) => x.category)}
+                availableCategories={categories}
+              />
+            )}
           </div>
           <div className="space-y-6">
             <div>
@@ -108,21 +117,24 @@ export default async function Page({ params: { courseId } }: Props) {
                 <IconBadge icon={ListChecks} />
                 <h2 className="text-xl">Course chapters</h2>
               </div>
-              <div>chapters form</div>
+              <ChaptersForm courseId={course.id} chapters={course.chapters} />
             </div>
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={CircleDollarSign} />
                 <h2 className="text-xl">Sell your course</h2>
               </div>
-              <div>price form</div>
+              <PriceForm courseId={course.id} price={course.price} />
             </div>
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={File} />
                 <h2 className="text-xl">Resource & Attachments</h2>
               </div>
-              <div>attachments form</div>
+              <AttachmentsForm
+                courseId={course.id}
+                attachments={course.attachments}
+              />
             </div>
           </div>
         </div>

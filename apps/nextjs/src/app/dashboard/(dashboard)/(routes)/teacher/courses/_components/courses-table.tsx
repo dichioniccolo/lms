@@ -98,7 +98,7 @@ const columns: ColumnDef<Course>[] = [
 
       return (
         <Link
-          href={`/teacher/courses/${id}`}
+          href={`/dashboard/teacher/courses/${id}`}
           className={buttonVariants({
             variant: "ghost",
           })}
@@ -114,7 +114,7 @@ const columns: ColumnDef<Course>[] = [
         //     </Button>
         //   </DropdownMenuTrigger>
         //   <DropdownMenuContent align="end">
-        //     <Link href={`/teacher/courses/${id}`}>
+        //     <Link href={`/dashboard/teacher/courses/${id}`}>
         //       <DropdownMenuItem>
         //         <Pencil className="mr-2 h-4 w-4" />
         //         Edit
@@ -157,7 +157,7 @@ export function CoursesTable({ courses }: Props) {
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
         />
-        <Link href="/teacher/courses/create">
+        <Link href="/dashboard/teacher/courses/create">
           <Button>
             <PlusCircle className="mr-2 h-4 w-4" />
             New course

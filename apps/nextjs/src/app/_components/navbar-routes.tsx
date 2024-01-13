@@ -18,7 +18,7 @@ interface Props {
 export function NavbarRoutes({ session }: Props) {
   const pathname = usePathname();
 
-  const isTeacherPage = pathname.startsWith("/teacher");
+  const isTeacherPage = pathname.includes("/teacher");
   const isCoursePage = pathname.includes("/courses");
   const isSearchPage = pathname === "/search";
 
@@ -34,7 +34,7 @@ export function NavbarRoutes({ session }: Props) {
       <div className="ml-auto flex items-center gap-x-2">
         {isTeacherPage || isCoursePage ? (
           <Link
-            href="/"
+            href="/dashboard"
             className={buttonVariants({
               size: "sm",
               variant: "ghost",
@@ -45,7 +45,7 @@ export function NavbarRoutes({ session }: Props) {
           </Link>
         ) : isUserATeacher ? (
           <Link
-            href="/teacher/courses"
+            href="/dashboard/teacher/courses"
             className={buttonVariants({
               size: "sm",
               variant: "ghost",

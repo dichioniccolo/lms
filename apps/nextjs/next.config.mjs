@@ -86,6 +86,7 @@ const config = {
   experimental: {
     useDeploymentId: true,
     useDeploymentIdServerActions: true,
+    typedRoutes: true,
   },
 
   headers: async () => [

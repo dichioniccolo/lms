@@ -36,7 +36,7 @@ export function CreateCourseForm() {
   const { action, status, validationErrors } = useServerAction(createCourse, {
     onSuccess(courseId) {
       toast.success("Course created");
-      router.push(`/teacher/courses/${courseId}`);
+      router.push(`/dashboard/teacher/courses/${courseId}`);
     },
   });
 

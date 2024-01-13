@@ -9,7 +9,6 @@ import { z } from "zod";
 import { SubmissionStatus } from "@acme/server-actions";
 import { useServerAction } from "@acme/server-actions/client";
 import { cn } from "@acme/ui";
-import { TextareaAutosize } from "@acme/ui/components/textarea-autosize";
 import { Button } from "@acme/ui/components/ui/button";
 import {
   FormControl,
@@ -17,29 +16,34 @@ import {
   FormItem,
   FormMessage,
 } from "@acme/ui/components/ui/form";
+import { Input } from "@acme/ui/components/ui/input";
 import { Form } from "@acme/ui/components/zod-form";
 import { useZodForm } from "@acme/ui/hooks/use-zod-form";
 
 import { updateCourse } from "~/app/_actions/courses/update-course";
-import { RequiredString } from "~/lib/validation";
+import { formatPrice } from "~/lib/utils";
 
 interface Props {
   courseId: string;
-  description: string | null;
+  price: number | null;
 }
 
 const formSchema = z.object({
-  description: RequiredString,
+  price: z.coerce.number(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export function DescriptionForm({ courseId, description }: Props) {
+export function PriceForm({ courseId, price }: Props) {
   const router = useRouter();
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const toggleEdit = () => setIsEditing((current) => !current);
 
   const { action, status } = useServerAction(updateCourse, {
     onSuccess() {
-      toast.success("Course description updated");
+      toast.success("Course price updated");
       router.refresh();
       toggleEdit();
     },
@@ -48,58 +52,53 @@ export function DescriptionForm({ courseId, description }: Props) {
     },
   });
 
-  const [editing, setEditing] = useState(false);
-
-  const toggleEdit = () => setEditing((x) => !x);
-
   const form = useZodForm({
     schema: formSchema,
     defaultValues: {
-      description: description ?? "",
+      price: price ?? undefined,
     },
   });
 
-  const onSubmit = ({ description }: FormSchema) =>
+  const onSubmit = ({ price }: FormSchema) =>
     action({
       courseId,
       values: {
-        description: description ?? "",
+        price,
       },
     });
 
   return (
     <div className="mt-6 rounded-md border bg-slate-100 p-4">
       <div className="flex items-center justify-between font-medium">
-        Course description
+        Course price
         <Button onClick={toggleEdit} variant="ghost">
-          {editing ? (
-            "Cancel"
+          {isEditing ? (
+            <>Cancel</>
           ) : (
             <>
               <Pencil className="mr-2 h-4 w-4" />
-              Edit description
+              Edit price
             </>
           )}
         </Button>
       </div>
-      {editing && (
-        <p
-          className={cn("mt-2 text-sm", {
-            "text-slate-5000 italic": !description,
-          })}
-        >
-          {description ?? "No description"}
+      {!isEditing && (
+        <p className={cn("mt-2 text-sm", !price && "italic text-slate-500")}>
+          {price ? formatPrice(price) : "No price"}
         </p>
       )}
-      {editing && (
+      {isEditing && (
         <Form form={form} onSubmit={onSubmit} className="mt-4 space-y-4">
-          <FormField<FormSchema>
-            name="description"
+          <FormField
+            control={form.control}
+            name="price"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextareaAutosize
-                    placeholder="e.g. 'This course is about....'"
+                  <Input
+                    type="number"
+                    step="0.01"
+                    placeholder="Set a price for your course"
                     {...field}
                   />
                 </FormControl>

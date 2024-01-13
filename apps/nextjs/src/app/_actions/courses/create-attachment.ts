@@ -1,23 +1,28 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { and, db, eq, schema } from "@acme/db";
 import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 
-import { mux } from "~/lib/mux";
+import { isTeacher } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
-export const deleteCourse = createServerAction({
-  actionName: "deleteCourse",
+export const createAttachment = createServerAction({
+  actionName: "createAttachment",
   middlewares: authenticatedMiddlewares,
   schema: z.object({
     courseId: RequiredString,
+    name: RequiredString,
+    url: RequiredString.url(),
   }),
-  action: async ({ input: { courseId }, ctx: { user } }) => {
+  action: async ({ input: { courseId, name, url }, ctx: { user } }) => {
+    if (!isTeacher(user.email)) {
+      throw new ErrorForClient("You are not a teacher");
+    }
+
     const course = await db.query.courses.findFirst({
       where: and(
         eq(schema.courses.id, courseId),
@@ -26,36 +31,16 @@ export const deleteCourse = createServerAction({
       columns: {
         id: true,
       },
-      with: {
-        chapters: {
-          with: {
-            mux: true,
-          },
-        },
-      },
     });
 
     if (!course) {
       throw new ErrorForClient("Course not found");
     }
 
-    for (const chapter of course.chapters) {
-      if (!chapter.mux?.assetId) {
-        continue;
-      }
-
-      await mux.Video.Assets.del(chapter.mux.assetId);
-    }
-
-    await db
-      .delete(schema.courses)
-      .where(
-        and(
-          eq(schema.courses.id, courseId),
-          eq(schema.courses.ownerId, user.id),
-        ),
-      );
-
-    redirect("/dashboard/teacher/courses");
+    await db.insert(schema.attachments).values({
+      courseId,
+      name,
+      url,
+    });
   },
 });

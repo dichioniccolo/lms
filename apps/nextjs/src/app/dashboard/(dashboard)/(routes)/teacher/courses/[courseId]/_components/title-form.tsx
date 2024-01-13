@@ -8,6 +8,7 @@ import { z } from "zod";
 
 import { SubmissionStatus } from "@acme/server-actions";
 import { useServerAction } from "@acme/server-actions/client";
+import { TextareaAutosize } from "@acme/ui/components/textarea-autosize";
 import { Button } from "@acme/ui/components/ui/button";
 import {
   FormControl,
@@ -25,20 +26,22 @@ import { RequiredString } from "~/lib/validation";
 interface Props {
   courseId: string;
   title: string;
+  description: string | null;
 }
 
 const formSchema = z.object({
   title: RequiredString,
+  description: RequiredString,
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export function TitleForm({ courseId, title }: Props) {
+export function TitleForm({ courseId, title, description }: Props) {
   const router = useRouter();
 
   const { action, status } = useServerAction(updateCourse, {
     onSuccess() {
-      toast.success("Course title updated");
+      toast.success("Course title and description updated");
       router.refresh();
       toggleEdit();
     },
@@ -55,33 +58,34 @@ export function TitleForm({ courseId, title }: Props) {
     schema: formSchema,
     defaultValues: {
       title,
+      description: description ?? "",
     },
   });
 
-  const onSubmit = ({ title }: FormSchema) =>
+  const onSubmit = ({ title, description }: FormSchema) =>
     action({
       courseId,
       values: {
         title,
+        description,
       },
     });
 
   return (
     <div className="mt-6 rounded-md border bg-slate-100 p-4">
       <div className="flex items-center justify-between font-medium">
-        Course title
+        Course title and description
         <Button onClick={toggleEdit} variant="ghost">
           {editing ? (
             "Cancel"
           ) : (
             <>
               <Pencil className="mr-2 h-4 w-4" />
-              Edit title
+              Edit title or description
             </>
           )}
         </Button>
       </div>
-      {editing && <p className="mt-2 text-sm">{title}</p>}
       {editing && (
         <Form form={form} onSubmit={onSubmit} className="mt-4 space-y-4">
           <FormField<FormSchema>
@@ -91,6 +95,20 @@ export function TitleForm({ courseId, title }: Props) {
                 <FormControl>
                   <Input
                     placeholder="e.g. 'Advanced web development'"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField<FormSchema>
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <TextareaAutosize
+                    placeholder="e.g. 'This course is about....'"
                     {...field}
                   />
                 </FormControl>

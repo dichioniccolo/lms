@@ -3,8 +3,10 @@
 import { z } from "zod";
 
 import { and, db, eq, schema } from "@acme/db";
+import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 
+import { isTeacher } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
@@ -18,10 +20,15 @@ export const updateCourse = createServerAction({
         title: RequiredString,
         description: RequiredString,
         imageUrl: RequiredString,
+        price: z.coerce.number(),
       })
       .partial(),
   }),
   action: async ({ input: { courseId, values }, ctx: { user } }) => {
+    if (!isTeacher(user.email)) {
+      throw new ErrorForClient("You are not a teacher");
+    }
+
     await db
       .update(schema.courses)
       .set({

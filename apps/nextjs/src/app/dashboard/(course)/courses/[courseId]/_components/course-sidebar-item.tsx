@@ -32,7 +32,7 @@ export function CourseSidebarItem({ purchased, courseId, chapter }: Props) {
 
   return (
     <Link
-      href={`/courses/${courseId}/chapters/${chapter.id}`}
+      href={`/dashboard/courses/${courseId}/chapters/${chapter.id}`}
       className={cn(
         "flex items-center gap-x-2 pl-6 text-sm font-medium text-slate-500 transition-all hover:bg-slate-300/20 hover:text-slate-600",
         {
