@@ -2,9 +2,9 @@ import { relations, sql } from "drizzle-orm";
 import {
   boolean,
   datetime,
+  int,
   mysqlTable,
   text,
-  tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -16,11 +16,13 @@ export const chapters = mysqlTable("chapters", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),
   courseId: varchar("courseId", { length: 255 })
     .notNull()
-    .references(() => courses.id),
+    .references(() => courses.id, {
+      onDelete: "cascade",
+    }),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   videoUrl: text("videoUrl"),
-  position: tinyint("position", {
+  position: int("position", {
     unsigned: true,
   }),
   published: boolean("published").notNull().default(false),

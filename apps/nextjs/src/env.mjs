@@ -21,6 +21,11 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
     MUX_TOKEN_ID: z.string().min(1),
     MUX_TOKEN_SECRET: z.string().min(1),
+    DO_ENDPOINT: z.string().url(),
+    DO_REGION: z.string().min(1),
+    DO_BUCKET_NAME: z.string().min(1),
+    DO_ACCESS_KEY_ID: z.string().min(1),
+    DO_SECRET_ACCESS_KEY: z.string().min(1),
   },
   /**
    * Specify your client-side environment variables schema here.
@@ -41,6 +46,11 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     MUX_TOKEN_ID: process.env.MUX_TOKEN_ID,
     MUX_TOKEN_SECRET: process.env.MUX_TOKEN_SECRET,
+    DO_ENDPOINT: process.env.DO_ENDPOINT,
+    DO_REGION: process.env.DO_REGION,
+    DO_BUCKET_NAME: process.env.DO_BUCKET_NAME,
+    DO_ACCESS_KEY_ID: process.env.DO_ACCESS_KEY_ID,
+    DO_SECRET_ACCESS_KEY: process.env.DO_SECRET_ACCESS_KEY,
     NEXT_PUBLIC_TEACHER_EMAILS: process.env.NEXT_PUBLIC_TEACHER_EMAILS,
     NEXT_PUBLIC_APP_DOMAIN: process.env.NEXT_PUBLIC_APP_DOMAIN,
   },

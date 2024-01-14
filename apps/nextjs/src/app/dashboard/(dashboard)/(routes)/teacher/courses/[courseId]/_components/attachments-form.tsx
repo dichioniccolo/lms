@@ -37,10 +37,10 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
     },
   });
 
-  const onSubmit = ({ url }: { url: string }) =>
+  const onSubmit = ({ name, url }: { name: string; url: string }) =>
     action({
       courseId,
-      name: url.split("/").pop()!,
+      name,
       url,
     });
 
@@ -81,14 +81,8 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
       {isEditing && (
         <div>
           <FileUpload
-            endpoint="courseAttachment"
-            onChange={(url) => {
-              if (!url) {
-                return;
-              }
-
-              onSubmit({ url });
-            }}
+            type="other"
+            onChange={({ name, url }) => onSubmit({ name, url })}
           />
           <div className="text-muted-foreground mt-4 text-xs">
             Add anything your students might need to complete the course.

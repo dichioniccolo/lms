@@ -55,7 +55,7 @@ const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
   {
     key: "Permissions-Policy",
-    value: "fullscreen=()",
+    value: "fullscreen=(self)",
   },
 ];
 
@@ -67,6 +67,11 @@ const config = {
       {
         protocol: "https",
         hostname: "utfs.io",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "accademiadellarmonia-dev.fra1.digitaloceanspaces.com",
         pathname: "**",
       },
     ],

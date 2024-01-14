@@ -17,7 +17,7 @@ import { ChaptersForm } from "./_components/chapters-form";
 import { CourseActions } from "./_components/course-actions";
 import { ImageForm } from "./_components/image-form";
 import { PriceForm } from "./_components/price-form";
-import { TitleForm } from "./_components/title-form";
+import { CourseTitleDescriptionForm } from "./_components/title-description-form";
 
 interface Props {
   params: {
@@ -88,7 +88,7 @@ export default async function Page({ params: { courseId } }: Props) {
           <CourseActions
             courseId={course.id}
             published={course.published}
-            disabled={isComplete}
+            disabled={!isComplete}
           />
         </div>
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -97,7 +97,7 @@ export default async function Page({ params: { courseId } }: Props) {
               <IconBadge icon={LayoutDashboard} />
               <h2 className="text-xl">Customize your course</h2>
             </div>
-            <TitleForm
+            <CourseTitleDescriptionForm
               courseId={course.id}
               title={course.title}
               description={course.description}

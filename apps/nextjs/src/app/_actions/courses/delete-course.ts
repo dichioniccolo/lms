@@ -9,6 +9,7 @@ import { createServerAction } from "@acme/server-actions/server";
 
 import { mux } from "~/lib/mux";
 import { RequiredString } from "~/lib/validation";
+import { deleteFiles } from "../files/delete-file";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
 export const deleteCourse = createServerAction({
@@ -46,6 +47,8 @@ export const deleteCourse = createServerAction({
 
       await mux.Video.Assets.del(chapter.mux.assetId);
     }
+
+    await deleteFiles(course.chapters.map((x) => x.videoUrl).filter(Boolean));
 
     await db
       .delete(schema.courses)

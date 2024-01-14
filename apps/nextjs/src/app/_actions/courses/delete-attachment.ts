@@ -8,6 +8,7 @@ import { createServerAction } from "@acme/server-actions/server";
 
 import { isTeacher } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
+import { deleteFile } from "../files/delete-file";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
 export const deleteAttachment = createServerAction({
@@ -30,13 +31,28 @@ export const deleteAttachment = createServerAction({
       columns: {
         id: true,
       },
+      with: {
+        attachments: {
+          where: eq(schema.attachments.id, id),
+          columns: {
+            id: true,
+            url: true,
+          },
+        },
+      },
     });
 
     if (!course) {
       throw new ErrorForClient("Course not found");
     }
 
-    // TODO: delete uploaded file
+    const attachment = course.attachments[0];
+
+    if (!attachment) {
+      throw new ErrorForClient("Attachment not found");
+    }
+
+    await deleteFile(attachment.url);
 
     await db
       .delete(schema.attachments)

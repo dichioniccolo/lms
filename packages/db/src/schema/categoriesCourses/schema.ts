@@ -19,10 +19,14 @@ export const categoriesCourses = mysqlTable(
       unsigned: true,
     })
       .notNull()
-      .references(() => categories.id),
+      .references(() => categories.id, {
+        onDelete: "cascade",
+      }),
     courseId: varchar("courseId", { length: 255 })
       .notNull()
-      .references(() => courses.id),
+      .references(() => courses.id, {
+        onDelete: "cascade",
+      }),
   },
   (columns) => ({
     categoryIdCourseIdPk: uniqueIndex("categoryIdCourseIdPk").on(

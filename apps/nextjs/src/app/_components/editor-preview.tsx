@@ -11,6 +11,6 @@ interface Props {
   value: string;
 }
 
-export function Editor({ value }: Props) {
+export function Preview({ value }: Props) {
   return <ReactQuill theme="bubble" value={value} readOnly />;
 }

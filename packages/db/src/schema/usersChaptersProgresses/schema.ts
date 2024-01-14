@@ -15,10 +15,14 @@ export const usersChaptersProgresses = mysqlTable(
   {
     userId: varchar("userId", { length: 255 })
       .notNull()
-      .references(() => users.id),
+      .references(() => users.id, {
+        onDelete: "cascade",
+      }),
     chapterId: varchar("chapterId", { length: 255 })
       .notNull()
-      .references(() => chapters.id),
+      .references(() => chapters.id, {
+        onDelete: "cascade",
+      }),
     completed: boolean("completed").notNull().default(false),
     createdAt: datetime("createdAt", {
       mode: "date",

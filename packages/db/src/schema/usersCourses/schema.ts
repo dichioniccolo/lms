@@ -14,10 +14,14 @@ export const usersCourses = mysqlTable(
   {
     userId: varchar("userId", { length: 255 })
       .notNull()
-      .references(() => users.id),
+      .references(() => users.id, {
+        onDelete: "cascade",
+      }),
     courseId: varchar("courseId", { length: 255 })
       .notNull()
-      .references(() => courses.id),
+      .references(() => courses.id, {
+        onDelete: "cascade",
+      }),
     createdAt: datetime("createdAt", {
       mode: "date",
       fsp: 3,

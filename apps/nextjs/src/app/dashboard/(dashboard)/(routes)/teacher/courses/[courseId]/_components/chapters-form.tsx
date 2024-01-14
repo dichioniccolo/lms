@@ -21,8 +21,8 @@ import { Input } from "@acme/ui/components/ui/input";
 import { Form } from "@acme/ui/components/zod-form";
 import { useZodForm } from "@acme/ui/hooks/use-zod-form";
 
+import { createChapter } from "~/app/_actions/chapters/create-chapter";
 import { courseReorder } from "~/app/_actions/courses/course-reorder";
-import { createChapter } from "~/app/_actions/courses/create-chapter";
 import { RequiredString } from "~/lib/validation";
 import { ChaptersList } from "./chapters-list";
 

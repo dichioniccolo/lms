@@ -7,7 +7,9 @@ export const mux = mysqlTable("mux", {
   id: serial("id").notNull().primaryKey(),
   chapterId: varchar("chapterId", { length: 255 })
     .notNull()
-    .references(() => chapters.id),
+    .references(() => chapters.id, {
+      onDelete: "cascade",
+    }),
   assetId: varchar("assetId", { length: 255 }).notNull(),
   playbackId: varchar("playbackId", { length: 255 }),
 });

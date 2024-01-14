@@ -46,11 +46,15 @@ export const purchaseCourse = createServerAction({
       .then((x) => x[0]);
 
     if (!course) {
-      throw new ErrorForClient("Course not found or not published");
+      throw new ErrorForClient("Course not found");
     }
 
     if (course.user?.id) {
       throw new ErrorForClient("Course already purchased");
+    }
+
+    if (!course.price) {
+      throw new ErrorForClient("Course is free");
     }
 
     const dbUser = await db.query.users.findFirst({
@@ -94,7 +98,7 @@ export const purchaseCourse = createServerAction({
               name: course.title,
               description: course.description ?? "",
             },
-            unit_amount: Math.round(course.price * 100),
+            unit_amount: Math.round(parseFloat(course.price) * 100),
           },
         },
       ],

@@ -13,7 +13,9 @@ export const attachments = mysqlTable("attachments", {
   id: serial("id").notNull().autoincrement().primaryKey(),
   courseId: varchar("courseId", { length: 255 })
     .notNull()
-    .references(() => courses.id),
+    .references(() => courses.id, {
+      onDelete: "cascade",
+    }),
   name: varchar("name", { length: 255 }).notNull(),
   url: text("url").notNull(),
   createdAt: datetime("createdAt", {

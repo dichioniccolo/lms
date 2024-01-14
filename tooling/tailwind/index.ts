@@ -4,9 +4,8 @@ import typography from "@tailwindcss/typography";
 import scrollbarHide from "tailwind-scrollbar-hide";
 import radix from "tailwindcss-radix";
 import { fontFamily } from "tailwindcss/defaultTheme";
-import { withUt } from "uploadthing/tw";
 
-export default withUt({
+export default {
   darkMode: "class",
   content: ["**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -109,4 +108,4 @@ export default withUt({
     },
   },
   plugins: [typography, require("tailwindcss-animate"), scrollbarHide, radix],
-} satisfies Config);
+} satisfies Config;

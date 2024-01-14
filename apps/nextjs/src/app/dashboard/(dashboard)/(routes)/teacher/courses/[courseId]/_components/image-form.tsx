@@ -35,11 +35,11 @@ export function ImageForm({ courseId, imageUrl }: Props) {
 
   const toggleEdit = () => setEditing((x) => !x);
 
-  const onSubmit = (imageUrl?: string) =>
+  const onSubmit = ({ url }: { name: string; url: string }) =>
     action({
       courseId,
       values: {
-        imageUrl,
+        imageUrl: url,
       },
     });
 
@@ -80,7 +80,14 @@ export function ImageForm({ courseId, imageUrl }: Props) {
         ))}
       {editing && (
         <div>
-          <FileUpload endpoint="courseImage" onChange={onSubmit} />
+          <FileUpload
+            type="image"
+            onChange={onSubmit}
+            accept={{
+              "image/*": [],
+            }}
+            maxFiles={1}
+          />
           <div className="text-muted-foreground mt-4 text-xs">
             16:9 aspect ratio recommended
           </div>

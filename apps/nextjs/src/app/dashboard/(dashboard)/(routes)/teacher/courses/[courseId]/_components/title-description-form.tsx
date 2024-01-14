@@ -36,7 +36,11 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export function TitleForm({ courseId, title, description }: Props) {
+export function CourseTitleDescriptionForm({
+  courseId,
+  title,
+  description,
+}: Props) {
   const router = useRouter();
 
   const { action, status } = useServerAction(updateCourse, {

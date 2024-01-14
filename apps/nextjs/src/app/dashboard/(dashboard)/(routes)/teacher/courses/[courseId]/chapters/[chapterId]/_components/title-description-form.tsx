@@ -8,7 +8,6 @@ import { z } from "zod";
 
 import { SubmissionStatus } from "@acme/server-actions";
 import { useServerAction } from "@acme/server-actions/client";
-import { cn } from "@acme/ui";
 import { Button } from "@acme/ui/components/ui/button";
 import {
   FormControl,
@@ -20,30 +19,35 @@ import { Input } from "@acme/ui/components/ui/input";
 import { Form } from "@acme/ui/components/zod-form";
 import { useZodForm } from "@acme/ui/hooks/use-zod-form";
 
-import { updateCourse } from "~/app/_actions/courses/update-course";
-import { formatPrice } from "~/lib/utils";
+import { updateChapter } from "~/app/_actions/chapters/update-chapter";
+import { Editor } from "~/app/_components/editor";
+import { RequiredString } from "~/lib/validation";
 
 interface Props {
   courseId: string;
-  price: string | null;
+  chapterId: string;
+  title: string;
+  description: string | null;
 }
 
 const formSchema = z.object({
-  price: z.coerce.number(),
+  title: RequiredString,
+  description: RequiredString,
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export function PriceForm({ courseId, price }: Props) {
+export function ChapterTitleDescriptionForm({
+  courseId,
+  chapterId,
+  title,
+  description,
+}: Props) {
   const router = useRouter();
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEdit = () => setIsEditing((current) => !current);
-
-  const { action, status } = useServerAction(updateCourse, {
+  const { action, status } = useServerAction(updateChapter, {
     onSuccess() {
-      toast.success("Course price updated");
+      toast.success("Chapter title and description updated");
       router.refresh();
       toggleEdit();
     },
@@ -52,55 +56,65 @@ export function PriceForm({ courseId, price }: Props) {
     },
   });
 
+  const [editing, setEditing] = useState(false);
+
+  const toggleEdit = () => setEditing((x) => !x);
+
   const form = useZodForm({
     schema: formSchema,
     defaultValues: {
-      price: parseFloat(price ?? "0"),
+      title,
+      description: description ?? "",
     },
   });
 
-  const onSubmit = ({ price }: FormSchema) =>
+  const onSubmit = ({ title, description }: FormSchema) =>
     action({
       courseId,
+      chapterId,
       values: {
-        price: price.toString(),
+        title,
+        description,
       },
     });
 
   return (
     <div className="mt-6 rounded-md border bg-slate-100 p-4">
       <div className="flex items-center justify-between font-medium">
-        Course price
+        Course title and description
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing ? (
-            <>Cancel</>
+          {editing ? (
+            "Cancel"
           ) : (
             <>
               <Pencil className="mr-2 h-4 w-4" />
-              Edit price
+              Edit title or description
             </>
           )}
         </Button>
       </div>
-      {!isEditing && (
-        <p className={cn("mt-2 text-sm", !price && "italic text-slate-500")}>
-          {price ? formatPrice(parseFloat(price)) : "No price"}
-        </p>
-      )}
-      {isEditing && (
+      {editing && (
         <Form form={form} onSubmit={onSubmit} className="mt-4 space-y-4">
-          <FormField
-            control={form.control}
-            name="price"
+          <FormField<FormSchema>
+            name="title"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <Input
-                    type="number"
-                    step="0.01"
-                    placeholder="Set a price for your course"
+                    placeholder="e.g. 'Advanced web development'"
                     {...field}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField<FormSchema>
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Editor {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

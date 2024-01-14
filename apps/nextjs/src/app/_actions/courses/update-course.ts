@@ -20,7 +20,7 @@ export const updateCourse = createServerAction({
         title: RequiredString,
         description: RequiredString,
         imageUrl: RequiredString,
-        price: z.coerce.number(),
+        price: RequiredString,
       })
       .partial(),
   }),
