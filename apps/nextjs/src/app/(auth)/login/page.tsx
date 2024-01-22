@@ -1,13 +1,14 @@
 import type { Metadata, ServerRuntime } from "next";
 
 import { SignInForm } from "./_components/sign-in-form";
+import { env } from "~/env.mjs";
 
-const title = "Sign in to BlogHub";
-const description = "Create your own blog and share your knowledge.";
+const title = `Entra su ${env.NEXT_PUBLIC_APP_NAME}`;
+// const description = "Create your own blog and share your knowledge.";
 
 export const metadata = {
   title,
-  description,
+  // description,
 } satisfies Metadata;
 
 export const runtime: ServerRuntime = "edge";
