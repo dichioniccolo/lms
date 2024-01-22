@@ -32,6 +32,7 @@ export const env = createEnv({
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
    */
   client: {
+    NEXT_PUBLIC_APP_NAME: z.string().min(1),
     NEXT_PUBLIC_APP_DOMAIN: z.string().min(1),
     NEXT_PUBLIC_TEACHER_EMAILS: z.string().min(1),
   },
@@ -52,6 +53,7 @@ export const env = createEnv({
     DO_ACCESS_KEY_ID: process.env.DO_ACCESS_KEY_ID,
     DO_SECRET_ACCESS_KEY: process.env.DO_SECRET_ACCESS_KEY,
     NEXT_PUBLIC_TEACHER_EMAILS: process.env.NEXT_PUBLIC_TEACHER_EMAILS,
+    NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXT_PUBLIC_APP_DOMAIN: process.env.NEXT_PUBLIC_APP_DOMAIN,
   },
   skipValidation:

@@ -71,8 +71,23 @@
     }
   },
   "globalEnv": [
-    "DATABASE_URL",
     "AUTH_SECRET",
-    "AUTH_URL"
+    "AUTH_URL",
+    "DATABASE_URL",
+    "DO_ACCESS_KEY_ID",
+    "DO_BUCKET_NAME",
+    "DO_ENDPOINT",
+    "DO_REGION",
+    "DO_SECRET_ACCESS_KEY",
+    "INNGEST_EVENT_KEY",
+    "INNGEST_SIGNING_KEY",
+    "MUX_TOKEN_ID",
+    "MUX_TOKEN_SECRET",
+    "NEXT_PUBLIC_APP_DOMAIN",
+    "NEXT_PUBLIC_TEACHER_EMAILS",
+    "RESEND_API_KEY",
+    "SMTP_FROM",
+    "STRIPE_API_KEY",
+    "STRIPE_WEBHOOK_SECRET"
   ]
 }

@@ -7,9 +7,13 @@ import { parseRequest } from "./lib/utils";
 export default auth((req) => {
   const { path } = parseRequest(req);
 
+  if (path === "/") {
+    return NextResponse.next();
+  }
+
   if (!req.auth?.user && path !== "/login") {
     const url = new URL("/login", req.url);
-    if (path !== "/") url.searchParams.set("redirect", path);
+    if (path !== "/dashboard") url.searchParams.set("redirect", path);
     return NextResponse.redirect(url);
   }
 
@@ -31,6 +35,13 @@ export const config = {
      * 5. /_vercel (Vercel internals)
      * 6. /favicon.ico, /sitemap.xml, /robots.txt (static files)
      */
-    "/((?!api/|_next/|_proxy/|_static|_vercel|favicon.ico|sitemap.xml|robots.txt).*)",
+    {
+      source:
+        "/((?!api/|_next/|_proxy/|_static|_vercel|favicon.ico|sitemap.xml|robots.txt).*)",
+      missing: [
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
+      ],
+    },
   ],
 };
