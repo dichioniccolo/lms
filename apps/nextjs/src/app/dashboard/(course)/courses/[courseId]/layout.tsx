@@ -2,13 +2,13 @@ import type { PropsWithChildren } from "react";
 import { redirect } from "next/navigation";
 
 import { auth } from "@acme/auth";
-import { and, asc, db, eq, exists, schema, sql } from "@acme/db";
+import { and, asc, db, eq, schema } from "@acme/db";
 
 import { getCourseProgress } from "~/app/_api/get-course-progress";
 import { CourseNavbar } from "./_components/course-navbar";
 import { CourseSidebar } from "./_components/course-sidebar";
 
-export async function Layout({
+export default async function Layout({
   children,
   params: { courseId },
 }: PropsWithChildren<{ params: { courseId: string } }>) {
@@ -22,21 +22,21 @@ export async function Layout({
     where: and(
       eq(schema.courses.id, courseId),
       eq(schema.courses.published, true),
-      exists(
-        db
-          .select({ count: sql`count(1)` })
-          .from(schema.usersCourses)
-          .where(
-            and(
-              eq(schema.courses.id, schema.usersCourses.courseId),
-              eq(schema.usersCourses, session.user.id),
-            ),
-          ),
-      ),
+      // exists(
+      //   db
+      //     .select()
+      //     .from(schema.usersCourses)
+      //     .where(
+      //       and(
+      //         eq(schema.courses.id, schema.usersCourses.courseId),
+      //         eq(schema.usersCourses, session.user.id),
+      //       ),
+      //     ),
+      // ),
     ),
     with: {
       users: {
-        where: eq(schema.users.id, session.user.id),
+        where: eq(schema.usersCourses.userId, session.user.id),
         limit: 1,
       },
       chapters: {

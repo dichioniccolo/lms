@@ -10,7 +10,7 @@ interface Props {
       ownerId: string;
       title: string;
       imageUrl: string | null;
-      price: number;
+      price: string | null;
       published: boolean;
       categories: {
         category: {

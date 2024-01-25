@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { and, db, eq, schema } from "@acme/db";
@@ -110,6 +111,6 @@ export const purchaseCourse = createServerAction({
       },
     });
 
-    return session.url;
+    redirect(session.url!);
   },
 });

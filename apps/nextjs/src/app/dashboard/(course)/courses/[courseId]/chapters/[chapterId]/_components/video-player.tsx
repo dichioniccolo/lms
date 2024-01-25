@@ -1,27 +1,54 @@
-import { useCallback, useState } from "react";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import MuxPlayer from "@mux/mux-player-react";
 import { Loader2, Lock } from "lucide-react";
+import { toast } from "sonner";
 
+import { useServerAction } from "@acme/server-actions/client";
 import { cn } from "@acme/ui";
 
+import { completeChapter } from "~/app/_actions/chapters/complete-chapter";
 import { useConfetti } from "~/hooks/use-confetti";
 
 interface Props {
-  playbackId: string;
   courseId: string;
   chapterId: string;
-  locked: boolean;
+  playbackId?: string | null;
   title: string;
+  locked: boolean;
+  nextChapterId?: string | null;
 }
 
-export function VideoPlayer({ playbackId, title, locked }: Props) {
+export function VideoPlayer({
+  courseId,
+  chapterId,
+  playbackId,
+  title,
+  locked,
+  nextChapterId,
+}: Props) {
   const [ready, setReady] = useState(false);
   const confetti = useConfetti();
+  const router = useRouter();
 
-  const onEnded = useCallback(() => {
-    // TODO: Record progress in the backend
-    // TODO: Redirect the user to the next chapter if there is one or Show confetti if the user has watched the whole course
-  }, []);
+  const { action } = useServerAction(completeChapter, {
+    onSuccess() {
+      if (!nextChapterId) {
+        confetti.open();
+      }
+
+      router.refresh();
+
+      if (nextChapterId) {
+        router.push(`/dashboard/courses/${courseId}/chapters/${nextChapterId}`);
+      }
+    },
+    onServerError(error) {
+      error && toast.error(error);
+    },
+  });
 
   return (
     <div className="relative aspect-video">
@@ -44,9 +71,9 @@ export function VideoPlayer({ playbackId, title, locked }: Props) {
             hidden: !ready,
           })}
           onCanPlay={() => setReady(true)}
-          onEnded={onEnded}
+          onEnded={() => action({ courseId, chapterId, completed: true })}
           autoPlay
-          playbackId={playbackId}
+          playbackId={playbackId!}
         />
       )}
     </div>

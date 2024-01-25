@@ -16,10 +16,7 @@ interface Props {
 
 export function SidebarItem({ route }: Props) {
   const pathname = usePathname();
-  const isActive =
-    (pathname === "/" && route.href === "/") ||
-    pathname === route.href ||
-    pathname.startsWith(`${route.href}/`);
+  const isActive = pathname.startsWith(route.href);
 
   return (
     <Link

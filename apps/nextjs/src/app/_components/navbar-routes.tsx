@@ -19,8 +19,7 @@ export function NavbarRoutes({ session }: Props) {
   const pathname = usePathname();
 
   const isTeacherPage = pathname.includes("/teacher");
-  const isCoursePage = pathname.includes("/courses");
-  const isSearchPage = pathname === "/search";
+  const isSearchPage = pathname === "/dashboard/search";
 
   const isUserATeacher = isTeacher(session.user.email);
 
@@ -32,7 +31,7 @@ export function NavbarRoutes({ session }: Props) {
         </div>
       )}
       <div className="ml-auto flex items-center gap-x-2">
-        {isTeacherPage || isCoursePage ? (
+        {isTeacherPage ? (
           <Link
             href="/dashboard"
             className={buttonVariants({

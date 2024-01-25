@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "with-env": "dotenv -e ../../.env --",
+    "with-env": "doppler run --",
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore",

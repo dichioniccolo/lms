@@ -16,7 +16,7 @@ interface Props {
     ownerId: string;
     title: string;
     imageUrl: string | null;
-    price: number;
+    price: string | null;
     published: boolean;
     categories: {
       category: {
@@ -64,7 +64,7 @@ export function CourseCard({ course, progress }: Props) {
             />
           ) : (
             <p className="text-md font-medium text-slate-700 md:text-sm">
-              {formatPrice(course.price)}
+              {course.price ? formatPrice(parseFloat(course.price)) : "Free"}
             </p>
           )}
         </div>
