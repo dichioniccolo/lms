@@ -60,8 +60,8 @@ importers:
         specifier: ^16.5.0
         version: 16.5.0(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
       '@mux/mux-node':
-        specifier: ^7.3.3
-        version: 7.3.3
+        specifier: ^7.3.5
+        version: 7.3.5
       '@mux/mux-player-react':
         specifier: ^2.3.1
         version: 2.3.1(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
@@ -2436,8 +2436,8 @@ packages:
       read-yaml-file: 1.1.0
     dev: false
 
-  /@mux/mux-node@7.3.3:
-    resolution: {integrity: sha512-t98SW0rhUP56Qn3vly+NApzy7Ebo51fcMYVQL379dpU5exsCoRBYc9lf6a4V+U0fXJ4Ke2asfToXfXMvfsMC+Q==}
+  /@mux/mux-node@7.3.5:
+    resolution: {integrity: sha512-lM0DIKiNAQoT0jBCuOfbzwfky4UYrF9h2xbidEYT/I2ftO2q4891+5dFXDUmi1IJtsdIxRARsggZKqrwdsd4Eg==}
     engines: {node: '>=14'}
     dependencies:
       axios: 1.6.5
