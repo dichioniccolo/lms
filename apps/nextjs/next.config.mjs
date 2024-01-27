@@ -66,12 +66,7 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "utfs.io",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "accademiadellarmonia-dev.fra1.digitaloceanspaces.com",
+        hostname: "accademiadellarmonia.fra1.digitaloceanspaces.com",
         pathname: "**",
       },
     ],
