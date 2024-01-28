@@ -8,6 +8,7 @@ import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 import { stripe } from "@acme/stripe";
 
+import { absoluteUrl } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
@@ -103,8 +104,8 @@ export const purchaseCourse = createServerAction({
           },
         },
       ],
-      success_url: "", // TODO:
-      cancel_url: "", // TODO:
+      success_url: absoluteUrl(`/dashboard/courses/${course.id}`),
+      cancel_url: absoluteUrl(`/dashboard/courses/${course.id}`),
       metadata: {
         courseId: course.id,
         userId: user.id,

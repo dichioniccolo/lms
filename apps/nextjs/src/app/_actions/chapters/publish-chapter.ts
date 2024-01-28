@@ -34,13 +34,6 @@ export const publishChapter = createServerAction({
             description: true,
             videoUrl: true,
           },
-          with: {
-            mux: {
-              columns: {
-                id: true,
-              },
-            },
-          },
         },
       },
     });
@@ -65,12 +58,6 @@ export const publishChapter = createServerAction({
 
     if (!chapter.videoUrl) {
       throw new ErrorForClient("Missing chapter video");
-    }
-
-    if (!chapter.mux) {
-      throw new ErrorForClient(
-        "Unknown error, please update your chapter video and try again",
-      );
     }
 
     await db

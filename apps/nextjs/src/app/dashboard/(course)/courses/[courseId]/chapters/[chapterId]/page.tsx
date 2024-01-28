@@ -24,7 +24,7 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
     redirect("/dashboard");
   }
 
-  const { course, chapter, mux, attachments, nextChapter, isUnlocked } = result;
+  const { course, chapter, attachments, nextChapter, isUnlocked } = result;
 
   const userProgress = chapter.progresses[0];
 
@@ -46,7 +46,6 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
             chapterId={chapterId}
             title={chapter.title}
             locked={!isUnlocked}
-            playbackId={mux?.playbackId}
             nextChapterId={nextChapter?.id}
           />
         </div>

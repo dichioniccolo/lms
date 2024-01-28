@@ -77,7 +77,7 @@ const columns: ColumnDef<Course>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const published = row.getValue("published") || false;
+      const published = row.getValue("published") ?? false;
 
       return (
         <Badge

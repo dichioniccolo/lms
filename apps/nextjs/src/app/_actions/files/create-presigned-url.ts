@@ -44,7 +44,7 @@ export async function createPresignedUrl(
     Bucket: env.DO_BUCKET_NAME,
     Key: key,
     Conditions: [
-      ["content-length-range", 0, contentLengthMaxRange], // up to 10 GB
+      ["content-length-range", 0, contentLengthMaxRange], // up to 10 GB if video
       ["starts-with", "$Content-Type", contentType],
     ],
     Fields: {

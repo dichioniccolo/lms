@@ -22,7 +22,12 @@ interface ProgressInfo {
 
 type Props = Pick<DropzoneProps, "accept" | "maxFiles"> & {
   type: "image" | "video" | "other";
-  onChange(file: { name: string; url: string }): void;
+  onChange(file: {
+    name: string;
+    url: string;
+    contentType: string;
+    contentSize: number;
+  }): void;
 };
 
 export function FileUpload({ type, onChange, accept, maxFiles }: Props) {
@@ -72,6 +77,8 @@ export function FileUpload({ type, onChange, accept, maxFiles }: Props) {
         onChange({
           name: file.name,
           url: `${url}${fields.key}`,
+          contentType: file.type,
+          contentSize: file.size,
         });
       } catch (e) {
         if (e instanceof Error) {

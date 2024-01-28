@@ -1,26 +1,35 @@
-import type { CreateEmailOptions } from "resend/build/src/emails/interfaces";
-import { Resend } from "resend";
+import type { SendMailOptions } from "nodemailer";
+import nodemailer from "nodemailer";
 
 import { env } from "../env.mjs";
 
 const defaultOptions = {
   from: env.SMTP_FROM,
-} satisfies Pick<CreateEmailOptions, "from">;
+} satisfies Pick<SendMailOptions, "from">;
+
+const transport = nodemailer.createTransport({
+  host: env.SMTP_HOST,
+  port: env.SMTP_PORT,
+  secure: true,
+  auth: {
+    user: env.SMTP_USERNAME,
+    pass: env.SMTP_PASSWORD,
+  },
+});
 
 export async function sendMail({
   ...options
 }: Partial<CreateEmailOptionsWithoutFrom>) {
-  const resend = new Resend(env.RESEND_API_KEY);
-
   const payload = {
     ...defaultOptions,
     ...options,
-  } as CreateEmailOptions;
-  const result = await resend.emails.send(payload);
+  } as SendMailOptions;
+
+  const result = await transport.sendMail(payload);
 
   return result;
 }
 
-type CreateEmailOptionsWithoutFrom = Omit<CreateEmailOptions, "from">;
+type CreateEmailOptionsWithoutFrom = Omit<SendMailOptions, "from">;
 
-export type { CreateEmailOptionsWithoutFrom as CreateEmailOptions };
+export type { CreateEmailOptionsWithoutFrom as SendMailOptions };

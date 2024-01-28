@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import MuxPlayer from "@mux/mux-player-react";
 import { Loader2, Lock } from "lucide-react";
 import { toast } from "sonner";
 
@@ -10,12 +9,10 @@ import { useServerAction } from "@acme/server-actions/client";
 import { cn } from "@acme/ui";
 
 import { completeChapter } from "~/app/_actions/chapters/complete-chapter";
-import { useConfetti } from "~/hooks/use-confetti";
 
 interface Props {
   courseId: string;
   chapterId: string;
-  playbackId?: string | null;
   title: string;
   locked: boolean;
   nextChapterId?: string | null;
@@ -24,20 +21,18 @@ interface Props {
 export function VideoPlayer({
   courseId,
   chapterId,
-  playbackId,
   title,
   locked,
   nextChapterId,
 }: Props) {
-  const [ready, setReady] = useState(false);
-  const confetti = useConfetti();
+  const [ready, setReady] = useState(true);
   const router = useRouter();
 
   const { action } = useServerAction(completeChapter, {
     onSuccess() {
-      if (!nextChapterId) {
-        confetti.open();
-      }
+      // if (!nextChapterId) {
+      //   confetti.open();
+      // }
 
       router.refresh();
 
@@ -65,16 +60,24 @@ export function VideoPlayer({
           </p>
         </div>
       ) : (
-        <MuxPlayer
-          title={title}
+        <video
           className={cn({
             hidden: !ready,
           })}
-          onCanPlay={() => setReady(true)}
-          onEnded={() => action({ courseId, chapterId, completed: true })}
+          controls
           autoPlay
-          playbackId={playbackId!}
-        />
+          src={`/api/courses/${courseId}/chapters/${chapterId}`}
+        ></video>
+        // <MuxPlayer
+        //   title={title}
+        //   className={cn({
+        //     hidden: !ready,
+        //   })}
+        //   onCanPlay={() => setReady(true)}
+        //   onEnded={() => action({ courseId, chapterId, completed: true })}
+        //   autoPlay
+        //   playbackId={playbackId!}
+        // />
       )}
     </div>
   );

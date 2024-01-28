@@ -1,11 +1,20 @@
-import type { CreateEmailOptions } from "@acme/emails";
+import { renderAsync } from "@react-email/render";
+
+import type { SendMailOptions } from "@acme/emails";
 import { sendMail as baseSendMail } from "@acme/emails";
 
-type MailOptions = CreateEmailOptions;
+type MailOptions = SendMailOptions & {
+  react: React.ReactElement;
+};
 
-export async function sendMail(options: MailOptions) {
+export async function sendMail({ react, ...options }: MailOptions) {
   try {
-    await baseSendMail(options);
+    const html = await renderAsync(react);
+
+    await baseSendMail({
+      ...options,
+      html,
+    });
   } catch (error) {
     console.error("Failed to send email:", error);
     throw error;

@@ -19,8 +19,6 @@ export const env = createEnv({
    */
   server: {
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
-    MUX_TOKEN_ID: z.string().min(1),
-    MUX_TOKEN_SECRET: z.string().min(1),
     DO_ENDPOINT: z.string().url(),
     DO_REGION: z.string().min(1),
     DO_BUCKET_NAME: z.string().min(1),
@@ -45,8 +43,6 @@ export const env = createEnv({
     PORT: process.env.PORT,
     NODE_ENV: process.env.NODE_ENV,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    MUX_TOKEN_ID: process.env.MUX_TOKEN_ID,
-    MUX_TOKEN_SECRET: process.env.MUX_TOKEN_SECRET,
     DO_ENDPOINT: process.env.DO_ENDPOINT,
     DO_REGION: process.env.DO_REGION,
     DO_BUCKET_NAME: process.env.DO_BUCKET_NAME,

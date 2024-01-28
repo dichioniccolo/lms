@@ -7,7 +7,6 @@ import { and, db, eq, schema } from "@acme/db";
 import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 
-import { mux } from "~/lib/mux";
 import { isTeacher } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
 import { deleteFile } from "../files/delete-file";
@@ -40,9 +39,6 @@ export const deleteChapter = createServerAction({
             id: true,
             videoUrl: true,
           },
-          with: {
-            mux: true,
-          },
         },
       },
     });
@@ -57,9 +53,7 @@ export const deleteChapter = createServerAction({
       throw new ErrorForClient("Chapter not found");
     }
 
-    if (chapter.videoUrl && chapter.mux) {
-      await mux.Video.Assets.del(chapter.mux.assetId);
-      await db.delete(schema.mux).where(eq(schema.mux.id, chapter.mux.id));
+    if (chapter.videoUrl) {
       await deleteFile(chapter.videoUrl);
     }
 

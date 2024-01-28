@@ -46,11 +46,6 @@ export async function getChapter(courseId: string, chapterId: string) {
     ),
   });
 
-  let mux:
-    | {
-        playbackId: string | null;
-      }
-    | undefined = undefined;
   let attachments: Attachment[] = [];
   let nextChapter: { id: string } | undefined = undefined;
 
@@ -63,13 +58,6 @@ export async function getChapter(courseId: string, chapterId: string) {
   const isUnlocked = chapter.free || !!userCourse;
 
   if (isUnlocked) {
-    mux = await db.query.mux.findFirst({
-      where: eq(schema.mux.chapterId, chapter.id),
-      columns: {
-        playbackId: true,
-      },
-    });
-
     nextChapter = await db.query.chapters.findFirst({
       where: and(
         eq(schema.chapters.published, true),
@@ -85,7 +73,6 @@ export async function getChapter(courseId: string, chapterId: string) {
       price: course.price!,
     },
     chapter,
-    mux,
     attachments,
     nextChapter,
     isUnlocked,

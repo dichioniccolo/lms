@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import MuxPlayer from "@mux/mux-player-react";
 import { Pencil, PlusCircle, Video } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -18,21 +17,17 @@ interface Props {
   courseId: string;
   chapterId: string;
   videoUrl: string | null;
-  playbackId: string | null;
 }
 
 const formSchema = z.object({
   videoUrl: RequiredString,
+  videoContentType: RequiredString,
+  videoContentLength: z.number(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export function ChapterVideoForm({
-  courseId,
-  chapterId,
-  videoUrl,
-  playbackId,
-}: Props) {
+export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
   const [editing, setEditing] = useState(false);
 
   const toggleEdit = () => setEditing((x) => !x);
@@ -50,12 +45,18 @@ export function ChapterVideoForm({
     },
   });
 
-  const onSubmit = ({ videoUrl }: FormSchema) =>
+  const onSubmit = ({
+    videoUrl,
+    videoContentLength,
+    videoContentType,
+  }: FormSchema) =>
     action({
       courseId,
       chapterId,
       values: {
         videoUrl,
+        videoContentLength,
+        videoContentType,
       },
     });
 
@@ -86,14 +87,21 @@ export function ChapterVideoForm({
           </div>
         ) : (
           <div className="relative mt-2 aspect-video">
-            <MuxPlayer playbackId={playbackId ?? ""} />
+            <video controls autoPlay={false} src={videoUrl}></video>
+            {/* <MuxPlayer playbackId={playbackId ?? ""} /> */}
           </div>
         ))}
       {editing && (
         <div>
           <FileUpload
             type="video"
-            onChange={({ url }) => onSubmit({ videoUrl: url })}
+            onChange={({ url, contentSize, contentType }) =>
+              onSubmit({
+                videoUrl: url,
+                videoContentType: contentType,
+                videoContentLength: contentSize,
+              })
+            }
             accept={{
               "video/*": [],
             }}

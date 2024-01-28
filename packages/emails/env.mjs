@@ -17,8 +17,11 @@ export const env = createEnv({
     //   (str) => (typeof str === "string" ? str.match(/<(.*)>/)?.[1] : null),
     //   z.string().email(),
     // ),
+    SMTP_HOST: z.string().min(1),
+    SMTP_PORT: z.number().int().min(1),
+    SMTP_USERNAME: z.string().min(1),
+    SMTP_PASSWORD: z.string().min(1),
     SMTP_FROM: z.string().email(),
-    RESEND_API_KEY: z.string().min(1),
   },
   /**
    * Specify your client-side environment variables schema here.
@@ -33,7 +36,10 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     SMTP_FROM: process.env.SMTP_FROM,
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    SMTP_HOST: process.env.SMTP_HOST,
+    SMTP_PORT: process.env.SMTP_PORT,
+    SMTP_USERNAME: process.env.SMTP_USERNAME,
+    SMTP_PASSWORD: process.env.SMTP_PASSWORD,
     NEXT_PUBLIC_APP_DOMAIN: process.env.NEXT_PUBLIC_APP_DOMAIN,
   },
   skipValidation:

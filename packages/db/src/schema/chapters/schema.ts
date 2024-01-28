@@ -1,5 +1,6 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  bigint,
   boolean,
   datetime,
   int,
@@ -9,7 +10,6 @@ import {
 } from "drizzle-orm/mysql-core";
 
 import { courses } from "../courses/schema";
-import { mux } from "../mux/schema";
 import { usersChaptersProgresses } from "../usersChaptersProgresses/schema";
 
 export const chapters = mysqlTable("chapters", {
@@ -22,6 +22,11 @@ export const chapters = mysqlTable("chapters", {
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   videoUrl: text("videoUrl"),
+  videoContentLength: bigint("videoContentLength", {
+    mode: "number",
+    unsigned: true,
+  }),
+  videoContentType: varchar("videoContentType", { length: 255 }),
   position: int("position", {
     unsigned: true,
   }),
@@ -47,5 +52,4 @@ export const chaptersRelations = relations(chapters, ({ one, many }) => ({
     references: [courses.id],
   }),
   progresses: many(usersChaptersProgresses),
-  mux: one(mux),
 }));

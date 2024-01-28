@@ -42,9 +42,6 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
           ),
       ),
     ),
-    with: {
-      mux: true,
-    },
   });
 
   if (!chapter) {
@@ -127,7 +124,6 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
               chapterId={chapter.id}
               courseId={courseId}
               videoUrl={chapter.videoUrl}
-              playbackId={chapter.mux?.playbackId ?? null}
             />
           </div>
         </div>
