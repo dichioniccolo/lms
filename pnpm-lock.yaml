@@ -63,8 +63,8 @@ importers:
         specifier: ^7.3.5
         version: 7.3.5
       '@mux/mux-player-react':
-        specifier: ^2.3.1
-        version: 2.3.1(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^2.3.2
+        version: 2.3.2(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -2447,8 +2447,8 @@ packages:
       - debug
     dev: false
 
-  /@mux/mux-player-react@2.3.1(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-kTNHmDLByomIZcbMWVayoFqpWf89+49m391W0moI0NvjN4wRwNGvwhYbWbj0xHhdDumgEf7MqbnbFRnuiibHiQ==}
+  /@mux/mux-player-react@2.3.2(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-WpxFRM6C617sOw4MdyjtPP2GXl2QISCKaYuFTBps9E6E8pSdGeg4sVybPESMfPPTnelUWbcYPf4DpIb8OQOeEA==}
     peerDependencies:
       '@types/react': ^17.0.0 || ^18
       '@types/react-dom': '*'
@@ -2460,7 +2460,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@mux/mux-player': 2.3.1
+      '@mux/mux-player': 2.3.2
       '@mux/playback-core': 0.22.1
       '@types/react': 18.2.48
       '@types/react-dom': 18.2.18
@@ -2469,12 +2469,12 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@mux/mux-player@2.3.1:
-    resolution: {integrity: sha512-yRR7Ec5LVJdmd431dQM7Lf6r9FdFQOXBBVADiv6HWdj+b+6duAinHA8w+Gfvibokc26l4YO7cQ27hWu29cGGUg==}
+  /@mux/mux-player@2.3.2:
+    resolution: {integrity: sha512-ar58+vNGHCytUDM9+Q+yasFCRayqvw5UwyqUVibPR4k0yRML7PTqejAZNzi9obqgUW/yKsZEbV7foKDYcJL6uw==}
     dependencies:
       '@mux/mux-video': 0.17.2
       '@mux/playback-core': 0.22.1
-      media-chrome: 2.0.1
+      media-chrome: 2.1.0
     dev: false
 
   /@mux/mux-video@0.17.2:
@@ -8606,8 +8606,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /media-chrome@2.0.1:
-    resolution: {integrity: sha512-6hoC5OY993t4o/YKYXn7YoWUAKG1UFAhnDXNN6kRRa5mnuL+Cwct/2Md16S4jjmTSmN5XjhEWwfCVM5NLHavOA==}
+  /media-chrome@2.1.0:
+    resolution: {integrity: sha512-ceUEE9tHVIe7KNmjtWq4oCOx1oYq09VyL3A9EP1MDGnFot0eOoLuDfaye/koe8+4tzhB4/yGyn8pIGuvzF85lg==}
     dev: false
 
   /media-tracks@0.3.0:
