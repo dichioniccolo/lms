@@ -15,7 +15,7 @@ importers:
         specifier: ^1.11.3
         version: 1.11.3(@types/node@20.11.10)(typescript@5.3.3)
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       turbo:
         specifier: ^1.11.3
@@ -139,7 +139,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       tailwindcss:
         specifier: 3.4.0
@@ -194,7 +194,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
@@ -237,7 +237,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
@@ -304,7 +304,7 @@ importers:
         specifier: 8.4.33
         version: 8.4.33
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       prism-react-renderer:
         specifier: ^2.3.1
@@ -341,7 +341,7 @@ importers:
         specifier: ^0.23.1
         version: 0.23.1
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
@@ -384,7 +384,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
@@ -415,7 +415,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
@@ -566,7 +566,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
@@ -629,7 +629,7 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1(prettier@3.2.4)
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       prettier-plugin-tailwindcss:
         specifier: ^0.5.11
@@ -679,7 +679,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.2.4
         version: 3.2.4
       typescript:
         specifier: ^5.3.3
