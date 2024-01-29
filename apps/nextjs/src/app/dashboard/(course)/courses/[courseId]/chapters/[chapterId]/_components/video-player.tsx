@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 import { toast } from "sonner";
 
 import { useServerAction } from "@acme/server-actions/client";
 import { cn } from "@acme/ui";
+import { useMounted } from "@acme/ui/hooks/use-mounted";
 
 import { completeChapter } from "~/app/_actions/chapters/complete-chapter";
 
@@ -25,7 +25,6 @@ export function VideoPlayer({
   locked,
   nextChapterId,
 }: Props) {
-  const [ready, setReady] = useState(true);
   const router = useRouter();
 
   const { action } = useServerAction(completeChapter, {
@@ -45,16 +44,18 @@ export function VideoPlayer({
     },
   });
 
+  const mounted = useMounted();
+
   return (
     <div className="relative aspect-video">
-      {!ready && !locked && (
+      {!mounted && !locked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
-          <Loader2 className="text-secondary h-8 w-8 animate-spin" />
+          <Loader2 className="text-secondary size-8 animate-spin" />
         </div>
       )}
       {locked ? (
         <div className="text-secondary absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800">
-          <Lock className="h-8 w-8" />
+          <Lock className="size-8" />
           <p className="text-center">
             You need to purchase this course to unlock this video.
           </p>
@@ -62,7 +63,7 @@ export function VideoPlayer({
       ) : (
         <video
           className={cn({
-            hidden: !ready,
+            hidden: !mounted,
           })}
           controls
           autoPlay

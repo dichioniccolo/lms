@@ -39,7 +39,7 @@ export function NavbarRoutes({ session }: Props) {
               variant: "ghost",
             })}
           >
-            <LogOut className="mr-2 h-4 w-4" />
+            <LogOut className="mr-2 size-4" />
             Student Mode
           </Link>
         ) : isUserATeacher ? (
@@ -50,7 +50,7 @@ export function NavbarRoutes({ session }: Props) {
               variant: "ghost",
             })}
           >
-            <Pencil className="mr-2 h-4 w-4" />
+            <Pencil className="mr-2 size-4" />
             Teacher Mode
           </Link>
         ) : null}

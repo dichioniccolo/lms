@@ -46,7 +46,7 @@ const columns: ColumnDef<Course>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Title
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
   },
@@ -58,7 +58,7 @@ const columns: ColumnDef<Course>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Price
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => (
@@ -73,7 +73,7 @@ const columns: ColumnDef<Course>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Published
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => {
@@ -103,7 +103,7 @@ const columns: ColumnDef<Course>[] = [
             variant: "ghost",
           })}
         >
-          <Pencil className="mr-2 h-4 w-4" />
+          <Pencil className="mr-2 size-4" />
           Edit
         </Link>
         // <DropdownMenu>
@@ -159,7 +159,7 @@ export function CoursesTable({ courses }: Props) {
         />
         <Link href="/dashboard/teacher/courses/create">
           <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
+            <PlusCircle className="mr-2 size-4" />
             New course
           </Button>
         </Link>

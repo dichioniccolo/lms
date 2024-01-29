@@ -69,7 +69,7 @@ export function CreateCourseForm() {
       <div className="flex items-center gap-x-2">
         <Button type="submit" disabled={status === SubmissionStatus.PENDING}>
           {status === SubmissionStatus.PENDING && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 size-4 animate-spin" />
           )}
           Continue
         </Button>

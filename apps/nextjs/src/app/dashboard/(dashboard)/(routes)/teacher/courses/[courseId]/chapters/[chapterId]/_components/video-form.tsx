@@ -68,13 +68,13 @@ export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
           {editing && <>Cancel</>}
           {!editing && !videoUrl && (
             <>
-              <PlusCircle className="mr-2 h-4 w-4" />
+              <PlusCircle className="mr-2 size-4" />
               Add a video
             </>
           )}
           {!editing && videoUrl && (
             <>
-              <Pencil className="mr-2 h-4 w-4" />
+              <Pencil className="mr-2 size-4" />
               Edit video
             </>
           )}
@@ -83,7 +83,7 @@ export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
       {!editing &&
         (!videoUrl ? (
           <div className="flex h-60 items-center justify-center rounded-md bg-slate-200">
-            <Video className="h-10 w-10 text-slate-500" />
+            <Video className="size-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative mt-2 aspect-video">

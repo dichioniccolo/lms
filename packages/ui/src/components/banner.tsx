@@ -5,12 +5,12 @@ import { AlertTriangle, CheckCircleIcon } from "lucide-react";
 import { cn } from "..";
 
 const bannerVariants = cva(
-  "border text-center p-4 text-sm flex items-center w-full",
+  "flex w-full items-center border p-4 text-center text-sm",
   {
     variants: {
       variant: {
-        warning: "bg-yellow-200/80 border-yellow-30 text-primary",
-        success: "bg-emerald-700 border-emerald-800 text-secondary",
+        warning: "border-yellow-50 bg-yellow-200/80 text-primary",
+        success: "border-emerald-800 bg-emerald-700 text-secondary",
       },
     },
     defaultVariants: {
@@ -33,7 +33,7 @@ export const Banner = ({ label, variant }: BannerProps) => {
 
   return (
     <div className={cn(bannerVariants({ variant }))}>
-      <Icon className="mr-2 h-4 w-4" />
+      <Icon className="mr-2 size-4" />
       {label}
     </div>
   );

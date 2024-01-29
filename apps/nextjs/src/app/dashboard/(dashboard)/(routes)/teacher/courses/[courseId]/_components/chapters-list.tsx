@@ -97,7 +97,7 @@ export function ChaptersList({ courseId, items, action }: Props) {
                       )}
                       {...provided.dragHandleProps}
                     >
-                      <Grip className="h-5 w-5" />
+                      <Grip className="size-5" />
                     </div>
                     {chapter.title}
                     <div className="ml-auto flex items-center gap-x-2 pr-2">
@@ -113,7 +113,7 @@ export function ChaptersList({ courseId, items, action }: Props) {
                       <Link
                         href={`/dashboard/teacher/courses/${courseId}/chapters/${chapter.id}`}
                       >
-                        <Pencil className="h-4 w-4 cursor-pointer transition hover:opacity-75" />
+                        <Pencil className="size-4 cursor-pointer transition hover:opacity-75" />
                       </Link>
                     </div>
                   </div>

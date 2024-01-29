@@ -87,8 +87,8 @@ export function ChaptersForm({ courseId, chapters }: Props) {
   return (
     <div className="relative mt-6 rounded-md border bg-slate-100 p-4">
       {reorderStatus === SubmissionStatus.PENDING && (
-        <div className="rounded-m absolute right-0 top-0 flex h-full w-full items-center justify-center bg-slate-500/20">
-          <Loader2 className="h-6 w-6 animate-spin text-sky-700" />
+        <div className="absolute right-0 top-0 flex size-full items-center justify-center rounded-md bg-slate-500/20">
+          <Loader2 className="size-6 animate-spin text-sky-700" />
         </div>
       )}
       <div className="flex items-center justify-between font-medium">
@@ -98,7 +98,7 @@ export function ChaptersForm({ courseId, chapters }: Props) {
             <>Cancel</>
           ) : (
             <>
-              <PlusCircle className="mr-2 h-4 w-4" />
+              <PlusCircle className="mr-2 size-4" />
               Add a chapter
             </>
           )}
@@ -126,7 +126,7 @@ export function ChaptersForm({ courseId, chapters }: Props) {
             disabled={creationStatus === SubmissionStatus.PENDING}
           >
             {creationStatus === SubmissionStatus.PENDING && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 size-4 animate-spin" />
             )}
             Create
           </Button>

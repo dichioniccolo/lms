@@ -76,7 +76,7 @@ export function PriceForm({ courseId, price }: Props) {
             <>Cancel</>
           ) : (
             <>
-              <Pencil className="mr-2 h-4 w-4" />
+              <Pencil className="mr-2 size-4" />
               Edit price
             </>
           )}
@@ -112,7 +112,7 @@ export function PriceForm({ courseId, price }: Props) {
               disabled={status === SubmissionStatus.PENDING}
             >
               {status === SubmissionStatus.PENDING && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 size-4 animate-spin" />
               )}
               Save
             </Button>

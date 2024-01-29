@@ -87,7 +87,7 @@ export function CourseActions({ courseId, disabled, published }: Props) {
         disabled={disabled || publishLoading}
         onClick={onTogglePublishingStatus}
       >
-        {publishLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {publishLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
         {published ? "Unpublished" : "Publish"}
       </Button>
       <AlertDialog>
@@ -97,9 +97,9 @@ export function CourseActions({ courseId, disabled, published }: Props) {
             disabled={deletionStatus === SubmissionStatus.PENDING}
           >
             {deletionStatus === SubmissionStatus.PENDING ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="size-4 animate-spin" />
             ) : (
-              <Trash className="h-4 w-4" />
+              <Trash className="size-4" />
             )}
           </Button>
         </AlertDialogTrigger>

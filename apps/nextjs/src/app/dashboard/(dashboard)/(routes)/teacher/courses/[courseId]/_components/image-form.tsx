@@ -51,13 +51,13 @@ export function ImageForm({ courseId, imageUrl }: Props) {
           {editing && "Cancel"}
           {!editing && !imageUrl && (
             <>
-              <PlusCircle className="mr-2 h-4 w-4" />
+              <PlusCircle className="mr-2 size-4" />
               Add an image
             </>
           )}
           {!editing && imageUrl && (
             <>
-              <Pencil className="mr-2 h-4 w-4" />
+              <Pencil className="mr-2 size-4" />
               Edit image
             </>
           )}
@@ -66,7 +66,7 @@ export function ImageForm({ courseId, imageUrl }: Props) {
       {!editing &&
         (!imageUrl ? (
           <div className="flex h-60 items-center justify-center rounded-md bg-slate-200">
-            <ImageIcon className="h-10 w-10 text-slate-500" />
+            <ImageIcon className="size-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative mt-2 aspect-video">

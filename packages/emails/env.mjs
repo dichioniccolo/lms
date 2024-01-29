@@ -18,7 +18,7 @@ export const env = createEnv({
     //   z.string().email(),
     // ),
     SMTP_HOST: z.string().min(1),
-    SMTP_PORT: z.number().int().min(1),
+    SMTP_PORT: z.coerce.number().int(),
     SMTP_USERNAME: z.string().min(1),
     SMTP_PASSWORD: z.string().min(1),
     SMTP_FROM: z.string().email(),

@@ -165,7 +165,7 @@ export function FileUpload({ type, onChange, accept, maxFiles }: Props) {
                   disabled={progress.status === "cancelled"}
                   onClick={() => progress.abortController?.abort()}
                 >
-                  <Trash className="h-4 w-4 text-red-500" />
+                  <Trash className="size-4 text-red-500" />
                 </button>
               </div>
             </div>

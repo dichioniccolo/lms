@@ -26,13 +26,13 @@ export function UserDropdown({ session }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-12 w-12 rounded-full">
+        <Button variant="ghost" className="size-12 rounded-full">
           <Avatar>
             {session.user.image && (
               <AvatarImage
                 alt={session.user.name ?? session.user.email}
                 src={session.user.image}
-                className="h-10 w-10 rounded-full"
+                className="size-10 rounded-full"
               />
             )}
             <AvatarFallback>
@@ -58,7 +58,7 @@ export function UserDropdown({ session }: Props) {
             }}
           >
             <button className="w-full">
-              <LogOut className="mr-2 h-4 w-4" />
+              <LogOut className="mr-2 size-4" />
               <span>Log Out</span>
             </button>
           </DropdownMenuItem>

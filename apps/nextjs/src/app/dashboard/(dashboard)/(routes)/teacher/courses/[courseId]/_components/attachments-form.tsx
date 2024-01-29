@@ -52,7 +52,7 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
           {isEditing && <>Cancel</>}
           {!isEditing && (
             <>
-              <PlusCircle className="mr-2 h-4 w-4" />
+              <PlusCircle className="mr-2 size-4" />
               Add a file
             </>
           )}
@@ -119,18 +119,18 @@ export function AttachmentForm({ courseId, attachment }: AttachmentProps) {
 
   return (
     <div className="flex w-full items-center rounded-md border border-sky-200 bg-sky-100 p-3 text-sky-700">
-      <File className="mr-2 h-4 w-4 flex-shrink-0" />
+      <File className="mr-2 size-4 shrink-0" />
       <p className="line-clamp-1 text-xs">{attachment.name}</p>
       {status === SubmissionStatus.PENDING && (
         <div className="ml-2">
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <Loader2 className="size-4 animate-spin" />
         </div>
       )}
       <button
         onClick={onSubmit}
         className="ml-auto transition hover:opacity-75"
       >
-        <X className="h-4 w-4" />
+        <X className="size-4" />
       </button>
     </div>
   );

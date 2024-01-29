@@ -63,7 +63,7 @@ export function SignInForm() {
         />
         <Button disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 size-4 animate-spin" />
           )}
           Sign In with Email
         </Button>

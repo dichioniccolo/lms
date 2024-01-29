@@ -30,7 +30,7 @@ export function CourseEnrollButton({ courseId, price }: Props) {
       className="w-full md:w-auto"
     >
       {status === SubmissionStatus.PENDING && (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        <Loader2 className="mr-2 size-4 animate-spin" />
       )}
       Enroll for {formatPrice(parseFloat(price))}
     </Button>

@@ -5,6 +5,7 @@ const config = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
+    // "plugin:tailwindcss/recommended",
     "prettier",
   ],
   env: {
