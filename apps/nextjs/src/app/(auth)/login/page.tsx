@@ -1,4 +1,7 @@
 import type { Metadata, ServerRuntime } from "next";
+import Link from "next/link";
+
+import { Logo } from "@acme/ui/icons/logo";
 
 import { env } from "~/env.mjs";
 import { SignInForm } from "./_components/sign-in-form";
@@ -38,12 +41,12 @@ export default function Page() {
         </svg>
       </div>
       <div className="absolute z-50 m-auto flex w-[380px] flex-1 flex-col justify-center p-6 sm:w-[468px] sm:p-10">
-        {/* <Link href="/">
+        <Link href="/">
           <h1 className="flex flex-col items-center text-3xl">
             <Logo alt={env.NEXT_PUBLIC_APP_NAME} size={50} />
             <span className="mt-2">{env.NEXT_PUBLIC_APP_NAME}</span>
           </h1>
-        </Link> */}
+        </Link>
         <p className="mb-6 mt-3 text-center text-sm font-medium text-slate-600">
           Use your email address to securely sign in to your account
         </p>

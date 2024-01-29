@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { BookOpen } from "lucide-react";
 
 import { Image } from "@acme/ui/components/image";
-import { Link } from "@acme/ui/components/link";
 
 import { formatPrice } from "~/lib/utils";
 import { CourseProgress } from "./course-progress";

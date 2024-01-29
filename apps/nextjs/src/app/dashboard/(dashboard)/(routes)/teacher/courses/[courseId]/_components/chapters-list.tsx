@@ -2,12 +2,12 @@
 
 import type { DropResult } from "@hello-pangea/dnd";
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { Grip, Pencil } from "lucide-react";
 
 import type { Chapter } from "@acme/db/types";
 import { cn } from "@acme/ui";
-import { Link } from "@acme/ui/components/link";
 import { Badge } from "@acme/ui/components/ui/badge";
 import { useMounted } from "@acme/ui/hooks/use-mounted";
 

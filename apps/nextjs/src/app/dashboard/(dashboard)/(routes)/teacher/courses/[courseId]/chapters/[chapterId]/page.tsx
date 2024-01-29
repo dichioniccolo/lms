@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 
 import { and, db, eq, exists, schema } from "@acme/db";
 import { Banner } from "@acme/ui/components/banner";
-import { Link } from "@acme/ui/components/link";
 
 import { getCurrentUser } from "~/app/_api/get-user";
 import { IconBadge } from "~/app/_components/icon-badge";

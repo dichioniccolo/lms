@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CheckCircle, Lock, PlayCircle } from "lucide-react";
 
 import { cn } from "@acme/ui";
-import { Link } from "@acme/ui/components/link";
 
 interface Props {
   courseId: string;

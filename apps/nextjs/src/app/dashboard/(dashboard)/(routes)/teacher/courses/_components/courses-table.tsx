@@ -6,6 +6,7 @@ import type {
   SortingState,
 } from "@tanstack/react-table";
 import { useState } from "react";
+import Link from "next/link";
 import {
   flexRender,
   getCoreRowModel,
@@ -18,7 +19,6 @@ import { ArrowUpDown, Pencil, PlusCircle } from "lucide-react";
 
 import type { Course } from "@acme/db/types";
 import { cn } from "@acme/ui";
-import { Link } from "@acme/ui/components/link";
 import { Badge } from "@acme/ui/components/ui/badge";
 import { Button, buttonVariants } from "@acme/ui/components/ui/button";
 import { Input } from "@acme/ui/components/ui/input";

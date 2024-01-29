@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, Pencil } from "lucide-react";
 
 import type { Session } from "@acme/auth";
-import { Link } from "@acme/ui/components/link";
 import { buttonVariants } from "@acme/ui/components/ui/button";
 
 import { isTeacher } from "~/lib/utils";

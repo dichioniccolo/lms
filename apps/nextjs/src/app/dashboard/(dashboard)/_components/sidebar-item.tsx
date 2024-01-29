@@ -1,10 +1,10 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@acme/ui";
-import { Link } from "@acme/ui/components/link";
 
 interface Props {
   route: {

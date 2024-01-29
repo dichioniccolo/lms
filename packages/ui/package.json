@@ -21,7 +21,6 @@
     "./hooks/use-zod-form": "./src/hooks/use-zod-form.ts",
     "./components/banner": "./src/components/banner.tsx",
     "./components/image": "./src/components/image.tsx",
-    "./components/link": "./src/components/link.tsx",
     "./components/textarea-autosize": "./src/components/textarea-autosize.tsx",
     "./components/ui/accordion": "./src/components/ui/accordion.tsx",
     "./components/ui/alert-dialog": "./src/components/ui/alert-dialog.tsx",
