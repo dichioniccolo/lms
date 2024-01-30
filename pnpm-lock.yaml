@@ -206,7 +206,7 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
       '@planetscale/database':
-        specifier: ^1.13.0
+        specifier: ^1.14.0
         version: 1.14.0
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
