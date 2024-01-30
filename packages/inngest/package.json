@@ -22,7 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "inngest": "^3.7.4",
+    "inngest": "^3.12.0",
     "@t3-oss/env-nextjs": "^0.7.1",
     "zod": "^3.22.4"
   },
