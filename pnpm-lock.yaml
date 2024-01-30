@@ -63,7 +63,7 @@ importers:
         specifier: ^0.7.1
         version: 0.7.3(typescript@5.3.3)(zod@3.22.4)
       aws-crt:
-        specifier: ^1.20.1
+        specifier: ^1.21.0
         version: 1.21.0
       aws-sdk:
         specifier: ^2.1535.0
@@ -5522,7 +5522,7 @@ packages:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.1.13
+      ieee754: 1.2.1
       isarray: 1.0.0
     dev: false
 
