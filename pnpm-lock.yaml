@@ -547,7 +547,7 @@ importers:
         specifier: ^2.2.1
         version: 2.2.1
       vaul:
-        specifier: ^0.8.0
+        specifier: ^0.8.9
         version: 0.8.9(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@acme/eslint-config':
