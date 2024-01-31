@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { Logo } from "@acme/ui/icons/logo";
@@ -49,7 +50,9 @@ export default function Page() {
           Use your email address to securely sign in to your account
         </p>
         <div className="grid gap-6">
-          <SignInForm />
+          <Suspense>
+            <SignInForm />
+          </Suspense>
           {/* <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-slate-300" />
