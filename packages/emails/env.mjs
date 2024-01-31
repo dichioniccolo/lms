@@ -21,7 +21,7 @@ export const env = createEnv({
     SMTP_PORT: z.coerce.number().int(),
     SMTP_USERNAME: z.string().min(1),
     SMTP_PASSWORD: z.string().min(1),
-    SMTP_FROM: z.string().email(),
+    SMTP_FROM: z.string(),
   },
   /**
    * Specify your client-side environment variables schema here.
