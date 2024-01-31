@@ -78,7 +78,7 @@ importers:
         specifier: ^0.315.0
         version: 0.315.0(react@18.2.0)
       next:
-        specifier: ^14.0.4
+        specifier: ^14.1.0
         version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
@@ -166,7 +166,7 @@ importers:
         specifier: ^0.7.1
         version: 0.7.3(typescript@5.3.3)(zod@3.22.4)
       next:
-        specifier: ^14.0.4
+        specifier: ^14.1.0
         version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
       next-auth:
         specifier: 5.0.0-beta.5
@@ -350,7 +350,7 @@ importers:
   packages/server-actions:
     dependencies:
       next:
-        specifier: ^14.0.4
+        specifier: ^14.1.0
         version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
@@ -575,7 +575,7 @@ importers:
   tooling/eslint:
     dependencies:
       '@next/eslint-plugin-next':
-        specifier: ^14.0.4
+        specifier: ^14.1.0
         version: 14.1.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.19.1
