@@ -3,7 +3,8 @@ import {
   boolean,
   datetime,
   mysqlTable,
-  primaryKey,
+  serial,
+  unique,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -13,6 +14,7 @@ import { users } from "../users/schema";
 export const usersChaptersProgresses = mysqlTable(
   "usersChaptersProgresses",
   {
+    id: serial("id").notNull().autoincrement().primaryKey(),
     userId: varchar("userId", { length: 255 })
       .notNull()
       .references(() => users.id, {
@@ -32,9 +34,7 @@ export const usersChaptersProgresses = mysqlTable(
       .default(sql`(now())`),
   },
   (columns) => ({
-    userIdchapterIdPk: primaryKey({
-      columns: [columns.userId, columns.chapterId],
-    }),
+    userIdChapterId: unique().on(columns.userId, columns.chapterId),
   }),
 );
 

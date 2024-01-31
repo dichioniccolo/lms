@@ -2,6 +2,7 @@ import { createId, db, eq, schema } from "@acme/db";
 import { LoginLink } from "@acme/emails";
 import { inngest } from "@acme/inngest";
 
+import { env } from "~/env.mjs";
 import { sendMail } from "~/lib/email";
 
 export const userLoginLink = inngest.createFunction(
@@ -26,8 +27,7 @@ export const userLoginLink = inngest.createFunction(
       to: email,
       subject: "Your login link",
       react: LoginLink({
-        siteName: "",
-        // siteName: env.NEXT_PUBLIC_APP_NAME,
+        siteName: env.NEXT_PUBLIC_APP_NAME,
         url,
         userName: user?.name,
         userEmail: email,

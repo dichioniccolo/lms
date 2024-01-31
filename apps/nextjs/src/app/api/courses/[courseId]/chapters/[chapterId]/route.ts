@@ -1,4 +1,3 @@
-import type { ServerRuntime } from "next";
 import { NextResponse } from "next/server";
 
 import { auth } from "@acme/auth";
@@ -9,8 +8,6 @@ import { rangeOfFile } from "~/app/_actions/files/range-of-file";
 interface Params {
   params: { courseId: string; chapterId: string };
 }
-
-export const runtime: ServerRuntime = "edge";
 
 const CHUNK_SIZE_IN_BYTES = 1024 * 1024 * 4; // 10 MB
 

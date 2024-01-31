@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 
-import { env } from "~/env.mjs";
 import { Providers } from "./providers";
 
 const fontSans = Inter({
@@ -15,11 +14,11 @@ const title = "LMS Andrea Di Chio";
 const description = "LMS Andrea Di Chio";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    env.VERCEL_ENV === "production"
-      ? env.NEXT_PUBLIC_APP_DOMAIN
-      : "http://localhost:3000",
-  ),
+  // metadataBase: new URL(
+  //   env.VERCEL_ENV === "production"
+  //     ? env.NEXT_PUBLIC_APP_DOMAIN
+  //     : "http://localhost:3000",
+  // ),
   title: {
     default: title,
     template: `%s | ${title}`,

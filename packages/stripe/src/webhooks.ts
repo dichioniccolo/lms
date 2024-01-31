@@ -2,7 +2,8 @@
 
 import type Stripe from "stripe";
 
-import { db, eq, schema } from "@acme/db";
+import { and, db, eq, schema } from "@acme/db";
+import { inngest } from "@acme/inngest";
 
 export async function handleEvent(event: Stripe.Event) {
   switch (event.type) {
@@ -32,18 +33,42 @@ export async function handleEvent(event: Stripe.Event) {
         throw new Error("Missing courseId");
       }
 
-      await db.transaction(async (tx) => {
-        await tx.insert(schema.usersCourses).values({
-          courseId,
-          userId,
-        });
+      const course = await db.query.courses.findFirst({
+        where: and(
+          eq(schema.courses.id, courseId),
+          eq(schema.courses.published, true),
+        ),
+        columns: {
+          id: true,
+          title: true,
+        },
+      });
 
-        await tx
-          .update(schema.users)
-          .set({
+      if (!course) {
+        throw new Error("Course not found");
+      }
+
+      const user = await db.query.users.findFirst({
+        where: eq(schema.users.id, userId),
+        columns: {
+          id: true,
+          email: true,
+        },
+      });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      await inngest.send({
+        name: "course/purchased",
+        data: {
+          course,
+          user: {
+            ...user,
             stripeCustomerId,
-          })
-          .where(eq(schema.users.id, userId));
+          },
+        },
       });
       break;
     }

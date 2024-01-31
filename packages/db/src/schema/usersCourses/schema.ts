@@ -1,8 +1,10 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  boolean,
   datetime,
   mysqlTable,
-  primaryKey,
+  serial,
+  unique,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -12,6 +14,7 @@ import { users } from "../users/schema";
 export const usersCourses = mysqlTable(
   "usersCourses",
   {
+    id: serial("id").notNull().autoincrement().primaryKey(),
     userId: varchar("userId", { length: 255 })
       .notNull()
       .references(() => users.id, {
@@ -22,6 +25,7 @@ export const usersCourses = mysqlTable(
       .references(() => courses.id, {
         onDelete: "cascade",
       }),
+    invited: boolean("invited").default(false),
     createdAt: datetime("createdAt", {
       mode: "date",
       fsp: 3,
@@ -30,9 +34,7 @@ export const usersCourses = mysqlTable(
       .default(sql`(now())`),
   },
   (columns) => ({
-    userIdCourseIdPk: primaryKey({
-      columns: [columns.userId, columns.courseId],
-    }),
+    userIdCourseIdUk: unique().on(columns.userId, columns.courseId),
   }),
 );
 

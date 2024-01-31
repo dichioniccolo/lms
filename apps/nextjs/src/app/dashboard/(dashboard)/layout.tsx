@@ -1,3 +1,4 @@
+import type { ServerRuntime } from "next";
 import type { PropsWithChildren } from "react";
 import { redirect } from "next/navigation";
 
@@ -6,6 +7,8 @@ import { auth } from "@acme/auth";
 import { Navbar } from "./_components/navbar";
 import { Sidebar } from "./_components/sidebar";
 import { DashboardProviders } from "./providers";
+
+export const runtime: ServerRuntime = "edge";
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();

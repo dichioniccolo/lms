@@ -3,6 +3,7 @@ import { and, db, eq, exists, schema } from "@acme/db";
 export async function getAnalytics(userId: string) {
   const purchases = await db.query.usersCourses.findMany({
     where: and(
+      eq(schema.usersCourses.invited, false),
       exists(
         db
           .select()

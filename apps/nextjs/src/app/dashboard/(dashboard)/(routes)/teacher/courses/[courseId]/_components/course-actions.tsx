@@ -23,6 +23,7 @@ import { deleteCourse } from "~/app/_actions/courses/delete-course";
 import { publishCourse } from "~/app/_actions/courses/publish-course";
 import { unpublishCourse } from "~/app/_actions/courses/unpublish-course";
 import { useConfetti } from "~/hooks/use-confetti";
+import { InviteUserDialog } from "./invite-user-dialog";
 
 interface Props {
   courseId: string;
@@ -81,6 +82,11 @@ export function CourseActions({ courseId, disabled, published }: Props) {
 
   return (
     <div className="flex items-center gap-x-2">
+      <InviteUserDialog courseId={courseId}>
+        <Button variant="secondary" size="sm">
+          Invite User
+        </Button>
+      </InviteUserDialog>
       <Button
         variant="outline"
         size="sm"

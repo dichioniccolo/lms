@@ -1,5 +1,3 @@
 export default function Page() {
-  return <div>
-    marketing
-  </div>
+  return <div>marketing</div>;
 }
