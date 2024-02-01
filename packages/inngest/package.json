@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "inngest": "^3.12.0",
-    "@t3-oss/env-nextjs": "^0.7.1",
+    "@t3-oss/env-nextjs": "^0.8.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
