@@ -37,7 +37,7 @@ export function SignInForm() {
   const onSubmit = ({ email }: UserAuthSchemaType) =>
     action({
       email,
-      callbackUrl: searchParams?.get("redirect") ?? null,
+      callbackUrl: searchParams?.get("redirect") ?? "/dashboard",
     });
 
   const form = useZodForm({
