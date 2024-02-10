@@ -19,7 +19,7 @@ export const deleteAttachment = createServerAction({
     id: z.number(),
   }),
   action: async ({ input: { courseId, id }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 

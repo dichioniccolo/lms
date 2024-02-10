@@ -32,7 +32,6 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_APP_NAME: z.string().min(1),
     NEXT_PUBLIC_APP_DOMAIN: z.string().min(1),
-    NEXT_PUBLIC_TEACHER_EMAILS: z.string().min(1),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -48,7 +47,6 @@ export const env = createEnv({
     DO_BUCKET_NAME: process.env.DO_BUCKET_NAME,
     DO_ACCESS_KEY_ID: process.env.DO_ACCESS_KEY_ID,
     DO_SECRET_ACCESS_KEY: process.env.DO_SECRET_ACCESS_KEY,
-    NEXT_PUBLIC_TEACHER_EMAILS: process.env.NEXT_PUBLIC_TEACHER_EMAILS,
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXT_PUBLIC_APP_DOMAIN: process.env.NEXT_PUBLIC_APP_DOMAIN,
   },

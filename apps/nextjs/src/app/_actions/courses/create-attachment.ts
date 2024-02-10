@@ -19,7 +19,7 @@ export const createAttachment = createServerAction({
     url: RequiredString.url(),
   }),
   action: async ({ input: { courseId, name, url }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 

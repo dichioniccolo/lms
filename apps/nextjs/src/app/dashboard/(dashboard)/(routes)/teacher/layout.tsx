@@ -11,7 +11,7 @@ export default async function Layout({ children }: PropsWithChildren) {
     return redirect("/login");
   }
 
-  if (!isTeacher(user.email)) {
+  if (!isTeacher(user.role)) {
     return redirect("/");
   }
 

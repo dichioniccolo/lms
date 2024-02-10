@@ -18,7 +18,7 @@ export const createChapter = createServerAction({
     title: RequiredString,
   }),
   action: async ({ input: { courseId, title }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 

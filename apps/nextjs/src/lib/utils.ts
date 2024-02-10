@@ -17,10 +17,8 @@ export function parseRequest(req: NextRequest) {
   return { domain, path, key, fullKey };
 }
 
-export function isTeacher(email: string) {
-  const teacherEmails = env.NEXT_PUBLIC_TEACHER_EMAILS.split(",");
-
-  return teacherEmails.includes(email);
+export function isTeacher(role: "ADMIN" | "USER" | "TEACHER") {
+  return role === "ADMIN" || role === "TEACHER";
 }
 
 export function formatPrice(price: number) {

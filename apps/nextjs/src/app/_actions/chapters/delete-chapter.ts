@@ -20,7 +20,7 @@ export const deleteChapter = createServerAction({
     chapterId: RequiredString,
   }),
   action: async ({ input: { courseId, chapterId }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 

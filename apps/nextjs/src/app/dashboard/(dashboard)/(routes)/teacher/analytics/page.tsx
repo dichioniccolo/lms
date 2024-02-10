@@ -19,7 +19,7 @@ export default async function Page() {
     redirect("/login");
   }
 
-  if (!isTeacher(user.email)) {
+  if (!isTeacher(user.role)) {
     redirect("/dashboard");
   }
 

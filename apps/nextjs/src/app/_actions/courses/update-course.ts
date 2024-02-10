@@ -25,7 +25,7 @@ export const updateCourse = createServerAction({
       .partial(),
   }),
   action: async ({ input: { courseId, values }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 

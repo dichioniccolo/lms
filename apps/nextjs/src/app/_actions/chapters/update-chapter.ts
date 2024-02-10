@@ -29,7 +29,7 @@ export const updateChapter = createServerAction({
       .partial(),
   }),
   action: async ({ input: { courseId, chapterId, values }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 

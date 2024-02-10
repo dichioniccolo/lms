@@ -13,6 +13,7 @@ declare module "next-auth" {
     user: {
       id: string;
       email: string;
+      role: "ADMIN" | "USER" | "TEACHER";
     } & DefaultSession["user"];
   }
 }
@@ -22,7 +23,7 @@ export const {
   auth,
   signIn,
   signOut,
-  update: updateSession,
+  unstable_update: updateSession,
 } = NextAuth({
   adapter: DrizzleAdapter(db),
   session: {
@@ -67,6 +68,7 @@ export const {
         session.user.name = others.token.name;
         session.user.email = others.token.email!;
         session.user.image = others.token.picture;
+        session.user.role = others.token.role as "ADMIN" | "USER" | "TEACHER";
       }
 
       return session;
@@ -84,6 +86,7 @@ export const {
           email: true,
           name: true,
           image: true,
+          role: true,
         },
       });
 
@@ -101,6 +104,7 @@ export const {
         email: dbUser.email,
         name: dbUser.name,
         picture: dbUser.image,
+        role: dbUser.role,
       } as JWT;
     },
   },

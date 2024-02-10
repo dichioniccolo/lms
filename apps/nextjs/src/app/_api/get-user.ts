@@ -12,12 +12,13 @@ export const getCurrentUser = cache(async () => {
     redirect("/login");
   }
 
-  const { id, email, name, image } = session.user;
+  const { id, email, name, image, role } = session.user;
 
   return {
     id,
     name,
     email,
     image,
+    role,
   };
 });

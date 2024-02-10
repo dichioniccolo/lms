@@ -24,7 +24,7 @@ export async function createPresignedUrl(
 ) {
   const user = await getCurrentUser();
 
-  if (!isTeacher(user.email)) {
+  if (!isTeacher(user.role)) {
     throw new ErrorForClient("You are not a teacher");
   }
 

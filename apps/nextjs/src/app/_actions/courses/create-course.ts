@@ -17,7 +17,7 @@ export const createCourse = createServerAction({
     title: z.string().min(1),
   }),
   action: async ({ input: { title }, ctx: { user } }) => {
-    if (!isTeacher(user.email)) {
+    if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");
     }
 
