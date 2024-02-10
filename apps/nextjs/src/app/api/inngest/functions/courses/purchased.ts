@@ -5,7 +5,7 @@ import { inngest } from "@acme/inngest";
 import { env } from "~/env.mjs";
 import { sendMail } from "~/lib/email";
 
-export const courseInvitation = inngest.createFunction(
+export const coursePurchased = inngest.createFunction(
   {
     id: "course/purchased",
     name: "Course Purchased",
@@ -20,7 +20,7 @@ export const courseInvitation = inngest.createFunction(
       step.run("Send purchase email", async () => {
         await sendMail({
           to: user.email,
-          subject: "You have been invited to a course",
+          subject: "Your purchase is complete. Get started now!",
           react: CoursePurchased({
             siteName: env.NEXT_PUBLIC_APP_NAME,
             course,

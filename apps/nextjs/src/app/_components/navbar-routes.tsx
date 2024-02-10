@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogOut, Pencil } from "lucide-react";
+import { Layout, LogOut, Pencil } from "lucide-react";
 
 import type { Session } from "@acme/auth";
 import { buttonVariants } from "@acme/ui/components/ui/button";
@@ -20,17 +20,35 @@ export function NavbarRoutes({ session }: Props) {
 
   const isTeacherPage = pathname.includes("/teacher");
   const isSearchPage = pathname === "/dashboard/search";
+  const isCoursePage =
+    !isTeacherPage &&
+    pathname.includes("/courses") &&
+    pathname.includes("/courses");
 
   const isUserATeacher = isTeacher(session.user.email);
 
   return (
-    <>
-      {isSearchPage && (
-        <div className="hidden md:block">
-          <SearchInput />
-        </div>
-      )}
-      <div className="ml-auto flex items-center gap-x-2">
+    <div className="flex flex-1 items-center justify-between">
+      <div>
+        {isCoursePage && (
+          <Link
+            href="/dashboard"
+            className={buttonVariants({
+              size: "sm",
+              variant: "ghost",
+            })}
+          >
+            <Layout className="mr-2 size-4" />
+            Dashboard
+          </Link>
+        )}
+        {isSearchPage && (
+          <div className="hidden md:block">
+            <SearchInput />
+          </div>
+        )}
+      </div>
+      <div className="flex items-center gap-x-2">
         {isTeacherPage ? (
           <Link
             href="/dashboard"
@@ -56,6 +74,6 @@ export function NavbarRoutes({ session }: Props) {
         ) : null}
         <UserDropdown session={session} />
       </div>
-    </>
+    </div>
   );
 }

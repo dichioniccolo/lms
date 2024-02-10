@@ -1,9 +1,17 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
+import type { Route } from "next";
 import { usePathname } from "next/navigation";
 import { BarChart, Compass, Layout, List } from "lucide-react";
 
 import { SidebarItem } from "./sidebar-item";
+
+export interface SidebarRoute {
+  icon: LucideIcon;
+  label: string;
+  href: Route;
+}
 
 const guestRoutes = [
   {
@@ -16,7 +24,7 @@ const guestRoutes = [
     label: "Browse",
     href: "/dashboard/search",
   },
-];
+] satisfies SidebarRoute[];
 
 const teacherRoutes = [
   {
@@ -29,7 +37,7 @@ const teacherRoutes = [
     label: "Analytics",
     href: "/dashboard/teacher/analytics",
   },
-];
+] satisfies SidebarRoute[];
 
 export function SidebarRoutes() {
   const pathname = usePathname();

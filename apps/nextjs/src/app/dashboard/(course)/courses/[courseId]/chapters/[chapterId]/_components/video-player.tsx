@@ -1,14 +1,21 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 import { toast } from "sonner";
 
 import { useServerAction } from "@acme/server-actions/client";
-import { cn } from "@acme/ui";
 import { useMounted } from "@acme/ui/hooks/use-mounted";
 
 import { completeChapter } from "~/app/_actions/chapters/complete-chapter";
+
+const Video = dynamic(
+  () => import("~/app/_components/video").then((mod) => mod.Video),
+  {
+    ssr: false,
+  },
+);
 
 interface Props {
   courseId: string;
@@ -21,7 +28,6 @@ interface Props {
 export function VideoPlayer({
   courseId,
   chapterId,
-  title,
   locked,
   nextChapterId,
 }: Props) {
@@ -47,38 +53,30 @@ export function VideoPlayer({
   const mounted = useMounted();
 
   return (
-    <div className="relative aspect-video">
+    <div className="relative">
       {!mounted && !locked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
-          <Loader2 className="text-secondary size-8 animate-spin" />
+          <Loader2 className="size-8 animate-spin text-secondary" />
         </div>
       )}
       {locked ? (
-        <div className="text-secondary absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800 text-secondary">
           <Lock className="size-8" />
           <p className="text-center">
             You need to purchase this course to unlock this video.
           </p>
         </div>
       ) : (
-        <video
-          className={cn({
-            hidden: !mounted,
-          })}
-          controls
-          autoPlay
+        <Video
           src={`/api/courses/${courseId}/chapters/${chapterId}`}
-        ></video>
-        // <MuxPlayer
-        //   title={title}
-        //   className={cn({
-        //     hidden: !ready,
-        //   })}
-        //   onCanPlay={() => setReady(true)}
-        //   onEnded={() => action({ courseId, chapterId, completed: true })}
-        //   autoPlay
-        //   playbackId={playbackId!}
-        // />
+          onCompleted={() =>
+            action({
+              courseId,
+              chapterId,
+              completed: true,
+            })
+          }
+        />
       )}
     </div>
   );

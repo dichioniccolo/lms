@@ -18,49 +18,65 @@ export default async function Layout({
     return redirect("/");
   }
 
-  const course = await db.query.courses.findFirst({
-    where: and(
-      eq(schema.courses.id, courseId),
-      eq(schema.courses.published, true),
-      // exists(
-      //   db
-      //     .select()
-      //     .from(schema.usersCourses)
-      //     .where(
-      //       and(
-      //         eq(schema.courses.id, schema.usersCourses.courseId),
-      //         eq(schema.usersCourses, session.user.id),
-      //       ),
-      //     ),
-      // ),
-    ),
-    with: {
-      users: {
-        where: eq(schema.usersCourses.userId, session.user.id),
-        limit: 1,
+  const course = await db
+    .select({
+      id: schema.courses.id,
+      title: schema.courses.title,
+      user: {
+        id: schema.usersCourses.userId,
       },
-      chapters: {
-        where: eq(schema.chapters.published, true),
-        with: {
-          progresses: {
-            where: eq(schema.usersChaptersProgresses.userId, session.user.id),
-            columns: {
-              completed: true,
-            },
-          },
-        },
-        orderBy: asc(schema.chapters.position),
-      },
-    },
-  });
+    })
+    .from(schema.courses)
+    .where(
+      and(
+        eq(schema.courses.id, courseId),
+        eq(schema.courses.published, true),
+        // exists(
+        //   db
+        //     .select()
+        //     .from(schema.usersCourses)
+        //     .where(
+        //       and(
+        //         eq(schema.courses.id, schema.usersCourses.courseId),
+        //         eq(schema.usersCourses, session.user.id),
+        //       ),
+        //     ),
+        // ),
+      ),
+    )
+    .leftJoin(
+      schema.usersCourses,
+      and(
+        eq(schema.usersCourses.courseId, schema.courses.id),
+        eq(schema.usersCourses.userId, session.user.id),
+      ),
+    )
+    .limit(1)
+    .then((x) => x[0]);
 
   if (!course) {
     return redirect("/");
   }
 
+  const chapters = await db.query.chapters.findMany({
+    where: and(
+      eq(schema.chapters.courseId, courseId),
+      eq(schema.chapters.published, true),
+    ),
+    with: {
+      progresses: {
+        where: eq(schema.usersChaptersProgresses.userId, session.user.id),
+        columns: {
+          completed: true,
+        },
+      },
+    },
+    orderBy: asc(schema.chapters.position),
+  });
+
   const courseProgress = await getCourseProgress(course.id);
 
-  const purchased = course.users.length > 0;
+  const purchased = !!course.user;
 
   return (
     <div className="h-full">
@@ -68,14 +84,14 @@ export default async function Layout({
         <CourseNavbar
           session={session}
           purchased={purchased}
-          course={course}
+          course={{ ...course, chapters }}
           courseProgress={courseProgress}
         />
       </div>
       <div className="fixed inset-y-0 z-50 hidden h-full w-80 flex-col md:flex">
         <CourseSidebar
           purchased={purchased}
-          course={course}
+          course={{ ...course, chapters }}
           courseProgress={courseProgress}
         />
       </div>

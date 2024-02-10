@@ -27,7 +27,7 @@ export function SignInForm() {
     await signIn("email", {
       email,
       redirect: false,
-      callbackUrl: searchParams?.get("from") ?? "/dashboard",
+      callbackUrl: searchParams?.get("redirect") ?? "/dashboard",
     });
 
     toast.success("We sent you a login link. Be sure to check your spam too");

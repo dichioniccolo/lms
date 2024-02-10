@@ -1,22 +1,20 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@acme/ui";
 
+import type { SidebarRoute } from "./sidebar-routes";
+
 interface Props {
-  route: {
-    icon: LucideIcon;
-    label: string;
-    href: string;
-  };
+  route: SidebarRoute;
 }
 
 export function SidebarItem({ route }: Props) {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(route.href);
+
+  const isActive = pathname === route.href;
 
   return (
     <Link

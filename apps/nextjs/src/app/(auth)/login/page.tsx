@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ServerRuntime } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 
@@ -7,12 +7,14 @@ import { Logo } from "@acme/ui/icons/logo";
 import { env } from "~/env.mjs";
 import { SignInForm } from "./_components/sign-in-form";
 
-const title = `Entra su ${env.NEXT_PUBLIC_APP_NAME}`;
-// const description = "Create your own blog and share your knowledge.";
+export const runtime: ServerRuntime = "edge";
+
+const title = `Login on ${env.NEXT_PUBLIC_APP_NAME}`;
+const description = "Sign in to your account to access your courses and more.";
 
 export const metadata = {
   title,
-  // description,
+  description,
 } satisfies Metadata;
 
 export default function Page() {

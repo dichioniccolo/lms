@@ -18,7 +18,7 @@ export const courseInvitation = inngest.createFunction(
 
     await sendMail({
       to: user.email,
-      subject: "You have been invited to a course",
+      subject: `You have been invited to the course ${course.title}`,
       react: CourseInvitation({
         siteName: env.NEXT_PUBLIC_APP_NAME,
         course,
