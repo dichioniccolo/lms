@@ -7,11 +7,11 @@ import { sendMail } from "~/lib/email";
 
 export const userLoginLink = inngest.createFunction(
   {
-    id: "lms/user/login-link",
+    id: "user/login-link",
     name: "User Login Link",
   },
   {
-    event: "lms/user/login-link",
+    event: "user/login-link",
   },
   async ({ event }) => {
     const { email, url } = event.data;

@@ -6,7 +6,7 @@ interface WrapWithData<T> {
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type InngestEvents = {
-  "lms/user/login-link": WrapWithData<{
+  "user/login-link": WrapWithData<{
     email: string;
     url: string;
   }>;
