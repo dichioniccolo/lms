@@ -6,11 +6,11 @@ interface WrapWithData<T> {
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type InngestEvents = {
-  "user/login-link": WrapWithData<{
+  "lms/user/login-link": WrapWithData<{
     email: string;
     url: string;
   }>;
-  "course/invitation": WrapWithData<{
+  "lms/course/invitation": WrapWithData<{
     course: {
       title: string;
     };
@@ -19,7 +19,7 @@ type InngestEvents = {
       email: string;
     };
   }>;
-  "course/purchased": WrapWithData<{
+  "lms/course/purchased": WrapWithData<{
     course: {
       id: string;
       title: string;

@@ -61,7 +61,7 @@ export async function handleEvent(event: Stripe.Event) {
       }
 
       await inngest.send({
-        name: "course/purchased",
+        name: "lms/course/purchased",
         data: {
           course,
           user: {

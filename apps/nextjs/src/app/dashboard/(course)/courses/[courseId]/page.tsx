@@ -1,3 +1,4 @@
+import type { ServerRuntime } from "next";
 import { redirect } from "next/navigation";
 
 import { and, asc, db, eq, schema } from "@acme/db";
@@ -7,6 +8,8 @@ interface Props {
     courseId: string;
   };
 }
+
+export const runtime: ServerRuntime = "edge";
 
 export default async function Page({ params: { courseId } }: Props) {
   const course = await db.query.courses.findFirst({

@@ -7,11 +7,11 @@ import { sendMail } from "~/lib/email";
 
 export const courseInvitation = inngest.createFunction(
   {
-    id: "course/invitation",
+    id: "lms/course/invitation",
     name: "Course Invitation",
   },
   {
-    event: "course/invitation",
+    event: "lms/course/invitation",
   },
   async ({ event }) => {
     const { course, user } = event.data;

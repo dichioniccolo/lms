@@ -1,3 +1,4 @@
+import type { ServerRuntime } from "next";
 import { redirect } from "next/navigation";
 import { File } from "lucide-react";
 
@@ -16,6 +17,8 @@ interface Props {
     chapterId: string;
   };
 }
+
+export const runtime: ServerRuntime = "edge";
 
 export default async function Page({ params: { courseId, chapterId } }: Props) {
   const result = await getChapter(courseId, chapterId);

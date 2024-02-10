@@ -47,7 +47,7 @@ export const {
       maxAge: 24 * 60 * 60,
       async sendVerificationRequest({ identifier, url }) {
         await inngest.send({
-          name: "user/login-link",
+          name: "lms/user/login-link",
           data: {
             email: identifier,
             url,

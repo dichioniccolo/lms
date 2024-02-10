@@ -69,7 +69,7 @@ export const inviteUser = createServerAction({
     });
 
     await inngest.send({
-      name: "course/invitation",
+      name: "lms/course/invitation",
       data: {
         course: {
           title: course.title,
