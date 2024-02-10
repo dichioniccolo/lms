@@ -88,7 +88,7 @@ export function subdomainUrl(
 
 export function getProtocol() {
   if (typeof window !== "undefined") {
-    return `${window.location.protocol}//`;
+    return `${window.location.protocol}://`;
   }
 
   return env.NODE_ENV === "production" ? "https://" : "http://";
