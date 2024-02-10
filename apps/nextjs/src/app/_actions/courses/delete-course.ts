@@ -8,7 +8,7 @@ import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 
 import { RequiredString } from "~/lib/validation";
-import { deleteFiles } from "../files/delete-file";
+import { deleteFile, deleteFiles } from "../files/delete-file";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
 export const deleteCourse = createServerAction({
@@ -25,6 +25,7 @@ export const deleteCourse = createServerAction({
       ),
       columns: {
         id: true,
+        imageUrl: true,
       },
       with: {
         chapters: {
@@ -37,6 +38,10 @@ export const deleteCourse = createServerAction({
 
     if (!course) {
       throw new ErrorForClient("Course not found");
+    }
+
+    if (course.imageUrl) {
+      await deleteFile(course.imageUrl);
     }
 
     await deleteFiles(course.chapters.map((x) => x.videoUrl).filter(Boolean));
