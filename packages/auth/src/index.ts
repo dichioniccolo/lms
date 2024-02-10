@@ -58,10 +58,9 @@ export const {
     },
   ],
   callbacks: {
-    // signIn: async ({ account, profile }) => {
-
-    //   return true;
-    // },
+    signIn: () => {
+      return true;
+    },
     session: ({ session, ...others }) => {
       if ("token" in others) {
         session.user.id = others.token.sub!;

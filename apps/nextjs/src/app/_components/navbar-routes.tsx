@@ -25,7 +25,7 @@ export function NavbarRoutes({ session }: Props) {
     pathname.includes("/courses") &&
     pathname.includes("/courses");
 
-  const isUserATeacher = isTeacher(session.user.email);
+  const isUserATeacher = isTeacher(session.user.role);
 
   return (
     <div className="flex flex-1 items-center justify-between">

@@ -1,5 +1,6 @@
+"use client";
+
 import { LogOut } from "lucide-react";
-import { signOut } from "next-auth/react";
 
 import type { Session } from "@acme/auth";
 import {
@@ -18,11 +19,15 @@ import {
   DropdownMenuTrigger,
 } from "@acme/ui/components/ui/dropdown-menu";
 
+import { logout } from "../_actions/users/logout";
+
 interface Props {
   session: Session;
 }
 
 export function UserDropdown({ session }: Props) {
+  // const { action } = useServerAction(logout);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -51,17 +56,14 @@ export function UserDropdown({ session }: Props) {
               <span>Settings</span>
             </DropdownMenuItem>
           </Link> */}
-          <DropdownMenuItem
-            asChild
-            onClick={async () => {
-              await signOut();
-            }}
-          >
-            <button className="w-full">
-              <LogOut className="mr-2 size-4" />
-              <span>Log Out</span>
-            </button>
-          </DropdownMenuItem>
+          <form action={logout} className="w-full">
+            <DropdownMenuItem asChild>
+              <button className="w-full">
+                <LogOut className="mr-2 size-4" />
+                <span>Log Out</span>
+              </button>
+            </DropdownMenuItem>
+          </form>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
