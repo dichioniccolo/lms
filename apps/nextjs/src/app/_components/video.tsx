@@ -1,8 +1,8 @@
 "use client";
 
-import type { ElementRef, KeyboardEvent } from "react";
+import type { ElementRef, KeyboardEvent, MouseEvent } from "react";
 import type { OnProgressProps } from "react-player/base";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import {
   Check,
@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import ReactPlayer from "react-player";
 
+import { cn } from "@acme/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,6 +36,7 @@ interface Props {
 const playbacks = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
 export function Video({ src, onCompleted }: Props) {
+  const fullScreenRef = useRef<ElementRef<"div">>(null);
   const videoRef = useRef<ElementRef<typeof ReactPlayer>>(null);
 
   const [playing, setPlaying] = useState(false);
@@ -43,9 +45,11 @@ export function Video({ src, onCompleted }: Props) {
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [played, setPlayed] = useState(0);
   const [loaded, setLoaded] = useState(0);
-  // const [seeking, setSeeking] = useState(false);
+  const [seeking, setSeeking] = useState(false);
   const [buffer, setBuffer] = useState(false);
   const [pip, setPip] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const currentTime = videoRef.current?.getCurrentTime() ?? 0;
   const duration = videoRef.current?.getDuration() ?? 0;
@@ -74,16 +78,6 @@ export function Video({ src, onCompleted }: Props) {
     videoRef.current?.seekTo(played);
   }, []);
 
-  // const seekMouseDown = useCallback(() => setSeeking(true), []);
-
-  // const seekMouseUp = useCallback(
-  //   (value: number) => {
-  //     setSeeking(false);
-  //     seek(value);
-  //   },
-  //   [seek],
-  // );
-
   const volumeChange = useCallback((value: number) => {
     setVolume(value);
     setMuted(value === 0);
@@ -93,64 +87,45 @@ export function Video({ src, onCompleted }: Props) {
     setMuted((prev) => !prev);
   }, []);
 
-  // const setControlsShownDebounced = useDebouncedCallback((value: boolean) => {
-  //   setControlsShown(value);
-  // }, 1000);
-
-  // const onMouseMove = useCallback(() => {
-  //   setControlsShown(true);
-  //   setControlsShownDebounced(false);
-  // }, [setControlsShownDebounced]);
-
   const onProgress = ({ playedSeconds, loadedSeconds }: OnProgressProps) => {
-    // if (seeking) {
-    //   return;
-    // }
+    if (seeking) {
+      return;
+    }
 
     setPlayed(playedSeconds);
     setLoaded(loadedSeconds);
   };
 
-  const onBuffer = () => setBuffer(true);
-  const onBufferEnd = () => setBuffer(false);
+  const onBuffer = useCallback(() => setBuffer(true), []);
+  const onBufferEnd = useCallback(() => setBuffer(false), []);
 
-  const onEnded = () => {
+  const onEnded = useCallback(() => {
     setPlaying(false);
     onCompleted?.();
-  };
+  }, [onCompleted]);
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === " " || e.key === "k") {
-      playPause();
-    } else if (e.key === "m") {
-      muteUnmute();
-    } else if (e.key === "ArrowLeft") {
-      rewind();
-    } else if (e.key === "ArrowRight") {
-      fastForward();
-    }
-  };
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === " " || e.key === "k") {
+        playPause();
+      } else if (e.key === "m") {
+        muteUnmute();
+      } else if (e.key === "ArrowLeft") {
+        rewind();
+      } else if (e.key === "ArrowRight") {
+        fastForward();
+      }
+    },
+    [fastForward, muteUnmute, playPause, rewind],
+  );
 
-  const onFullScreen = useCallback(() => {
-    const player = videoRef.current?.getInternalPlayer();
-    if (!player) {
-      return;
+  const onFullScreen = useCallback(async () => {
+    if (!fullScreen) {
+      await fullScreenRef.current?.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
     }
-
-    if (player.requestFullscreen) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      player.requestFullscreen();
-    } else if (player.msRequestFullscreen) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      player.msRequestFullscreen();
-    } else if (player.mozRequestFullScreen) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      player.mozRequestFullScreen();
-    } else if (player.webkitRequestFullscreen) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      player.webkitRequestFullscreen();
-    }
-  }, []);
+  }, [fullScreen]);
 
   const onPictureInPicture = useCallback(() => {
     setPip(true);
@@ -159,26 +134,48 @@ export function Video({ src, onCompleted }: Props) {
   const playedPercentage = (played / duration) * 100;
   const loadedPercentage = (loaded / duration) * 100;
 
-  const [isDragging, setIsDragging] = useState(false);
+  const onHandleSeek = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      const target = e.target as HTMLElement;
 
-  const onHandleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLElement;
+      let rect = target.getBoundingClientRect();
 
-    let rect = target.getBoundingClientRect();
+      if (target.id === "played" || target.id === "loaded") {
+        rect = target.parentElement!.getBoundingClientRect();
+      }
 
-    if (target.id === "played" || target.id === "loaded") {
-      rect = target.parentElement!.getBoundingClientRect();
-    }
+      const x = e.clientX - rect.left + 1;
+      const percentage = (x / rect.width) * 100;
+      const newPlayedSeconds = (percentage / 100) * duration;
 
-    const x = e.clientX - rect.left + 1;
-    const percentage = (x / rect.width) * 100;
-    const newPlayedSeconds = (percentage / 100) * duration;
+      setSeeking(true);
+      seek(newPlayedSeconds);
+    },
+    [duration, seek],
+  );
 
-    seek(newPlayedSeconds);
-  };
+  useEffect(() => {
+    const handle = () => {
+      setFullScreen((prev) => !prev);
+    };
+
+    const ref = fullScreenRef.current;
+
+    ref?.addEventListener("fullscreenchange", handle);
+
+    return () => {
+      ref?.removeEventListener("fullscreenchange", handle);
+    };
+  }, []);
 
   return (
-    <div className="relative size-full">
+    <div
+      ref={fullScreenRef}
+      className={cn({
+        "size-full": !fullScreen,
+        "h-screen w-screen": fullScreen,
+      })}
+    >
       {buffer && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/10">
           <Loader2 className="h-8 w-8 animate-spin text-white" />
@@ -199,8 +196,14 @@ export function Video({ src, onCompleted }: Props) {
             onHandleSeek(e);
             setIsDragging(true);
           }}
-          onMouseUp={() => setIsDragging(false)}
-          onMouseLeave={() => setIsDragging(false)}
+          onMouseUp={() => {
+            setIsDragging(false);
+            setSeeking(false);
+          }}
+          onMouseLeave={() => {
+            setIsDragging(false);
+            setSeeking(false);
+          }}
         >
           <div
             id="played"
