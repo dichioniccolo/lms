@@ -547,7 +547,7 @@ importers:
         specifier: ^7.50.1
         version: 7.50.1(react@18.2.0)
       react-resizable-panels:
-        specifier: ^2.0.3
+        specifier: ^2.0.4
         version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
       react-textarea-autosize:
         specifier: ^8.5.3
