@@ -60,4 +60,64 @@
       "rlig" 1,
       "calt" 1;
   }
+
+  .marge-x {
+    @apply px-4 min-[720px]:px-6 min-[1280px]:px-8 min-[1536px]:px-20;
+  }
+
+  .-margin-x {
+    @apply -mx-3 px-3 md:-mx-6 md:px-6;
+  }
+
+  .text-body {
+    @apply text-base font-medium tracking-[-.008em];
+  }
+
+  .text-heading {
+    @apply text-4xl font-semibold tracking-[-.016em] md:text-[44px] md:leading-[48px] md:tracking-[-.024em];
+  }
+
+  .text-heading-xl {
+    @apply text-4xl font-semibold tracking-[-.016em] md:text-[56px] md:leading-[64px] md:tracking-[-.024em];
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Search command dialog */
+.search-command [cmdk-input-wrapper] {
+  @apply mx-3 rounded-full bg-secondary px-5 text-secondary-foreground;
+}
+
+.search-command [cmdk-input-wrapper] svg {
+  @apply !text-foreground !opacity-100;
+}
+
+.search-command [cmdk-input-wrapper] input {
+  @apply text-sm sm:text-base;
+}
+
+.search-command [cmdk-list-sizer] {
+  @apply flex !size-full !max-h-full flex-col gap-y-6 !pb-6;
+}
+
+.search-command [cmdk-group-heading] {
+  @apply mb-2.5 !px-0 !text-sm;
+}
+
+@media (min-width: 768px) {
+  .group[data-selected="true"] .md\:group-data-selected\:-translate-y-5 {
+    @apply -translate-y-5;
+  }
+}
+
+.data-selected[data-selected="true"] .data-selected-bg {
+  @apply !bg-foreground/20;
 }
