@@ -36,7 +36,7 @@ export const CoursePurchased = ({
     title: "Course title",
   },
 }: Props) => {
-  const previewText = `Thank you for purchasing the course ${course.title}`;
+  const previewText = `Grazie per aver completato l'acquisto di ${course.title}`;
 
   return (
     <Html>
@@ -55,22 +55,22 @@ export const CoursePurchased = ({
               />
             </Section>
             <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
-              {course.title}
+              Acquisto di {course.title} completato
             </Heading>
             <Text className="text-[14px] leading-[24px] text-black">
-              Hello {user.name ?? user.email},
+              Ciao {user.name ?? user.email},
             </Text>
             <Text className="text-[14px] leading-[24px] text-black">
-              thank you for purchasing the course{" "}
-              <strong>{course.title}</strong>. Your purchase is now complete and
-              you can watching the course by clicking the button below.
+              grazie per aver comprato il corso <strong>{course.title}</strong>.
+              Il tuo acquisto è stato completato da ora puoi accedere al corso
+              cliccando il bottone sottostante.
             </Text>
             <Section className="my-[32px] text-center">
               <Button
                 className="rounded bg-[#000000] px-5 py-3 text-center text-[12px] font-semibold text-white no-underline"
                 href={`https://${env.NEXT_PUBLIC_APP_DOMAIN}/login`}
               >
-                Sign in
+                Login
               </Button>
             </Section>
             <Hr className="mx-0 my-[26px] w-full border border-solid border-[#eaeaea]" />

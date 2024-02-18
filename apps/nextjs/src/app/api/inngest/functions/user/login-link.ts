@@ -29,8 +29,10 @@ export const userLoginLink = inngest.createFunction(
       react: LoginLink({
         siteName: env.NEXT_PUBLIC_APP_NAME,
         url,
-        userName: user?.name,
-        userEmail: email,
+        user: {
+          name: user?.name,
+          email,
+        },
       }),
       headers: {
         "X-Entity-Ref-ID": createId(),

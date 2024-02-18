@@ -28,19 +28,18 @@ export function CourseCard({ course }: Props) {
         className="overflow-hidden rounded-3xl md:hidden"
         priority
       />
-      <AspectRatio
-        ratio={16 / 9}
-        className="relative hidden w-full overflow-hidden rounded-[28px] transition duration-300 md:block md:bg-foreground/[0.04] md:group-hover:bg-foreground/[0.06]"
-      >
-        {/* <div className="relative hidden w-full overflow-hidden rounded-[28px] transition duration-300 md:block md:bg-foreground/[0.04] md:pb-7 md:pt-6 md:group-hover:bg-foreground/[0.06]"> */}
-        <Image
-          src={course.imageUrl!}
-          alt={course.title}
-          width={300}
-          height={800}
-          className="max-h-[583px] overflow-hidden rounded-3xl"
-        />
-      </AspectRatio>
+      <div className="relative hidden w-full overflow-hidden rounded-[28px] transition duration-300 md:block md:bg-foreground/[0.04] md:group-hover:bg-foreground/[0.06]">
+        <AspectRatio ratio={16 / 9}>
+          {/* <div className="relative hidden w-full overflow-hidden rounded-[28px] transition duration-300 md:block md:bg-foreground/[0.04] md:pb-7 md:pt-6 md:group-hover:bg-foreground/[0.06]"> */}
+          <Image
+            src={course.imageUrl!}
+            alt={course.title}
+            width={300}
+            height={800}
+            className="max-h-[583px] overflow-hidden rounded-3xl"
+          />
+        </AspectRatio>{" "}
+      </div>
 
       <div className="flex w-full items-center gap-x-3">
         {/* <div className="h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-[#eaeaea]" /> */}

@@ -55,22 +55,21 @@ export const CourseInvitation = ({
               />
             </Section>
             <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
-              Course invitation
+              Invito al corso {course.title}
             </Heading>
             <Text className="text-[14px] leading-[24px] text-black">
-              Hello {user.name ?? user.email},
+              Ciao {user.name ?? user.email},
             </Text>
             <Text className="text-[14px] leading-[24px] text-black">
-              you have been invited in the course{" "}
-              <strong>{course.title}</strong>. Enter our site and sign in with
-              your email address to access the course.
+              Sei statp invitato al corso <strong>{course.title}</strong>. Da
+              ora puoi accedere al corso cliccando il bottone sottostante.
             </Text>
             <Section className="my-[32px] text-center">
               <Button
                 className="rounded bg-[#000000] px-5 py-3 text-center text-[12px] font-semibold text-white no-underline"
                 href={`https://${env.NEXT_PUBLIC_APP_DOMAIN}/login`}
               >
-                Sign in
+                Login
               </Button>
             </Section>
             <Hr className="mx-0 my-[26px] w-full border border-solid border-[#eaeaea]" />

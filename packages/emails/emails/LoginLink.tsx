@@ -19,16 +19,13 @@ import Head from "./components/Head";
 interface LoginLinkProps {
   siteName: string;
   url: string;
-  userName?: string | null;
-  userEmail?: string;
+  user: {
+    name?: string | null;
+    email: string;
+  };
 }
 
-export const LoginLink = ({
-  siteName,
-  url,
-  userName,
-  userEmail,
-}: LoginLinkProps) => {
+export const LoginLink = ({ siteName, url, user }: LoginLinkProps) => {
   const previewText = `Login link on ${siteName}`;
 
   return (
@@ -48,38 +45,36 @@ export const LoginLink = ({
               />
             </Section>
             <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
-              Sign in on <strong>{siteName}</strong>
+              Autenticati su <strong>{siteName}</strong>
             </Heading>
             <Text className="text-[14px] leading-[24px] text-black">
-              Hello {userName ?? userEmail},
+              Ciao {user.name ?? user.email},
             </Text>
             <Text className="text-[14px] leading-[24px] text-black">
-              here is your login link to sign in on <strong>{siteName}</strong>.
+              ecco il tuo link per eseguire l'autenticazione su{" "}
+              <strong>{siteName}</strong>.
             </Text>
             <Section className="my-[32px] text-center">
               <Button
                 className="rounded bg-[#000000] px-5 py-3 text-center text-[12px] font-semibold text-white no-underline"
                 href={url}
               >
-                Sign in
+                Login
               </Button>
             </Section>
             <Text className="text-[14px] leading-[24px] text-black">
-              or copy and paste this URL into your browser:{" "}
+              oppure copia e incolla questo URL sul tuo browser:{" "}
               <Link href={url} className="text-blue-600 no-underline">
                 {url}
               </Link>
             </Text>
             <Hr className="mx-0 my-[26px] w-full border border-solid border-[#eaeaea]" />
             <Text className="text-[12px] leading-[24px] text-[#666666]">
-              This link was intended for{" "}
-              <span className="text-black">{userEmail}</span>.
-              {/* This link was
-              sent from <span className="text-black">{linkFromIp}</span> located
-              in <span className="text-black">{linkFromLocation}</span>. */}{" "}
-              If you were not expecting this link, you can ignore this email. If
-              you are concerned about your account&apos;s safety, please reply
-              to this email to get in touch with us.
+              This email was intended for{" "}
+              <span className="text-black">{user.name ?? user.email}</span>. If
+              you were not expecting this email, you can ignore it. If you are
+              concerned about your account&apos;s safety, please reply to this
+              email to get in touch with us.
             </Text>
           </Container>
         </Body>
