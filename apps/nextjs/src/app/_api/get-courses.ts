@@ -13,7 +13,7 @@ export async function getCourses({
   const where: SQL[] = [eq(schema.courses.published, true)];
 
   if (title) {
-    where.push(like(schema.courses.title, title));
+    where.push(like(schema.courses.title, `%${title}%`));
   }
 
   const courses = await db.query.courses.findMany({

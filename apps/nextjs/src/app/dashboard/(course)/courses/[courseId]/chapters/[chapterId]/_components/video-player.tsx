@@ -53,7 +53,7 @@ export function VideoPlayer({
   const mounted = useMounted();
 
   return (
-    <div className="relative">
+    <div className="relative min-h-60">
       {!mounted && !locked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
           <Loader2 className="size-8 animate-spin text-secondary" />

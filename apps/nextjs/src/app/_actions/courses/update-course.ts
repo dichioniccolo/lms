@@ -8,6 +8,7 @@ import { createServerAction } from "@acme/server-actions/server";
 
 import { isTeacher } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
+import { deleteFile } from "../files/delete-file";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
 export const updateCourse = createServerAction({
@@ -29,6 +30,21 @@ export const updateCourse = createServerAction({
       throw new ErrorForClient("You are not a teacher");
     }
 
+    const course = await db
+      .select()
+      .from(schema.courses)
+      .where(
+        and(
+          eq(schema.courses.id, courseId),
+          eq(schema.courses.ownerId, user.id),
+        ),
+      )
+      .then((x) => x[0]);
+
+    if (!course) {
+      throw new ErrorForClient("Course not found");
+    }
+
     await db
       .update(schema.courses)
       .set({
@@ -40,5 +56,9 @@ export const updateCourse = createServerAction({
           eq(schema.courses.ownerId, user.id),
         ),
       );
+
+    if (values.imageUrl && course.imageUrl) {
+      await deleteFile(course.imageUrl);
+    }
   },
 });
