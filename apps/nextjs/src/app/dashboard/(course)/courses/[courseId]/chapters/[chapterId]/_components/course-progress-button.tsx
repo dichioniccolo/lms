@@ -57,7 +57,7 @@ export function CourseProgressButton({
       variant={completed ? "outline" : "default"}
       className="w-full md:w-auto"
     >
-      {completed ? "Mark as incomplete" : "Mark as complete"}
+      {completed ? "Imposta come incompleto" : "Imposta come completato"}
       <Icon className="ml-2 size-4" />
     </Button>
   );

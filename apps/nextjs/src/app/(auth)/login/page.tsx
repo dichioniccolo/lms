@@ -49,7 +49,7 @@ export default function Page() {
           </h1>
         </Link>
         <p className="mb-6 mt-3 text-center text-sm font-medium text-slate-600">
-          Use your email address to securely sign in to your account
+          Usa il tuo indirizzo email per accedere in modo sicuro al tuo account
         </p>
         <div className="grid gap-6">
           <Suspense>

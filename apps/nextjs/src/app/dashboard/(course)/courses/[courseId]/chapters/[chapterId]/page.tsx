@@ -34,12 +34,12 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
   return (
     <div>
       {userProgress?.completed && (
-        <Banner variant="success" label="You already completed this chapter." />
+        <Banner variant="success" label="Hai già completato questo capitolo!" />
       )}
       {!isUnlocked && (
         <Banner
           variant="warning"
-          label="You need to purchase this course to watch this chapter."
+          label="Devi comprare il corso per essere abilitato a visualizzare il video."
         />
       )}
       <div className="mx-auto flex max-w-4xl flex-col pb-20">
@@ -67,30 +67,32 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
             )}
           </div>
           <Separator />
-          {chapter.description && (
-            <div>
-              <Preview value={chapter.description} />
-            </div>
-          )}
-          {attachments.length > 0 && (
-            <>
-              <Separator />
-              <div className="p-4">
-                {attachments.map((attachment) => (
-                  <a
-                    href={attachment.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={attachment.id}
-                    className="flex w-full items-center rounded-md border bg-sky-200 p-3 text-sky-700 hover:underline"
-                  >
-                    <File />
-                    <p className="line-clamp-1">{attachment.name}</p>
-                  </a>
-                ))}
+          <div className="flex">
+            {chapter.description && (
+              <div className="flex-1">
+                <Preview value={chapter.description} />
               </div>
-            </>
-          )}
+            )}
+            {attachments.length > 0 && (
+              <>
+                <Separator />
+                <div className="p-4">
+                  {attachments.map((attachment) => (
+                    <a
+                      href={attachment.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={attachment.id}
+                      className="flex w-full items-center rounded-md border bg-sky-200 p-3 text-sky-700 hover:underline"
+                    >
+                      <File />
+                      <p className="line-clamp-1">{attachment.name}</p>
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

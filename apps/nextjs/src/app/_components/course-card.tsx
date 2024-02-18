@@ -44,7 +44,7 @@ export function CourseCard({ course, progress }: Props) {
           <div className="line-clamp-2 text-lg font-medium transition group-hover:text-sky-700 md:text-base">
             {course.title}
           </div>
-          <p className="text-muted-foreground text-xs">
+          <p className="text-xs text-muted-foreground">
             {course.categories.map((c) => c.category.name).join(", ")}
           </p>
           <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
@@ -52,7 +52,7 @@ export function CourseCard({ course, progress }: Props) {
               <IconBadge size="sm" icon={BookOpen} />
               <span>
                 {course.chapters.length}{" "}
-                {course.chapters.length === 1 ? "Chapter" : "Chapters"}
+                {course.chapters.length === 1 ? "Capitolo" : "Capitoli"}
               </span>
             </div>
           </div>
@@ -64,7 +64,7 @@ export function CourseCard({ course, progress }: Props) {
             />
           ) : (
             <p className="text-md font-medium text-slate-700 md:text-sm">
-              {course.price ? formatPrice(parseFloat(course.price)) : "Free"}
+              {course.price ? formatPrice(parseFloat(course.price)) : "Gratis"}
             </p>
           )}
         </div>

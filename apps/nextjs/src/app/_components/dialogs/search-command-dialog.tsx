@@ -3,18 +3,18 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Search } from "lucide-react";
 
 import { cn } from "@acme/ui";
 import { Button } from "@acme/ui/components/ui/button";
 import {
   CommandDialog,
   CommandEmpty,
-  CommandGroup,
-  CommandInput,
   CommandItem,
-  CommandList,
 } from "@acme/ui/components/ui/command";
+import { Input } from "@acme/ui/components/ui/input";
 import { ScrollArea } from "@acme/ui/components/ui/scroll-area";
+import { useDebounce } from "@acme/ui/hooks/use-debounce";
 
 import { getPublishedCourses } from "~/app/_api/get-published-courses";
 import { useSearchModal } from "~/hooks/use-search-modal";
@@ -43,17 +43,17 @@ export function SearchCommandDialog() {
     };
   }, [searchModal]);
 
-  // const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      setCourses(await getPublishedCourses());
+      setCourses(await getPublishedCourses(debouncedSearch));
       setLoading(false);
     };
 
     void load();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <CommandDialog
@@ -67,14 +67,18 @@ export function SearchCommandDialog() {
       )}
     >
       <div className="flex w-full items-center gap-x-0 [&_[cmdk-input-wrapper]]:flex [&_[cmdk-input-wrapper]]:grow">
-        <CommandInput
-          placeholder="Search..."
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
-          value={search}
-          onValueChange={setSearch}
-          className="!h-10 md:!h-12"
-        />
+        {/* eslint-disable-next-line react/no-unknown-property */}
+        <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
+          <Search className="mr-2 size-4 shrink-0 opacity-50" />
+          <Input
+            placeholder="Cerca..."
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+            value={search}
+            onChange={(x) => setSearch(x.target.value)}
+            className="flex !h-10 w-full rounded-md border-none bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-none focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 md:!h-12"
+          />
+        </div>
 
         <Button
           variant="ghost"
@@ -95,8 +99,8 @@ export function SearchCommandDialog() {
             /> */}
 
             <ScrollArea className="w-full">
-              <CommandList className="relative size-full !max-h-none pb-10 pr-2 md:px-3">
-                <CommandGroup>
+              <div className="relative size-full !max-h-none pb-10 pr-2 md:px-3">
+                <div>
                   <div className="flex flex-nowrap gap-x-2 [&_[cmdk-item]]:shrink-0">
                     {courses.map((course) => (
                       <CommandItem
@@ -110,7 +114,7 @@ export function SearchCommandDialog() {
                           className="peer absolute inset-0 z-20"
                         />
                         <div className="z-10 shrink-0 overflow-hidden rounded-t-2xl md:h-40">
-                          <div className="md:group-data-selected:-translate-y-5 flex cursor-pointer flex-col items-center gap-y-1 transition-transform duration-300 ease-out md:group-hover:-translate-y-5">
+                          <div className="md:group-data-selected:-translate-y-5 flex max-w-[200px] cursor-pointer flex-col items-center gap-y-1 transition-transform duration-300 ease-out md:group-hover:-translate-y-5">
                             <Image
                               src={course.imageUrl!}
                               alt={course.title}
@@ -119,15 +123,15 @@ export function SearchCommandDialog() {
                               className="size-40 shrink-0 overflow-hidden rounded-2xl object-cover"
                               priority
                             />
-                            <span className="shrink-0 truncate text-center text-xs font-normal text-muted-foreground">
+                            <p className="shrink-0 truncate text-xs font-normal text-muted-foreground">
                               {course.title}
-                            </span>
+                            </p>
                           </div>
                         </div>
                       </CommandItem>
                     ))}
                   </div>
-                </CommandGroup>
+                </div>
                 {/* {category === "trending" && (
                   <>
                     <CommandItem className="absolute inset-0 z-0 !bg-transparent !text-transparent">
@@ -148,7 +152,7 @@ export function SearchCommandDialog() {
                 {category === "flows" && (
                   <ItemsLines title="Flows -- NOT Hover Card" />
                 )} */}
-              </CommandList>
+              </div>
             </ScrollArea>
           </>
         ) : !loading && courses.length === 0 ? (

@@ -32,7 +32,7 @@ export function CourseEnrollButton({ courseId, price }: Props) {
       {status === SubmissionStatus.PENDING && (
         <Loader2 className="mr-2 size-4 animate-spin" />
       )}
-      Enroll for {formatPrice(parseFloat(price))}
+      Compra per {formatPrice(parseFloat(price))}
     </Button>
   );
 }

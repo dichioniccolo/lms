@@ -47,7 +47,7 @@ export function UserDropdown({ session }: Props) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" forceMount align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>Il mio Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {/* <Link href={AppRoutes.Settings}>

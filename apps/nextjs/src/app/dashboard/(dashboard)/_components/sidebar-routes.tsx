@@ -21,7 +21,7 @@ const guestRoutes = [
   },
   {
     icon: Compass,
-    label: "Browse",
+    label: "Cerca",
     href: "/dashboard/search",
   },
 ] satisfies SidebarRoute[];

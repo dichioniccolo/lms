@@ -45,7 +45,7 @@ export function CourseProgress({ value, variant, size }: Props) {
           }),
         )}
       >
-        {Math.round(value)}% Complete
+        {Math.round(value)}%
       </p>
     </div>
   );

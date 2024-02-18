@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Button } from "@acme/ui/components/ui/button";
-import { Logo } from "@acme/ui/icons/logo";
 
 import { SearchButtonNav } from "~/app/_components/search-button-nav";
 import { env } from "~/env.mjs";
@@ -12,7 +11,6 @@ export function Navbar() {
       <div className="marge-x marge-x grid w-full grid-cols-[min-content_auto_min-content] grid-rows-[1fr_auto] items-center gap-x-2 md:grid-cols-[1fr_minmax(auto,500px)_1fr] lg:grid-rows-1">
         <div className="flex items-center gap-7">
           <Link href="/" className="flex items-center gap-x-2">
-            <Logo alt="Logo" />
             <span className="text-lg font-semibold">
               {env.NEXT_PUBLIC_APP_NAME}
             </span>

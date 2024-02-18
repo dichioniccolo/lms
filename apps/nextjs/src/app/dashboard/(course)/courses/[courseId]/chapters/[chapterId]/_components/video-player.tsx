@@ -63,7 +63,7 @@ export function VideoPlayer({
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800 text-secondary">
           <Lock className="size-8" />
           <p className="text-center">
-            You need to purchase this course to unlock this video.
+            Devi comprare il corso per essere abilitato a visualizzare il video.
           </p>
         </div>
       ) : (

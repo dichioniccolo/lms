@@ -36,8 +36,8 @@ export function CoursesList({ items }: Props) {
         ))}
       </div>
       {items.length === 0 && (
-        <div className="text-muted-foreground mt-10 text-center text-sm">
-          No courses found
+        <div className="mt-10 text-center text-sm text-muted-foreground">
+          Nessun corso trovato
         </div>
       )}
     </div>

@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@acme/ui/components/ui/button";
+import { Logo } from "@acme/ui/icons/logo";
 
 import { env } from "~/env.mjs";
 
 export function HeroComponent() {
   return (
-    <div className="border-divider-primary h-[620px] w-full overflow-hidden border-b-2 text-center md:h-[580px]">
+    <div className="border-divider-primary min-h-[620px] w-full overflow-hidden border-b-2 text-center md:min-h-[580px]">
       <div className="relative flex h-full w-full flex-col items-center justify-between pb-6">
         <Image
           className="absolute top-0 -z-10 mt-16 hidden h-full w-[1560px] max-w-[unset] scale-90 object-contain md:block"
@@ -17,6 +18,7 @@ export function HeroComponent() {
           height={480}
         />
         <div className="mt-8 flex max-w-[355px] flex-col items-center justify-center gap-4 text-balance md:max-w-fit md:gap-4 md:px-4">
+          <Logo size={200} alt={env.NEXT_PUBLIC_APP_NAME} />
           <h1 className="text-heading-xl max-w-[660px] px-3 md:px-0 md:text-[54px]">
             Benvenuti all&apos;{env.NEXT_PUBLIC_APP_NAME}
           </h1>
