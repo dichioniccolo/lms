@@ -6,7 +6,7 @@ import { Navbar } from "./_components/navbar";
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
-      <div className="flex min-h-screen flex-col">
+      <div className="isolate mx-auto flex max-w-[3840px] flex-col bg-primary-foreground">
         <Navbar />
         <main className="flex-1">{children}</main>
 

@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <HeroComponent />
-      <div className="marge-x flex flex-col gap-y-5 pt-8">
+      <div className="marge-x flex flex-col gap-y-5 px-4 pt-8">
         <h1 className="text-heading">Naviga</h1>
         {/* {children} */}
         <div className="flex flex-col gap-y-6">

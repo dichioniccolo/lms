@@ -11,8 +11,8 @@ export function HeroComponent() {
     <div className="border-divider-primary min-h-[620px] w-full overflow-hidden border-b-2 text-center md:min-h-[580px]">
       <div className="relative flex h-full w-full flex-col items-center justify-between pb-6">
         <Image
-          className="absolute top-0 -z-10 h-full w-[1560px] max-w-[unset] object-cover"
-          src="/hero-section.jpeg"
+          className="absolute top-0 -z-10 h-full w-[1560px] max-w-[unset] object-cover blur-sm"
+          src="/_static/hero-section.jpeg"
           alt={env.NEXT_PUBLIC_APP_NAME}
           width={1513}
           height={480}

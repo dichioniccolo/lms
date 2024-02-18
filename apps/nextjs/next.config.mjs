@@ -5,8 +5,6 @@ import "@acme/emails/env";
 import "@acme/stripe/env";
 import "./src/env.mjs";
 
-import { env } from "./src/env.mjs";
-
 // const ContentSecurityPolicy = `
 //   default-src 'self';
 //   script-src https://vercel.live/ https://vercel.com unsafe-inline unsafe-eval;
@@ -96,12 +94,9 @@ const config = {
     },
   ],
   compiler: {
-    removeConsole:
-      env.NODE_ENV === "production"
-        ? {
-            exclude: ["error", "warn"],
-          }
-        : undefined,
+    removeConsole: {
+      exclude: ["error", "warn"],
+    },
   },
   productionBrowserSourceMaps: true,
   // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing

@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 
-import { Providers } from "./providers";
 import { env } from "~/env.mjs";
+import { Providers } from "./providers";
 
 const fontSans = Inter({
   subsets: ["latin"],

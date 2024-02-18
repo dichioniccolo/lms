@@ -17,38 +17,25 @@ export function CourseCard({ course }: Props) {
     <div className="group relative flex flex-col gap-y-3 md:gap-y-4">
       <Link
         href={`/dashboard/courses/${course.id}`}
-        className="peer absolute inset-0 z-10"
+        className="peer absolute inset-0 focus-visible:ring-4 focus-visible:ring-blue-200/50"
       />
-
-      <Image
-        src={course.imageUrl!}
-        alt={course.title}
-        width={300}
-        height={800}
-        className="overflow-hidden rounded-3xl md:hidden"
-        priority
-      />
-      <div className="relative hidden w-full overflow-hidden rounded-[28px] transition duration-300 md:block md:bg-foreground/[0.04] md:group-hover:bg-foreground/[0.06]">
+      <div className="relative overflow-hidden p-[1px] sm:rounded-md sm:bg-secondary sm:px-7 sm:pb-7 sm:pt-6">
         <AspectRatio ratio={16 / 9}>
-          {/* <div className="relative hidden w-full overflow-hidden rounded-[28px] transition duration-300 md:block md:bg-foreground/[0.04] md:pb-7 md:pt-6 md:group-hover:bg-foreground/[0.06]"> */}
           <Image
             src={course.imageUrl!}
             alt={course.title}
-            width={300}
-            height={800}
-            className="max-h-[583px] overflow-hidden rounded-3xl"
+            priority
+            fill
+            className="h-full w-full object-cover object-top"
           />
-        </AspectRatio>{" "}
+        </AspectRatio>
       </div>
-
-      <div className="flex w-full items-center gap-x-3">
-        {/* <div className="h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-[#eaeaea]" /> */}
-
+      <div className="flex items-center gap-x-3">
         <div className="flex grow flex-col">
-          <span className="text-body-medium-bold line-clamp-1 underline decoration-transparent transition-colors ease-out group-hover:decoration-current">
+          <span className="line-clamp-1 text-base font-medium text-primary underline decoration-transparent transition-colors ease-out group-hover:decoration-current">
             {course.title}
           </span>
-          <span className="line-clamp-1 text-sm font-normal text-muted-foreground">
+          <span className="line-clamp-1 text-sm text-muted-foreground">
             {course.description}
           </span>
         </div>
