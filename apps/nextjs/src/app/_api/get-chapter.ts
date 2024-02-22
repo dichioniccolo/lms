@@ -3,6 +3,7 @@
 import type { Attachment } from "@acme/db/types";
 import { and, asc, db, eq, gt, schema } from "@acme/db";
 
+import { getVideoUrl } from "../_actions/courses/get-video-url";
 import { getCurrentUser } from "./get-user";
 
 export async function getChapter(courseId: string, chapterId: string) {
@@ -48,6 +49,7 @@ export async function getChapter(courseId: string, chapterId: string) {
 
   let attachments: Attachment[] = [];
   let nextChapter: { id: string } | undefined = undefined;
+  let videoUrl: string | undefined = undefined;
 
   if (userCourse) {
     attachments = await db.query.attachments.findMany({
@@ -66,6 +68,8 @@ export async function getChapter(courseId: string, chapterId: string) {
       ),
       orderBy: asc(schema.chapters.position),
     });
+
+    videoUrl = await getVideoUrl(course.id, chapter.id);
   }
 
   return {
@@ -76,5 +80,6 @@ export async function getChapter(courseId: string, chapterId: string) {
     attachments,
     nextChapter,
     isUnlocked,
+    videoUrl,
   };
 }

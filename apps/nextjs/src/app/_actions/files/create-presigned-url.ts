@@ -48,7 +48,7 @@ export async function createPresignedUrl(
       ["starts-with", "$Content-Type", contentType],
     ],
     Fields: {
-      acl: "public-read",
+      acl: type === "video" ? "authenticated-read" : "public-read",
       "Content-Type": contentType,
     },
     Expires: expires,

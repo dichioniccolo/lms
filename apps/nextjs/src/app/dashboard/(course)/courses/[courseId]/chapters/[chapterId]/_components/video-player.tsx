@@ -21,6 +21,7 @@ interface Props {
   courseId: string;
   chapterId: string;
   title: string;
+  videoUrl?: string | null;
   locked: boolean;
   nextChapterId?: string | null;
 }
@@ -28,6 +29,7 @@ interface Props {
 export function VideoPlayer({
   courseId,
   chapterId,
+  videoUrl,
   locked,
   nextChapterId,
 }: Props) {
@@ -59,7 +61,7 @@ export function VideoPlayer({
           <Loader2 className="size-8 animate-spin text-secondary" />
         </div>
       )}
-      {locked ? (
+      {locked || !videoUrl ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800 text-secondary">
           <Lock className="size-8" />
           <p className="text-center">
@@ -68,7 +70,7 @@ export function VideoPlayer({
         </div>
       ) : (
         <Video
-          src={`/api/courses/${courseId}/chapters/${chapterId}`}
+          src={videoUrl}
           onCompleted={() =>
             action({
               courseId,

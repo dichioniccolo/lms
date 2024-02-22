@@ -130,7 +130,7 @@ export function FileUpload({ type, onChange, accept, maxFiles }: Props) {
                 //
               }}
               role="button"
-              className="border-border flex cursor-pointer flex-col items-center rounded-md border border-dashed p-4"
+              className="flex cursor-pointer flex-col items-center rounded-md border border-dashed border-border p-4"
               {...getRootProps()}
             >
               <input {...getInputProps()} />
