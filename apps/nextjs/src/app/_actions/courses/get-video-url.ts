@@ -2,27 +2,24 @@
 
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { z } from "zod";
 
 import { and, db, eq, exists, or, schema } from "@acme/db";
-import { ErrorForClient } from "@acme/server-actions";
+import { createServerQuery } from "@acme/server-actions/server";
 
-import { getCurrentUser } from "~/app/_api/get-user";
 import { env } from "~/env.mjs";
 import { s3 } from "~/lib/s3";
+import { RequiredString } from "~/lib/validation";
 import { getKey } from "../files";
+import { authenticatedMiddlewares } from "../middlewares/user";
 
-export const getVideoUrl = // createServerAction({
-  // actionName: "getVideoUrl",
-  // middlewares: authenticatedMiddlewares,
-  // schema: z.object({
-  //   courseId: RequiredString,
-  //   chapterId: RequiredString,
-  // }),
-  // initialState: undefined as unknown as string,
-  // action:
-  async (courseId: string, chapterId: string) => {
-    const user = await getCurrentUser();
-
+export const getVideoUrl = createServerQuery({
+  middlewares: authenticatedMiddlewares,
+  schema: z.object({
+    courseId: RequiredString,
+    chapterId: RequiredString,
+  }),
+  query: async ({ input: { courseId, chapterId }, ctx: { user } }) => {
     const chapter = await db.query.chapters.findFirst({
       where: and(
         eq(schema.chapters.published, true),
@@ -52,11 +49,11 @@ export const getVideoUrl = // createServerAction({
     });
 
     if (!chapter) {
-      throw new ErrorForClient("Non hai accesso a questo video");
+      return null;
     }
 
     if (!chapter.videoUrl) {
-      throw new ErrorForClient("Non hai accesso a questo video");
+      return null;
     }
 
     const key = getKey(chapter.videoUrl);
@@ -69,5 +66,5 @@ export const getVideoUrl = // createServerAction({
     const url = await getSignedUrl(s3, command, { expiresIn: 60 * 60 * 24 });
 
     return url;
-  };
-// });
+  },
+});

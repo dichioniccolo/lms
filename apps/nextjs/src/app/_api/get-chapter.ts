@@ -49,7 +49,6 @@ export async function getChapter(courseId: string, chapterId: string) {
 
   let attachments: Attachment[] = [];
   let nextChapter: { id: string } | undefined = undefined;
-  let videoUrl: string | undefined = undefined;
 
   if (userCourse) {
     attachments = await db.query.attachments.findMany({
@@ -68,9 +67,12 @@ export async function getChapter(courseId: string, chapterId: string) {
       ),
       orderBy: asc(schema.chapters.position),
     });
-
-    videoUrl = await getVideoUrl(course.id, chapter.id);
   }
+
+  const { data: videoUrl } = await getVideoUrl({
+    courseId,
+    chapterId,
+  });
 
   return {
     course: {
