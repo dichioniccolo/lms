@@ -184,7 +184,7 @@ export function Video({ src, onCompleted }: Props) {
     <AspectRatio ratio={16 / 9}>
       <div
         ref={fullScreenRef}
-        className={cn({
+        className={cn("bg-slate-800", {
           "size-full": !fullScreen,
           "h-screen w-screen": fullScreen,
         })}

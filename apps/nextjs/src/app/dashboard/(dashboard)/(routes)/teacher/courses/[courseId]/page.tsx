@@ -6,10 +6,10 @@ import {
   ListChecks,
 } from "lucide-react";
 
-import { and, asc, db, eq, schema } from "@acme/db";
+import { asc, db, schema } from "@acme/db";
 import { Banner } from "@acme/ui/components/banner";
 
-import { getCurrentUser } from "~/app/_api/get-user";
+import { getCourse } from "~/app/_api/teacher/get-course";
 import { IconBadge } from "~/app/_components/icon-badge";
 import { AttachmentsForm } from "./_components/attachments-form";
 import { CategoriesForm } from "./_components/categories-form";
@@ -26,29 +26,7 @@ interface Props {
 }
 
 export default async function Page({ params: { courseId } }: Props) {
-  const user = await getCurrentUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
-  const course = await db.query.courses.findFirst({
-    where: and(
-      eq(schema.courses.id, courseId),
-      eq(schema.courses.ownerId, user.id),
-    ),
-    with: {
-      chapters: {
-        orderBy: asc(schema.chapters.position),
-      },
-      attachments: true,
-      categories: {
-        with: {
-          category: true,
-        },
-      },
-    },
-  });
+  const { data: course } = await getCourse({ courseId });
 
   if (!course) {
     return redirect("/dashboard/teacher/courses");

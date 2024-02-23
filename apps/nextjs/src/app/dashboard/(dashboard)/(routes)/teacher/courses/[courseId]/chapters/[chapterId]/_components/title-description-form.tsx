@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Pencil } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -49,16 +48,11 @@ export function ChapterTitleDescriptionForm({
     onSuccess() {
       toast.success("Chapter title and description updated");
       router.refresh();
-      toggleEdit();
     },
     onServerError(error) {
       error && toast.error(error);
     },
   });
-
-  const [editing, setEditing] = useState(false);
-
-  const toggleEdit = () => setEditing((x) => !x);
 
   const form = useZodForm({
     schema: formSchema,
@@ -82,57 +76,42 @@ export function ChapterTitleDescriptionForm({
     <div className="mt-6 rounded-md border bg-slate-100 p-4">
       <div className="flex items-center justify-between font-medium">
         Course title and description
-        <Button onClick={toggleEdit} variant="ghost">
-          {editing ? (
-            "Cancel"
-          ) : (
-            <>
-              <Pencil className="mr-2 size-4" />
-              Edit title or description
-            </>
-          )}
-        </Button>
       </div>
-      {editing && (
-        <Form form={form} onSubmit={onSubmit} className="mt-4 space-y-4">
-          <FormField<FormSchema>
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. 'Advanced web development'"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+      <Form form={form} onSubmit={onSubmit} className="mt-4 space-y-4">
+        <FormField<FormSchema>
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  placeholder="e.g. 'Advanced web development'"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField<FormSchema>
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Editor {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex items-center gap-x-2">
+          <Button type="submit" disabled={status === SubmissionStatus.PENDING}>
+            {status === SubmissionStatus.PENDING && (
+              <Loader2 className="mr-2 size-4 animate-spin" />
             )}
-          />
-          <FormField<FormSchema>
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Editor {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="flex items-center gap-x-2">
-            <Button
-              type="submit"
-              disabled={status === SubmissionStatus.PENDING}
-            >
-              {status === SubmissionStatus.PENDING && (
-                <Loader2 className="mr-2 size-4 animate-spin" />
-              )}
-              Save
-            </Button>
-          </div>
-        </Form>
-      )}
+            Save
+          </Button>
+        </div>
+      </Form>
     </div>
   );
 }

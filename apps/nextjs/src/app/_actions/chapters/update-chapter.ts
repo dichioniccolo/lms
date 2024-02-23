@@ -6,6 +6,7 @@ import { and, db, eq, exists, schema } from "@acme/db";
 import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 
+import { getCourseCacheKey } from "~/app/_api/teacher/get-course";
 import { isTeacher } from "~/lib/utils";
 import { RequiredString } from "~/lib/validation";
 import { deleteFile } from "../files/delete-file";
@@ -28,6 +29,9 @@ export const updateChapter = createServerAction({
       })
       .partial(),
   }),
+  cache: {
+    revalidateTags: [getCourseCacheKey],
+  },
   action: async ({ input: { courseId, chapterId, values }, ctx: { user } }) => {
     if (!isTeacher(user.role)) {
       throw new ErrorForClient("You are not a teacher");

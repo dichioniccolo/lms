@@ -5,6 +5,7 @@ import { z } from "zod";
 import { and, db, eq, exists, schema } from "@acme/db";
 import { createServerAction } from "@acme/server-actions/server";
 
+import { getCourseCacheKey } from "~/app/_api/teacher/get-course";
 import { RequiredString } from "~/lib/validation";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
@@ -15,6 +16,9 @@ export const unpublishChapter = createServerAction({
     courseId: RequiredString,
     chapterId: RequiredString,
   }),
+  cache: {
+    revalidateTags: [getCourseCacheKey],
+  },
   action: async ({ input: { courseId, chapterId }, ctx: { user } }) => {
     await db
       .update(schema.chapters)

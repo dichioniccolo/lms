@@ -2,11 +2,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 
-import { and, db, eq, exists, schema } from "@acme/db";
 import { Banner } from "@acme/ui/components/banner";
 
 import { getVideoUrl } from "~/app/_actions/courses/get-video-url";
-import { getCurrentUser } from "~/app/_api/get-user";
+import { getChapter } from "~/app/_api/teacher/get-chapter";
 import { IconBadge } from "~/app/_components/icon-badge";
 import { ChapterAccessForm } from "./_components/access-form";
 import { ChapterActions } from "./_components/chapter-actions";
@@ -21,29 +20,7 @@ interface Props {
 }
 
 export default async function Page({ params: { courseId, chapterId } }: Props) {
-  const user = await getCurrentUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
-  const chapter = await db.query.chapters.findFirst({
-    where: and(
-      eq(schema.chapters.courseId, courseId),
-      eq(schema.chapters.id, chapterId),
-      exists(
-        db
-          .select()
-          .from(schema.courses)
-          .where(
-            and(
-              eq(schema.courses.id, schema.chapters.courseId),
-              eq(schema.courses.ownerId, user.id),
-            ),
-          ),
-      ),
-    ),
-  });
+  const { data: chapter } = await getChapter({ courseId, chapterId });
 
   if (!chapter) {
     return redirect("/dashboard");

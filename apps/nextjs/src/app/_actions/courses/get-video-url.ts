@@ -22,11 +22,30 @@ export const getVideoUrl = createServerQuery({
   query: async ({ input: { courseId, chapterId }, ctx: { user } }) => {
     const chapter = await db.query.chapters.findFirst({
       where: and(
-        eq(schema.chapters.published, true),
         eq(schema.chapters.id, chapterId),
         eq(schema.chapters.courseId, courseId),
         or(
-          eq(schema.chapters.free, true),
+          // chapter is free and published
+          and(
+            eq(schema.chapters.published, true),
+            eq(schema.chapters.free, true),
+          ),
+          // current user is enrolled in the course and the chapter is published
+          and(
+            eq(schema.chapters.published, true),
+            exists(
+              db
+                .select()
+                .from(schema.usersCourses)
+                .where(
+                  and(
+                    eq(schema.chapters.courseId, schema.usersCourses.courseId),
+                    eq(schema.usersCourses.userId, user.id),
+                  ),
+                ),
+            ),
+          ),
+          // current user is the owner of the course
           exists(
             db
               .select()
@@ -38,24 +57,11 @@ export const getVideoUrl = createServerQuery({
                 ),
               ),
           ),
-          exists(
-            db
-              .select()
-              .from(schema.usersCourses)
-              .where(
-                and(
-                  eq(schema.chapters.courseId, schema.usersCourses.courseId),
-                  eq(schema.usersCourses.userId, user.id),
-                ),
-              ),
-          ),
         ),
       ),
       columns: {
         id: true,
         videoUrl: true,
-        videoContentLength: true,
-        videoContentType: true,
       },
     });
 

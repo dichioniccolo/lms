@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Loader2, Trash } from "lucide-react";
 import { toast } from "sonner";
 
@@ -36,14 +35,11 @@ export function ChapterActions({
   chapterId,
   published,
 }: Props) {
-  const router = useRouter();
-
   const { action: publish, status: publishState } = useServerAction(
     publishChapter,
     {
       onSuccess() {
         toast.success("Chapter published");
-        router.refresh();
       },
       onServerError(error) {
         error && toast.error(error);
@@ -55,7 +51,6 @@ export function ChapterActions({
     {
       onSuccess() {
         toast.success("Course unpublished");
-        router.refresh();
       },
       onServerError(error) {
         error && toast.error(error);

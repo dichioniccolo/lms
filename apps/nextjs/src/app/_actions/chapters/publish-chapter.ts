@@ -6,6 +6,7 @@ import { and, db, eq, schema } from "@acme/db";
 import { ErrorForClient } from "@acme/server-actions";
 import { createServerAction } from "@acme/server-actions/server";
 
+import { getCourseCacheKey } from "~/app/_api/teacher/get-course";
 import { RequiredString } from "~/lib/validation";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
@@ -16,6 +17,9 @@ export const publishChapter = createServerAction({
     courseId: RequiredString,
     chapterId: RequiredString,
   }),
+  cache: {
+    revalidateTags: [getCourseCacheKey],
+  },
   action: async ({ input: { courseId, chapterId }, ctx: { user } }) => {
     const course = await db.query.courses.findFirst({
       where: and(

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Loader2, Trash } from "lucide-react";
 import { toast } from "sonner";
 
@@ -33,14 +32,12 @@ interface Props {
 
 export function CourseActions({ courseId, disabled, published }: Props) {
   const confetti = useConfetti();
-  const router = useRouter();
 
   const { action: publish, status: publishState } = useServerAction(
     publishCourse,
     {
       onSuccess() {
         confetti.open();
-        router.refresh();
       },
       onServerError(error) {
         error && toast.error(error);
@@ -52,7 +49,6 @@ export function CourseActions({ courseId, disabled, published }: Props) {
     {
       onSuccess() {
         toast.success("Course unpublished");
-        router.refresh();
       },
       onServerError(error) {
         error && toast.error(error);

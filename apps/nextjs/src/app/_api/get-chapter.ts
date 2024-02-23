@@ -45,6 +45,9 @@ export async function getChapter(courseId: string, chapterId: string) {
       eq(schema.usersCourses.userId, user.id),
       eq(schema.usersCourses.courseId, courseId),
     ),
+    columns: {
+      id: true,
+    },
   });
 
   let attachments: Attachment[] = [];

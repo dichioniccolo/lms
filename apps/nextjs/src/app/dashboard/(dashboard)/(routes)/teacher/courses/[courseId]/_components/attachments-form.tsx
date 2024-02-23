@@ -24,12 +24,9 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
 
   const toggleEdit = () => setIsEditing((x) => !x);
 
-  const router = useRouter();
-
   const { action } = useServerAction(createAttachment, {
     onSuccess() {
       toast.success("Attachment uploaded");
-      router.refresh();
       toggleEdit();
     },
     onServerError(error) {
@@ -84,7 +81,7 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
             type="other"
             onChange={({ name, url }) => onSubmit({ name, url })}
           />
-          <div className="text-muted-foreground mt-4 text-xs">
+          <div className="mt-4 text-xs text-muted-foreground">
             Add anything your students might need to complete the course.
           </div>
         </div>

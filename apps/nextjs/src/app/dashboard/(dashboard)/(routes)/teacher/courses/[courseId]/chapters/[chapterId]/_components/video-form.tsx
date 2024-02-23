@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { Pencil, PlusCircle, Video } from "lucide-react";
+import { Pencil, PlusCircle, Video as VideoIcon } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -12,6 +13,13 @@ import { Button } from "@acme/ui/components/ui/button";
 import { updateChapter } from "~/app/_actions/chapters/update-chapter";
 import { FileUpload } from "~/app/_components/file-upload";
 import { RequiredString } from "~/lib/validation";
+
+const Video = dynamic(
+  () => import("~/app/_components/video").then((mod) => mod.Video),
+  {
+    ssr: false,
+  },
+);
 
 interface Props {
   courseId: string;
@@ -28,7 +36,7 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(!videoUrl);
 
   const toggleEdit = () => setEditing((x) => !x);
 
@@ -65,7 +73,7 @@ export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
       <div className="flex items-center justify-between font-medium">
         Chapter video
         <Button onClick={toggleEdit} variant="ghost">
-          {editing && <>Cancel</>}
+          {editing && videoUrl && <>Cancel</>}
           {!editing && !videoUrl && (
             <>
               <PlusCircle className="mr-2 size-4" />
@@ -83,12 +91,11 @@ export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
       {!editing &&
         (!videoUrl ? (
           <div className="flex h-60 items-center justify-center rounded-md bg-slate-200">
-            <Video className="size-10 text-slate-500" />
+            <VideoIcon className="size-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative mt-2 aspect-video">
-            <video controls autoPlay={false} src={videoUrl}></video>
-            {/* <MuxPlayer playbackId={playbackId ?? ""} /> */}
+            <Video src={videoUrl} />
           </div>
         ))}
       {editing && (
@@ -107,13 +114,13 @@ export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
             }}
             maxFiles={1}
           />
-          <div className="text-muted-foreground mt-4 text-xs">
+          <div className="mt-4 text-xs text-muted-foreground">
             Upload this chapter&apos;s video
           </div>
         </div>
       )}
       {videoUrl && !editing && (
-        <div className="text-muted-foreground mt-2 text-xs">
+        <div className="mt-2 text-xs text-muted-foreground">
           Videos can take a few minutes to process. Refresh the page if video
           does not appear.
         </div>

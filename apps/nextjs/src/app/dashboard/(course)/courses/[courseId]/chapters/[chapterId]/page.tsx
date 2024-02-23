@@ -77,8 +77,8 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
             )}
             {attachments.length > 0 && (
               <>
-                <Separator />
-                <div className="p-4">
+                {/* <Separator /> */}
+                <div className="w-60 p-4">
                   {attachments.map((attachment) => (
                     <a
                       href={attachment.url}

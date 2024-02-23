@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -18,22 +17,19 @@ interface Props {
 }
 
 export function ImageForm({ courseId, imageUrl }: Props) {
-  const router = useRouter();
+  const [editing, setEditing] = useState(!imageUrl);
+
+  const toggleEdit = () => setEditing((x) => !x);
 
   const { action } = useServerAction(updateCourse, {
     onSuccess() {
       toast.success("Course image updated");
-      router.refresh();
       toggleEdit();
     },
     onServerError(error) {
       error && toast.error(error);
     },
   });
-
-  const [editing, setEditing] = useState(false);
-
-  const toggleEdit = () => setEditing((x) => !x);
 
   const onSubmit = ({ url }: { name: string; url: string }) =>
     action({
@@ -48,7 +44,7 @@ export function ImageForm({ courseId, imageUrl }: Props) {
       <div className="flex items-center justify-between font-medium">
         Course image
         <Button onClick={toggleEdit} variant="ghost">
-          {editing && "Cancel"}
+          {editing && imageUrl && "Cancel"}
           {!editing && !imageUrl && (
             <>
               <PlusCircle className="mr-2 size-4" />
@@ -88,7 +84,7 @@ export function ImageForm({ courseId, imageUrl }: Props) {
             }}
             maxFiles={1}
           />
-          <div className="text-muted-foreground mt-4 text-xs">
+          <div className="mt-4 text-xs text-muted-foreground">
             16:9 aspect ratio recommended
           </div>
         </div>
