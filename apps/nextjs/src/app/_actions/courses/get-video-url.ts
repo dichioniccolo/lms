@@ -30,6 +30,17 @@ export const getVideoUrl = createServerQuery({
           exists(
             db
               .select()
+              .from(schema.courses)
+              .where(
+                and(
+                  eq(schema.courses.id, schema.chapters.courseId),
+                  eq(schema.courses.ownerId, user.id),
+                ),
+              ),
+          ),
+          exists(
+            db
+              .select()
               .from(schema.usersCourses)
               .where(
                 and(

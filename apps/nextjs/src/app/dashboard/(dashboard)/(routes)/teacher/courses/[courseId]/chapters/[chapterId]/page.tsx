@@ -5,6 +5,7 @@ import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import { and, db, eq, exists, schema } from "@acme/db";
 import { Banner } from "@acme/ui/components/banner";
 
+import { getVideoUrl } from "~/app/_actions/courses/get-video-url";
 import { getCurrentUser } from "~/app/_api/get-user";
 import { IconBadge } from "~/app/_components/icon-badge";
 import { ChapterAccessForm } from "./_components/access-form";
@@ -54,6 +55,8 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
   const completedFields = requiredFields.filter(Boolean).length;
 
   const isComplete = requiredFields.every(Boolean);
+
+  const { data: videoUrl } = await getVideoUrl({ chapterId, courseId });
 
   return (
     <>
@@ -123,7 +126,7 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
             <ChapterVideoForm
               chapterId={chapter.id}
               courseId={courseId}
-              videoUrl={chapter.videoUrl}
+              videoUrl={videoUrl}
             />
           </div>
         </div>
