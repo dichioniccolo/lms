@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { z } from "zod";
-import { revalidateTag, unstable_cache } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { isNotFoundError } from "next/dist/client/components/not-found";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
@@ -198,12 +198,12 @@ export function createServerQuery<
     }
   };
 
-  if (cache) {
-    return unstable_cache(queryHandler, cache.keys, {
-      revalidate: cache.revalidate,
-      tags: cache.tags,
-    });
-  }
+  // if (cache) {
+  //   return unstable_cache(queryHandler, cache.keys, {
+  //     revalidate: cache.revalidate,
+  //     tags: cache.tags,
+  //   });
+  // }
 
   return queryHandler;
 }
