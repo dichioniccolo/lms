@@ -25,7 +25,7 @@ export const userLoginLink = inngest.createFunction(
 
     await sendMail({
       to: email,
-      subject: "Your login link",
+      subject: "Link magico per accedere al tuo account",
       react: LoginLink({
         siteName: env.NEXT_PUBLIC_APP_NAME,
         url,

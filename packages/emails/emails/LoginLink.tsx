@@ -26,7 +26,7 @@ interface LoginLinkProps {
 }
 
 export const LoginLink = ({ siteName, url, user }: LoginLinkProps) => {
-  const previewText = `Login link on ${siteName}`;
+  const previewText = `Login su ${siteName}`;
 
   return (
     <Html>
