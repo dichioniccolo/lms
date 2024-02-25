@@ -91,6 +91,10 @@ export const purchaseCourse = createServerAction({
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer: stripeCustomerId,
+      customer_update: {
+        name: "auto",
+        address: "auto",
+      },
       success_url: absoluteUrl(`/dashboard/courses/${course.id}`),
       cancel_url: absoluteUrl(`/dashboard/courses/${course.id}`),
       billing_address_collection: "required",
