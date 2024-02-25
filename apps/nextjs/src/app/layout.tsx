@@ -11,8 +11,8 @@ const fontSans = Inter({
   variable: "--font-sans",
 });
 
-const title = "LMS Andrea Di Chio";
-const description = "LMS Andrea Di Chio";
+const title = "Accademia Dell'Armonia";
+const description = "Accademia Dell'Armonia";
 
 export const metadata: Metadata = {
   metadataBase: new URL(

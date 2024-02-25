@@ -101,6 +101,9 @@ export const purchaseCourse = createServerAction({
       tax_id_collection: {
         enabled: true,
       },
+      phone_number_collection: {
+        enabled: true,
+      },
       allow_promotion_codes: true,
       line_items: [
         {
