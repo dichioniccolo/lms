@@ -89,8 +89,17 @@ export const purchaseCourse = createServerAction({
     }
 
     const session = await stripe.checkout.sessions.create({
-      customer: stripeCustomerId,
       mode: "payment",
+      payment_method_types: ["card", "paypal"],
+      customer: stripeCustomerId,
+      customer_email: dbUser.email,
+      success_url: absoluteUrl(`/dashboard/courses/${course.id}`),
+      cancel_url: absoluteUrl(`/dashboard/courses/${course.id}`),
+      billing_address_collection: "required",
+      tax_id_collection: {
+        enabled: true,
+      },
+      allow_promotion_codes: true,
       line_items: [
         {
           quantity: 1,
@@ -104,8 +113,6 @@ export const purchaseCourse = createServerAction({
           },
         },
       ],
-      success_url: absoluteUrl(`/dashboard/courses/${course.id}`),
-      cancel_url: absoluteUrl(`/dashboard/courses/${course.id}`),
       metadata: {
         courseId: course.id,
         userId: user.id,

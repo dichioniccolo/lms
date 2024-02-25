@@ -17,7 +17,7 @@ export function CourseCard({ course }: Props) {
     <div className="group relative flex flex-col gap-y-3 md:gap-y-4">
       <Link
         href={`/dashboard/courses/${course.id}`}
-        className="peer absolute inset-0 focus-visible:ring-4 focus-visible:ring-blue-200/50"
+        className="peer absolute inset-0 z-10 focus-visible:ring-4 focus-visible:ring-blue-200/50"
       />
       <div className="relative overflow-hidden p-[1px] sm:rounded-md sm:bg-secondary sm:px-7 sm:pb-7 sm:pt-6">
         <AspectRatio ratio={16 / 9}>
