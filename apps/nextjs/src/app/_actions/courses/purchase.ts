@@ -95,8 +95,8 @@ export const purchaseCourse = createServerAction({
         name: "auto",
         address: "auto",
       },
-      success_url: absoluteUrl(`/dashboard/courses/${course.id}`),
-      cancel_url: absoluteUrl(`/dashboard/courses/${course.id}`),
+      success_url: absoluteUrl(`/dashboard/courses/${course.id}`, false),
+      cancel_url: absoluteUrl(`/dashboard/courses/${course.id}`, false),
       billing_address_collection: "required",
       tax_id_collection: {
         enabled: true,
