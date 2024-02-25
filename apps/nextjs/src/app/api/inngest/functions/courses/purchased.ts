@@ -20,7 +20,7 @@ export const coursePurchased = inngest.createFunction(
       step.run("Send purchase email", async () => {
         await sendMail({
           to: user.email,
-          subject: "Your purchase is complete. Get started now!",
+          subject: "Congratulazioni! Da ora puoi iniziare il tuo percorso",
           react: CoursePurchased({
             siteName: env.NEXT_PUBLIC_APP_NAME,
             course,

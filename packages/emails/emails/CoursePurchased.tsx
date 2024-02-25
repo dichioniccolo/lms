@@ -47,7 +47,7 @@ export const CoursePurchased = ({
           <Container className="mx-auto my-[40px] w-[500px] rounded border border-solid border-[#eaeaea] p-[20px]">
             <Section className="mt-[32px]">
               <Img
-                src={`https://${env.NEXT_PUBLIC_APP_DOMAIN}/logo.png`}
+                src={`${env.NEXT_PUBLIC_APP_DOMAIN}/logo.png`}
                 width="40"
                 height="37"
                 alt={siteName}
@@ -62,7 +62,7 @@ export const CoursePurchased = ({
             </Text>
             <Text className="text-[14px] leading-[24px] text-black">
               grazie per aver comprato il corso <strong>{course.title}</strong>.
-              Il tuo acquisto è stato completato da ora puoi accedere al corso
+              Il tuo acquisto è stato completato, da ora puoi accedere al corso
               cliccando il bottone sottostante.
             </Text>
             <Section className="my-[32px] text-center">

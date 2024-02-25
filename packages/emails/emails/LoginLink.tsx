@@ -37,7 +37,7 @@ export const LoginLink = ({ siteName, url, user }: LoginLinkProps) => {
           <Container className="mx-auto my-[40px] w-[500px] rounded border border-solid border-[#eaeaea] p-[20px]">
             <Section className="mt-[32px]">
               <Img
-                src={`https://${env.NEXT_PUBLIC_APP_DOMAIN}/logo.png`}
+                src={`${env.NEXT_PUBLIC_APP_DOMAIN}/logo.png`}
                 width="40"
                 height="37"
                 alt={siteName}
