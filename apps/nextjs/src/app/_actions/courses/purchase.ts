@@ -90,7 +90,6 @@ export const purchaseCourse = createServerAction({
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card", "paypal"],
       customer: stripeCustomerId,
       customer_email: dbUser.email,
       success_url: absoluteUrl(`/dashboard/courses/${course.id}`),
