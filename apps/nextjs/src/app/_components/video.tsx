@@ -358,8 +358,9 @@ const formatTime = (time: number) => {
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes();
   const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-  if (hours) {
+
+  if (hours > 0) {
     //if video have hours
-    return `${hours}:${minutes.toString().padStart(2, "0")} `;
-  } else return `${minutes}:${seconds}`;
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds}`;
+  } else return `${minutes.toString().padStart(2, "0")}:${seconds}`;
 };
