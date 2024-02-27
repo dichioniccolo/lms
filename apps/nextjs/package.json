@@ -51,7 +51,7 @@
     "@acme/tsconfig": "^0.1.0",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/node": "^20.11.20",
-    "@types/react": "^18.2.59",
+    "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
