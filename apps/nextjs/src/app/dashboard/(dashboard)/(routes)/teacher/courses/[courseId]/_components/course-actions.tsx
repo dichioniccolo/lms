@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Loader2, Trash } from "lucide-react";
 import { toast } from "sonner";
 
@@ -16,7 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@acme/ui/components/ui/alert-dialog";
-import { Button } from "@acme/ui/components/ui/button";
+import { Button, buttonVariants } from "@acme/ui/components/ui/button";
 
 import { deleteCourse } from "~/app/_actions/courses/delete-course";
 import { publishCourse } from "~/app/_actions/courses/publish-course";
@@ -78,6 +79,14 @@ export function CourseActions({ courseId, disabled, published }: Props) {
 
   return (
     <div className="flex items-center gap-x-2">
+      <Link
+        href={`/dashboard/teacher/courses/${courseId}/users`}
+        className={buttonVariants({
+          size: "sm",
+        })}
+      >
+        View Users
+      </Link>
       <InviteUserDialog courseId={courseId}>
         <Button variant="secondary" size="sm">
           Invite User
@@ -96,6 +105,7 @@ export function CourseActions({ courseId, disabled, published }: Props) {
         <AlertDialogTrigger asChild>
           <Button
             size="sm"
+            variant="destructive"
             disabled={deletionStatus === SubmissionStatus.PENDING}
           >
             {deletionStatus === SubmissionStatus.PENDING ? (

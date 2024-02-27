@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 
+import { cn } from "@acme/ui";
+
 import { env } from "~/env.mjs";
 import { Providers } from "./providers";
 
@@ -66,7 +68,7 @@ export const viewport: Viewport = {
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={["font-sans", fontSans.variable].join(" ")}>
+      <body className={cn(["font-sans", fontSans.variable])}>
         <Providers>{props.children}</Providers>
       </body>
     </html>

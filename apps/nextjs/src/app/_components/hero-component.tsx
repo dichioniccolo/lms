@@ -35,7 +35,7 @@ export function HeroComponent() {
 
           <div className="flex gap-4 md:pt-4">
             <Button variant="default" size="lg">
-              <Link href="/login">Crea un account</Link>
+              <Link href="/login">Crea un account gratuito</Link>
             </Button>
           </div>
 
