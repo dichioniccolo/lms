@@ -77,7 +77,7 @@ export function ImageForm({ courseId, imageUrl }: Props) {
       {editing && (
         <div>
           <FileUpload
-            type="image"
+            acl="public"
             onChange={onSubmit}
             accept={{
               "image/*": [],

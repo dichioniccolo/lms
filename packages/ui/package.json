@@ -63,6 +63,7 @@
     "./components/ui/textarea": "./src/components/ui/textarea.tsx",
     "./components/ui/toggle": "./src/components/ui/toggle.tsx",
     "./components/ui/tooltip": "./src/components/ui/tooltip.tsx",
+    "./components/progress-bar": "./src/components/progress-bar.tsx",
     "./components/zod-form": "./src/components/zod-form.tsx"
   },
   "typesVersions": {

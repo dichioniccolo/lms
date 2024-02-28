@@ -1,16 +1,12 @@
 "use server";
 
-import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { z } from "zod";
 
 import { and, db, eq, exists, or, schema } from "@acme/db";
 import { createServerQuery } from "@acme/server-actions/server";
 
-import { env } from "~/env.mjs";
-import { s3 } from "~/lib/s3";
 import { RequiredString } from "~/lib/validation";
-import { getKey } from "../files";
+import { getSignedUrl } from "../files/get-signed-url";
 import { authenticatedMiddlewares } from "../middlewares/user";
 
 export const getVideoUrl = createServerQuery({
@@ -73,15 +69,6 @@ export const getVideoUrl = createServerQuery({
       return null;
     }
 
-    const key = getKey(chapter.videoUrl);
-
-    const command = new GetObjectCommand({
-      Bucket: env.DO_BUCKET_NAME,
-      Key: key,
-    });
-
-    const url = await getSignedUrl(s3, command, { expiresIn: 60 * 60 * 24 });
-
-    return url;
+    return await getSignedUrl(chapter.videoUrl);
   },
 });

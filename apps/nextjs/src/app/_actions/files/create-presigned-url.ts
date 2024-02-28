@@ -10,6 +10,20 @@ import { env } from "~/env.mjs";
 import { s3 } from "~/lib/s3";
 import { isTeacher } from "~/lib/utils";
 
+enum FileTypes {
+  Image = "image",
+  Pdf = "pdf",
+  Audio = "audio",
+  Video = "video",
+  Other = "other",
+}
+
+interface Options {
+  type: FileTypes;
+  contentType: string;
+  acl: "public" | "private";
+}
+
 export async function createPresignedUrl(
   state:
     | {
@@ -17,10 +31,7 @@ export async function createPresignedUrl(
         url: string;
       }
     | undefined,
-  {
-    type,
-    contentType,
-  }: { type: "video" | "image" | "other"; contentType: string },
+  { type, contentType, acl = "private" }: Options,
 ) {
   const user = await getCurrentUser();
 
@@ -31,12 +42,12 @@ export async function createPresignedUrl(
   const key = createId();
 
   const contentLengthMaxRange =
-    type === "video"
+    type === FileTypes.Video
       ? 10_000_000_000 // 10 GB
       : 10_000_000; // 10 MB
 
   const expires =
-    type === "video"
+    type === FileTypes.Video
       ? 60 * 60 * 24 // 24 hours
       : 600; // 5 minutes
 
@@ -48,7 +59,7 @@ export async function createPresignedUrl(
       ["starts-with", "$Content-Type", contentType],
     ],
     Fields: {
-      acl: type === "video" ? "authenticated-read" : "public-read",
+      acl: acl === "private" ? "authenticated-read" : "public-read",
       "Content-Type": contentType,
     },
     Expires: expires,

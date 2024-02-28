@@ -78,7 +78,7 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
       {isEditing && (
         <div>
           <FileUpload
-            type="other"
+            acl="private"
             onChange={({ name, url }) => onSubmit({ name, url })}
           />
           <div className="mt-4 text-xs text-muted-foreground">

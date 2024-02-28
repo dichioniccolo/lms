@@ -4,6 +4,7 @@ import type { Attachment } from "@acme/db/types";
 import { and, asc, db, eq, gt, schema } from "@acme/db";
 
 import { getVideoUrl } from "../_actions/courses/get-video-url";
+import { getSignedUrl } from "../_actions/files/get-signed-url";
 import { getCurrentUser } from "./get-user";
 
 export async function getChapter(courseId: string, chapterId: string) {
@@ -57,6 +58,19 @@ export async function getChapter(courseId: string, chapterId: string) {
     attachments = await db.query.attachments.findMany({
       where: eq(schema.attachments.courseId, course.id),
     });
+
+    const attachmentsWithNewUrls = await Promise.all(
+      attachments.map(async (attachment) => {
+        const url = await getSignedUrl(attachment.url);
+
+        return {
+          ...attachment,
+          url,
+        };
+      }),
+    );
+
+    attachments = attachmentsWithNewUrls;
   }
 
   const isUnlocked = chapter.free || !!userCourse;

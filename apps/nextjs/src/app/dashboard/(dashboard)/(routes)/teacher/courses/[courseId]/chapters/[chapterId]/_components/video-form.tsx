@@ -101,7 +101,7 @@ export function ChapterVideoForm({ courseId, chapterId, videoUrl }: Props) {
       {editing && (
         <div>
           <FileUpload
-            type="video"
+            acl="private"
             onChange={({ url, contentSize, contentType }) =>
               onSubmit({
                 videoUrl: url,
