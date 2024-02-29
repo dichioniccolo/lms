@@ -1,28 +1,52 @@
+import type { NextFetchEvent, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { auth } from "@acme/auth";
 
+import { ratelimit } from "./lib/ratelimit";
 import { parseRequest } from "./lib/utils";
 
-export default auth((req) => {
-  const { path } = parseRequest(req);
+export default function middleware(req: NextRequest, event: NextFetchEvent) {
+  return auth((req) => {
+    const { path } = parseRequest(req);
 
-  if (path === "/") {
-    return NextResponse.next();
-  }
+    if (path === "/") {
+      return next(req, event);
+    }
 
-  if (!req.auth?.user && path !== "/login") {
-    const url = new URL("/login", req.url);
-    if (path !== "/dashboard") url.searchParams.set("redirect", path);
-    return NextResponse.redirect(url);
-  }
+    if (!req.auth?.user && path !== "/login") {
+      const url = new URL("/login", req.url);
+      if (path !== "/dashboard") url.searchParams.set("redirect", path);
+      return NextResponse.redirect(url);
+    }
 
-  if (!!req.auth?.user && path === "/login") {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
+    if (!!req.auth?.user && path === "/login") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
 
-  return NextResponse.next();
-});
+    return next(req, event);
+    // return auth(req);
+  })(req, null!);
+}
+
+const next = async (request: NextRequest, event: NextFetchEvent) => {
+  const ip = request.ip ?? "127.0.0.1";
+
+  const { success, pending, limit, remaining, reset } =
+    await ratelimit.limit(ip);
+
+  event.waitUntil(pending);
+
+  const res = success
+    ? NextResponse.next()
+    : NextResponse.json("Rate limit exceeded", { status: 429 });
+
+  res.headers.set("X-RateLimit-Limit", limit.toString());
+  res.headers.set("X-RateLimit-Remaining", remaining.toString());
+  res.headers.set("X-RateLimit-Reset", reset.toString());
+
+  return res;
+};
 
 export const config = {
   matcher: [
