@@ -7,11 +7,28 @@ import { ratelimit } from "./lib/ratelimit";
 import { parseRequest } from "./lib/utils";
 
 export default function middleware(req: NextRequest, event: NextFetchEvent) {
-  return auth((req) => {
+  return auth(async (req) => {
+    const ip = req.ip ?? "127.0.0.1";
+
+    const { success, pending, limit, remaining, reset } =
+      await ratelimit.limit(ip);
+
+    event.waitUntil(pending);
+
+    if (!success) {
+      const res = NextResponse.json("Rate limit exceeded", { status: 429 });
+
+      res.headers.set("X-RateLimit-Limit", limit.toString());
+      res.headers.set("X-RateLimit-Remaining", remaining.toString());
+      res.headers.set("X-RateLimit-Reset", reset.toString());
+
+      return res;
+    }
+
     const { path } = parseRequest(req);
 
     if (path === "/") {
-      return next(req, event);
+      return NextResponse.next();
     }
 
     if (!req.auth?.user && path !== "/login") {
@@ -24,28 +41,9 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
-    return next(req, event);
+    return NextResponse.next();
   })(req, null!);
 }
-
-const next = async (request: NextRequest, event: NextFetchEvent) => {
-  const ip = request.ip ?? "127.0.0.1";
-
-  const { success, pending, limit, remaining, reset } =
-    await ratelimit.limit(ip);
-
-  event.waitUntil(pending);
-
-  const res = success
-    ? NextResponse.next()
-    : NextResponse.json("Rate limit exceeded", { status: 429 });
-
-  res.headers.set("X-RateLimit-Limit", limit.toString());
-  res.headers.set("X-RateLimit-Remaining", remaining.toString());
-  res.headers.set("X-RateLimit-Reset", reset.toString());
-
-  return res;
-};
 
 export const config = {
   matcher: [
