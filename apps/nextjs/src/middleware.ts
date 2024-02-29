@@ -25,7 +25,6 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
     }
 
     return next(req, event);
-    // return auth(req);
   })(req, null!);
 }
 
