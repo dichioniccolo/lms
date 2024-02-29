@@ -21,7 +21,7 @@
     "@acme/stripe": "^0.1.0",
     "@acme/ui": "^0.1.0",
     "@aws-sdk/client-s3": "^3.523.0",
-    "@aws-sdk/s3-presigned-post": "^3.523.0",
+    "@aws-sdk/s3-presigned-post": "^3.524.0",
     "@aws-sdk/s3-request-presigner": "^3.523.0",
     "@aws-sdk/signature-v4-crt": "^3.523.0",
     "@hello-pangea/dnd": "^16.5.0",
