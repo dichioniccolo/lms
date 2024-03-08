@@ -30,12 +30,13 @@ export const {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/login",
     signOut: "/login",
     error: "/login",
   },
   providers: [
-    // Discord({
+    // Google({
+    //   clientId: env.GOOGLE_CLIENT_ID,
+    //   clientSecret: env.GOOGLE_CLIENT_SECRET,
     //   allowDangerousEmailAccountLinking: true,
     // }),
     {
@@ -58,7 +59,27 @@ export const {
     },
   ],
   callbacks: {
-    signIn: () => {
+    signIn: async ({ user, account, profile }) => {
+      if (account?.provider === "google") {
+        const userExists = await db.query.users.findFirst({
+          where: eq(schema.users.email, user.email!),
+          columns: {
+            name: true,
+            image: true,
+          },
+        });
+
+        if (userExists && profile) {
+          await db
+            .update(schema.users)
+            .set({
+              name: userExists.name ? userExists.name : profile.name,
+              image: userExists.image ? userExists.image : profile.picture,
+            })
+            .where(eq(schema.users.email, user.email!));
+        }
+      }
+
       return true;
     },
     session: ({ session, ...others }) => {

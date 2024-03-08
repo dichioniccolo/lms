@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -46,6 +47,11 @@ export function SignInForm() {
       email: "",
     },
   });
+
+  useEffect(() => {
+    const error = searchParams?.get("error");
+    error && toast.error(error);
+  }, [searchParams]);
 
   return (
     <Form form={form} onSubmit={onSubmit}>
