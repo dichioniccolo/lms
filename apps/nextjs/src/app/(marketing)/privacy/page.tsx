@@ -55,8 +55,8 @@ export default function Page() {
                 </p>
                 <ul className="list-inside list-disc">
                   <li className="leading-7">
-                    Information you provide such as feedback, question and
-                    issues reports.
+                    Information you provide such as your email, feedback,
+                    question and issues reports.
                   </li>
                 </ul>
                 <p className="leading-7">
