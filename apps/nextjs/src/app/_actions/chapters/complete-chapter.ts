@@ -47,46 +47,25 @@ export const completeChapter = createServerAction({
       throw new ErrorForClient("Chapter not found or not available");
     }
 
-    const existing = await db.query.usersChaptersProgresses.findFirst({
-      where: and(
-        eq(schema.usersChaptersProgresses.userId, user.id),
-        eq(schema.usersChaptersProgresses.chapterId, chapter.id),
-      ),
-    });
-
-    try {
-      if (!existing) {
-        await db.insert(schema.usersChaptersProgresses).values({
-          userId: user.id,
-          chapterId: chapter.id,
+    await db
+      .insert(schema.usersChaptersProgresses)
+      .values({
+        userId: user.id,
+        chapterId: chapter.id,
+        completed,
+      })
+      .onConflictDoUpdate({
+        target: [
+          schema.usersChaptersProgresses.userId,
+          schema.usersChaptersProgresses.chapterId,
+        ],
+        where: and(
+          eq(schema.usersChaptersProgresses.userId, user.id),
+          eq(schema.usersChaptersProgresses.chapterId, chapter.id),
+        ),
+        set: {
           completed,
-        });
-        return;
-      }
-
-      await db
-        .update(schema.usersChaptersProgresses)
-        .set({
-          completed,
-        })
-        .where(
-          and(
-            eq(schema.usersChaptersProgresses.userId, user.id),
-            eq(schema.usersChaptersProgresses.chapterId, chapter.id),
-          ),
-        );
-    } catch (error) {
-      await db
-        .update(schema.usersChaptersProgresses)
-        .set({
-          completed,
-        })
-        .where(
-          and(
-            eq(schema.usersChaptersProgresses.userId, user.id),
-            eq(schema.usersChaptersProgresses.chapterId, chapter.id),
-          ),
-        );
-    }
+        },
+      });
   },
 });
