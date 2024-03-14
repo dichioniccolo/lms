@@ -1,19 +1,16 @@
 "use client";
 
+import type { LinkProps } from "next/link";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
 import { Button } from "@acme/ui/components/ui/button";
 
-const links = [
-  { name: "Login", path: "/login" },
-  // { name: "Android", path: "/browse/android" },
-  // { name: "Web", path: "/browse/web" },
-];
+const links = [{ name: "Login", path: "/login" }] satisfies {
+  name: string;
+  path: LinkProps<unknown>["href"];
+}[];
 
 export const NavLinks = () => {
-  const params = useParams<{ platform: string; feature: string }>();
-
   return (
     <>
       {links.map((link) => (
@@ -25,12 +22,8 @@ export const NavLinks = () => {
           asChild
         >
           <Link
-            href={link.path + "/" + params.feature}
-            className={
-              link.path === `/browse/${params.platform}`
-                ? "text-primary"
-                : "text-muted-foreground hover:text-primary"
-            }
+            href={link.path}
+            className="text-muted-foreground hover:text-primary"
           >
             {link.name}
           </Link>
