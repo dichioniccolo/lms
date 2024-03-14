@@ -23,7 +23,7 @@ interface Props {
 
 export function CourseSidebar({ course, purchased, courseProgress }: Props) {
   return (
-    <div className="flex h-full flex-col overflow-y-auto border-r shadow-sm">
+    <div className="flex h-full flex-col border-r shadow-sm">
       <div className="flex flex-col border-b p-8">
         <h1 className="font-semibold">{course.title}</h1>
         {purchased && (
@@ -32,7 +32,7 @@ export function CourseSidebar({ course, purchased, courseProgress }: Props) {
           </div>
         )}
       </div>
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col overflow-y-auto">
         {course.chapters.map((chapter) => (
           <CourseSidebarItem
             key={chapter.id}

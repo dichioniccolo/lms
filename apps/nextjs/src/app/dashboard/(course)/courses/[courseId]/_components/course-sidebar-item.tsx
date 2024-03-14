@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CheckCircle, Lock, PlayCircle } from "lucide-react";
+import { CheckCircle, Lock, LockOpen, PlayCircle } from "lucide-react";
 
 import { cn } from "@acme/ui";
 
@@ -26,7 +26,13 @@ export function CourseSidebarItem({ purchased, courseId, chapter }: Props) {
 
   const isCompleted = chapter.progresses?.[0]?.completed;
 
-  const Icon = isCompleted ? CheckCircle : !purchased ? Lock : PlayCircle;
+  const Icon = chapter.free
+    ? LockOpen
+    : !purchased
+      ? Lock
+      : isCompleted
+        ? CheckCircle
+        : PlayCircle;
 
   const isActive = pathname.includes(chapter.id);
 
@@ -48,8 +54,7 @@ export function CourseSidebarItem({ purchased, courseId, chapter }: Props) {
       <span className="flex items-center gap-x-2">
         <Icon
           size={22}
-          className={cn("text-slate-50", {
-            "text-slate-700": isActive,
+          className={cn("text-slate-700", {
             "text-emerald-700": isCompleted,
           })}
         />
