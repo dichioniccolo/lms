@@ -54,25 +54,39 @@ export const completeChapter = createServerAction({
       ),
     });
 
-    if (!existing) {
-      await db.insert(schema.usersChaptersProgresses).values({
-        userId: user.id,
-        chapterId: chapter.id,
-        completed,
-      });
-      return;
-    }
+    try {
+      if (!existing) {
+        await db.insert(schema.usersChaptersProgresses).values({
+          userId: user.id,
+          chapterId: chapter.id,
+          completed,
+        });
+        return;
+      }
 
-    await db
-      .update(schema.usersChaptersProgresses)
-      .set({
-        completed,
-      })
-      .where(
-        and(
-          eq(schema.usersChaptersProgresses.userId, user.id),
-          eq(schema.usersChaptersProgresses.chapterId, chapter.id),
-        ),
-      );
+      await db
+        .update(schema.usersChaptersProgresses)
+        .set({
+          completed,
+        })
+        .where(
+          and(
+            eq(schema.usersChaptersProgresses.userId, user.id),
+            eq(schema.usersChaptersProgresses.chapterId, chapter.id),
+          ),
+        );
+    } catch (error) {
+      await db
+        .update(schema.usersChaptersProgresses)
+        .set({
+          completed,
+        })
+        .where(
+          and(
+            eq(schema.usersChaptersProgresses.userId, user.id),
+            eq(schema.usersChaptersProgresses.chapterId, chapter.id),
+          ),
+        );
+    }
   },
 });
