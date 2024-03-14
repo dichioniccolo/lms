@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    url: "https://lms.andreadichio.it",
+    url: `https://${env.NEXT_PUBLIC_APP_DOMAIN}`,
     siteName: title,
   },
   twitter: {
@@ -65,11 +65,11 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function Layout(props: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={cn(["font-sans", fontSans.variable])}>
-        <Providers>{props.children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

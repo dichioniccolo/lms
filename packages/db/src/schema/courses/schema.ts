@@ -1,13 +1,13 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   boolean,
-  datetime,
   decimal,
   index,
-  mysqlTable,
+  pgTable,
   text,
+  timestamp,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 import { attachments } from "../attachments/schema";
 import { categoriesCourses } from "../categoriesCourses/schema";
@@ -15,7 +15,7 @@ import { chapters } from "../chapters/schema";
 import { users } from "../users/schema";
 import { usersCourses } from "../usersCourses/schema";
 
-export const courses = mysqlTable(
+export const courses = pgTable(
   "courses",
   {
     id: varchar("id", { length: 255 }).notNull().primaryKey(),
@@ -32,18 +32,18 @@ export const courses = mysqlTable(
       scale: 2,
     }),
     published: boolean("published").notNull().default(false),
-    createdAt: datetime("createdAt", {
+    createdAt: timestamp("createdAt", {
       mode: "date",
-      fsp: 3,
+      precision: 3,
     })
       .notNull()
-      .default(sql`(now())`),
-    updatedAt: datetime("updatedAt", {
+      .defaultNow(),
+    updatedAt: timestamp("updatedAt", {
       mode: "date",
-      fsp: 3,
+      precision: 3,
     })
       .notNull()
-      .default(sql`(now())`),
+      .defaultNow(),
   },
   (columns) => ({
     publishedIdx: index("published_idx").on(columns.published),

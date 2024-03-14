@@ -41,7 +41,7 @@ export function UserDropdown({ session }: Props) {
               />
             )}
             <AvatarFallback>
-              {session.user.name ?? session.user.email}
+              {session.user.name ?? session.user.email.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>

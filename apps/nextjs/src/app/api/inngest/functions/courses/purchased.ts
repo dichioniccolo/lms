@@ -32,19 +32,19 @@ export const coursePurchased = inngest.createFunction(
         });
       }),
       step.run("Set user as student", async () => {
-        await db.transaction(async (tx) => {
-          await tx.insert(schema.usersCourses).values({
-            courseId: course.id,
-            userId: user.id,
-          });
-
-          await tx
-            .update(schema.users)
-            .set({
-              stripeCustomerId: user.stripeCustomerId,
-            })
-            .where(eq(schema.users.id, user.id));
+        // await db.transaction(async (tx) => {
+        await db.insert(schema.usersCourses).values({
+          courseId: course.id,
+          userId: user.id,
         });
+
+        await db
+          .update(schema.users)
+          .set({
+            stripeCustomerId: user.stripeCustomerId,
+          })
+          .where(eq(schema.users.id, user.id));
+        // });
       }),
     ];
 

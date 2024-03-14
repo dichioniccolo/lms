@@ -11,7 +11,7 @@ export function CategoriesList() {
   const searchModal = useSearchModal();
 
   return (
-    <div className="-margin-x -my-3 flex items-center gap-4">
+    <div className="-my-3 flex items-center gap-4">
       <Button
         size="lg"
         variant="secondary"

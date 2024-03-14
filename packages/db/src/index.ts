@@ -1,5 +1,5 @@
-import { Client } from "@planetscale/database";
-import { drizzle } from "drizzle-orm/planetscale-serverless";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
 import { env } from "./env.mjs";
 import * as accounts from "./schema/accounts/schema";
@@ -30,11 +30,10 @@ export const schema = {
 
 export * from "drizzle-orm";
 
-const client = new Client({
-  url: env.DATABASE_URL,
-});
+const client = neon(env.DATABASE_URL_POSTGRES);
 
-export const db = drizzle(client.connection(), { schema });
+// @ts-expect-error error TS2322: Type 'Neon' is not assignable to type 'Client'.
+export const db = drizzle(client, { schema });
 
 export { createId } from "@paralleldrive/cuid2";
 

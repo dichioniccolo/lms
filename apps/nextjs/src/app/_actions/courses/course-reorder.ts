@@ -41,15 +41,15 @@ export const courseReorder = createServerAction({
       throw new ErrorForClient("Course not found");
     }
 
-    await db.transaction(async (tx) => {
-      for (const item of list) {
-        await tx
-          .update(schema.chapters)
-          .set({
-            position: item.position,
-          })
-          .where(eq(schema.chapters.id, item.id));
-      }
-    });
+    // await db.transaction(async (tx) => {
+    for (const item of list) {
+      await db
+        .update(schema.chapters)
+        .set({
+          position: item.position,
+        })
+        .where(eq(schema.chapters.id, item.id));
+    }
+    // });
   },
 });

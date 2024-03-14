@@ -28,7 +28,9 @@ export function SignInForm() {
 
   const { action, status } = useServerAction(login, {
     onSuccess() {
-      toast.success("We sent you a login link. Be sure to check your spam too");
+      toast.success(
+        "Ti abbiamo inviato un link sulla tua mail per effettuare il login. Assicurati di controllare anche lo spam!",
+      );
     },
     onServerError(error) {
       error && toast.error(error);

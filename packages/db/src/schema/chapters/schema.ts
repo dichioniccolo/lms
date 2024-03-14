@@ -1,18 +1,18 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   bigint,
   boolean,
-  datetime,
-  int,
-  mysqlTable,
+  integer,
+  pgTable,
   text,
+  timestamp,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 import { courses } from "../courses/schema";
 import { usersChaptersProgresses } from "../usersChaptersProgresses/schema";
 
-export const chapters = mysqlTable("chapters", {
+export const chapters = pgTable("chapters", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),
   courseId: varchar("courseId", { length: 255 })
     .notNull()
@@ -24,26 +24,23 @@ export const chapters = mysqlTable("chapters", {
   videoUrl: text("videoUrl"),
   videoContentLength: bigint("videoContentLength", {
     mode: "number",
-    unsigned: true,
   }),
   videoContentType: varchar("videoContentType", { length: 255 }),
-  position: int("position", {
-    unsigned: true,
-  }),
+  position: integer("position"),
   published: boolean("published").notNull().default(false),
   free: boolean("free").notNull().default(false),
-  createdAt: datetime("createdAt", {
+  createdAt: timestamp("createdAt", {
     mode: "date",
-    fsp: 3,
+    precision: 3,
   })
     .notNull()
-    .default(sql`(now())`),
-  updatedAt: datetime("updatedAt", {
+    .defaultNow(),
+  updatedAt: timestamp("updatedAt", {
     mode: "date",
-    fsp: 3,
+    precision: 3,
   })
     .notNull()
-    .default(sql`(now())`),
+    .defaultNow(),
 });
 
 export const chaptersRelations = relations(chapters, ({ one, many }) => ({

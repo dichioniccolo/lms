@@ -54,7 +54,11 @@ export const completeChapter = createServerAction({
         chapterId: chapter.id,
         completed,
       })
-      .onDuplicateKeyUpdate({
+      .onConflictDoUpdate({
+        target: [
+          schema.usersChaptersProgresses.userId,
+          schema.usersChaptersProgresses.chapterId,
+        ],
         set: {
           completed,
         },

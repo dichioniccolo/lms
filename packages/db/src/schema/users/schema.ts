@@ -1,25 +1,20 @@
-import { relations, sql } from "drizzle-orm";
-import {
-  datetime,
-  mysqlEnum,
-  mysqlTable,
-  varchar,
-} from "drizzle-orm/mysql-core";
+import { relations } from "drizzle-orm";
+import { pgEnum, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import { accounts } from "../accounts/schema";
 import { usersCourses } from "../usersCourses/schema";
 
-export const users = mysqlTable("user", {
+export const roleEnum = pgEnum("Role", ["ADMIN", "USER", "TEACHER"]);
+
+export const users = pgTable("user", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),
   name: varchar("name", { length: 255 }),
   email: varchar("email", { length: 255 }).notNull(),
-  emailVerified: datetime("emailVerified", {
+  emailVerified: timestamp("emailVerified", {
     mode: "date",
-    fsp: 3,
-  }).default(sql`(now())`),
-  role: mysqlEnum("role", ["ADMIN", "USER", "TEACHER"])
-    .notNull()
-    .default("USER"),
+    precision: 3,
+  }).defaultNow(),
+  role: roleEnum("role").notNull().default("USER"),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).unique(),
   image: varchar("image", { length: 255 }),
 });

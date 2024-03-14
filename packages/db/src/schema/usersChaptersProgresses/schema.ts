@@ -1,20 +1,20 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   boolean,
-  datetime,
-  mysqlTable,
+  pgTable,
   serial,
+  timestamp,
   unique,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 import { chapters } from "../chapters/schema";
 import { users } from "../users/schema";
 
-export const usersChaptersProgresses = mysqlTable(
+export const usersChaptersProgresses = pgTable(
   "usersChaptersProgresses",
   {
-    id: serial("id").notNull().autoincrement().primaryKey(),
+    id: serial("id").notNull().primaryKey(),
     userId: varchar("userId", { length: 255 })
       .notNull()
       .references(() => users.id, {
@@ -26,12 +26,12 @@ export const usersChaptersProgresses = mysqlTable(
         onDelete: "cascade",
       }),
     completed: boolean("completed").notNull().default(false),
-    createdAt: datetime("createdAt", {
+    createdAt: timestamp("createdAt", {
       mode: "date",
-      fsp: 3,
+      precision: 3,
     })
       .notNull()
-      .default(sql`(now())`),
+      .defaultNow(),
   },
   (columns) => ({
     userIdChapterId: unique().on(columns.userId, columns.chapterId),

@@ -1,22 +1,21 @@
 import { relations } from "drizzle-orm";
 import {
   bigint,
-  mysqlTable,
+  pgTable,
   serial,
   uniqueIndex,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 import { categories } from "../categories/schema";
 import { courses } from "../courses/schema";
 
-export const categoriesCourses = mysqlTable(
+export const categoriesCourses = pgTable(
   "categoriesCourses",
   {
-    id: serial("id").notNull().autoincrement().primaryKey(),
+    id: serial("id").notNull().primaryKey(),
     categoryId: bigint("categoryId", {
       mode: "number",
-      unsigned: true,
     })
       .notNull()
       .references(() => categories.id, {

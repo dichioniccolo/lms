@@ -1,20 +1,20 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   boolean,
-  datetime,
-  mysqlTable,
+  pgTable,
   serial,
+  timestamp,
   unique,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 import { courses } from "../courses/schema";
 import { users } from "../users/schema";
 
-export const usersCourses = mysqlTable(
+export const usersCourses = pgTable(
   "usersCourses",
   {
-    id: serial("id").notNull().autoincrement().primaryKey(),
+    id: serial("id").notNull().primaryKey(),
     userId: varchar("userId", { length: 255 })
       .notNull()
       .references(() => users.id, {
@@ -26,12 +26,12 @@ export const usersCourses = mysqlTable(
         onDelete: "cascade",
       }),
     invited: boolean("invited").default(false),
-    createdAt: datetime("createdAt", {
+    createdAt: timestamp("createdAt", {
       mode: "date",
-      fsp: 3,
+      precision: 3,
     })
       .notNull()
-      .default(sql`(now())`),
+      .defaultNow(),
   },
   (columns) => ({
     userIdCourseIdUk: unique().on(columns.userId, columns.courseId),

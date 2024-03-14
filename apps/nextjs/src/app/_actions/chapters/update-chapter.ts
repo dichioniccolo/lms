@@ -37,40 +37,40 @@ export const updateChapter = createServerAction({
       throw new ErrorForClient("You are not a teacher");
     }
 
-    await db.transaction(async (tx) => {
-      const where = and(
-        eq(schema.chapters.id, chapterId),
-        eq(schema.chapters.courseId, courseId),
-        exists(
-          tx
-            .select()
-            .from(schema.courses)
-            .where(
-              and(
-                eq(schema.courses.id, courseId),
-                eq(schema.courses.ownerId, user.id),
-              ),
+    // await db.transaction(async (tx) => {
+    const where = and(
+      eq(schema.chapters.id, chapterId),
+      eq(schema.chapters.courseId, courseId),
+      exists(
+        db
+          .select()
+          .from(schema.courses)
+          .where(
+            and(
+              eq(schema.courses.id, courseId),
+              eq(schema.courses.ownerId, user.id),
             ),
-        ),
-      );
+          ),
+      ),
+    );
 
-      const chapter = await tx.query.chapters.findFirst({
-        where,
-        columns: {
-          videoUrl: true,
-        },
-      });
-
-      await tx
-        .update(schema.chapters)
-        .set({
-          ...values,
-        })
-        .where(where);
-
-      if (values.videoUrl && chapter?.videoUrl) {
-        await deleteFile(chapter.videoUrl);
-      }
+    const chapter = await db.query.chapters.findFirst({
+      where,
+      columns: {
+        videoUrl: true,
+      },
     });
+
+    await db
+      .update(schema.chapters)
+      .set({
+        ...values,
+      })
+      .where(where);
+
+    if (values.videoUrl && chapter?.videoUrl) {
+      await deleteFile(chapter.videoUrl);
+    }
+    // });
   },
 });

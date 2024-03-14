@@ -1,16 +1,10 @@
-import { relations, sql } from "drizzle-orm";
-import {
-  datetime,
-  mysqlTable,
-  serial,
-  text,
-  varchar,
-} from "drizzle-orm/mysql-core";
+import { relations } from "drizzle-orm";
+import { pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import { courses } from "../courses/schema";
 
-export const attachments = mysqlTable("attachments", {
-  id: serial("id").notNull().autoincrement().primaryKey(),
+export const attachments = pgTable("attachments", {
+  id: serial("id").notNull().primaryKey(),
   courseId: varchar("courseId", { length: 255 })
     .notNull()
     .references(() => courses.id, {
@@ -18,18 +12,18 @@ export const attachments = mysqlTable("attachments", {
     }),
   name: varchar("name", { length: 255 }).notNull(),
   url: text("url").notNull(),
-  createdAt: datetime("createdAt", {
+  createdAt: timestamp("createdAt", {
     mode: "date",
-    fsp: 3,
+    precision: 3,
   })
     .notNull()
-    .default(sql`(now())`),
-  updatedAt: datetime("updatedAt", {
+    .defaultNow(),
+  updatedAt: timestamp("updatedAt", {
     mode: "date",
-    fsp: 3,
+    precision: 3,
   })
     .notNull()
-    .default(sql`(now())`),
+    .defaultNow(),
 });
 
 export const attachmentsRelations = relations(attachments, ({ one }) => ({
