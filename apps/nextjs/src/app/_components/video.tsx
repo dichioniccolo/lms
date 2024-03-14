@@ -315,7 +315,7 @@ export function Video({ src, onCompleted }: Props) {
           onKeyDown={onKeyDown}
           role="button"
           tabIndex={0}
-          className="outline-none active:outline-none"
+          className="aspect-video outline-none active:outline-none"
         >
           <ReactPlayer
             ref={videoRef}
