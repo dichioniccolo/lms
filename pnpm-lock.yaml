@@ -405,8 +405,8 @@ importers:
         specifier: ^8.57.0
         version: 8.57.0
       inngest-cli:
-        specifier: ^0.26.4
-        version: 0.26.4
+        specifier: ^0.26.5
+        version: 0.26.5
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -8293,8 +8293,8 @@ packages:
   /ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
 
-  /inngest-cli@0.26.4:
-    resolution: {integrity: sha512-3DuP3jGHW4g/mVHdmADRVtuHJrC1wnfdPL3fCSMurZzxEcsDeLGjM47vLXlNDyc7QIPGWlpWD92ARH36g4cbxA==}
+  /inngest-cli@0.26.5:
+    resolution: {integrity: sha512-8RTN11MvsSHk/UUHfg+j3Pm+MYxNY2ob+gbABcfsQhKdvKEJ6RZI/qr2ndMB2I6aN/dwlcF5tqwv4vCAGiOdWQ==}
     hasBin: true
     requiresBuild: true
     dependencies:
