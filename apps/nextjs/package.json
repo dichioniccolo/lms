@@ -53,7 +53,7 @@
     "@acme/tailwind-config": "^0.1.0",
     "@acme/tsconfig": "^0.1.0",
     "@total-typescript/ts-reset": "^0.5.1",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.2",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "eslint": "^8.57.0",
