@@ -30,7 +30,7 @@
     "@upstash/redis": "^1.29.0",
     "@vercel/kv": "^1.0.1",
     "aws-crt": "^1.21.1",
-    "aws-sdk": "^2.1594.0",
+    "aws-sdk": "^2.1595.0",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "lucide-react": "^0.365.0",
