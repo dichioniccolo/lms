@@ -78,8 +78,8 @@ importers:
         specifier: ^1.21.1
         version: 1.21.1
       aws-sdk:
-        specifier: ^2.1596.0
-        version: 2.1596.0
+        specifier: ^2.1597.0
+        version: 2.1597.0
       axios:
         specifier: ^1.6.8
         version: 1.6.8
@@ -5856,8 +5856,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /aws-sdk@2.1596.0:
-    resolution: {integrity: sha512-0C0TGFW3ANoZ1AkSKIIjTpEfN9WQ7jbwLODsdU2TIPkJBuv7UcOkTPuKoiowhi5sOFZmyx58SG3g12j+BJpyEg==}
+  /aws-sdk@2.1597.0:
+    resolution: {integrity: sha512-YvApP9p5a5TD870mvQRrcUyJz3nKFrtlnDLaA4yrmAaidMDGzdNJ+AZlW0+onRCB4llzKD4Hos56zea0ulR+zQ==}
     engines: {node: '>= 10.0.0'}
     requiresBuild: true
     dependencies:
