@@ -386,8 +386,8 @@ importers:
         specifier: ^0.9.2
         version: 0.9.2(typescript@5.4.5)(zod@3.22.5)
       inngest:
-        specifier: ^3.17.0
-        version: 3.17.0(typescript@5.4.5)
+        specifier: ^3.18.0
+        version: 3.18.0(typescript@5.4.5)
       zod:
         specifier: ^3.22.5
         version: 3.22.5
@@ -8281,8 +8281,8 @@ packages:
       - supports-color
     dev: true
 
-  /inngest@3.17.0(typescript@5.4.5):
-    resolution: {integrity: sha512-tmqV7oOiPTxsIgxi2IehKjK/gvbLuULFqqw7T82R3Ih+2M8mwhdZn8d/GHw789FVSfYV8VWrqlUYPWUjYGc0/w==}
+  /inngest@3.18.0(typescript@5.4.5):
+    resolution: {integrity: sha512-PsefjJMz2G7aR5J8uwCoV3qasCvrUGh2HdfmoXiE86MyZeqE65wr/as+a5YygQFzcaGe7oEidOxgUDroRle3SQ==}
     engines: {node: '>=14'}
     peerDependencies:
       typescript: '>=4.7.2'
