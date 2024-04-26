@@ -10,6 +10,7 @@ import {
   CommandDialog,
   CommandEmpty,
   CommandItem,
+  CommandList,
 } from "@acme/ui/components/ui/command";
 import { ScrollArea } from "@acme/ui/components/ui/scroll-area";
 import { useDebounce } from "@acme/ui/hooks/use-debounce";
@@ -85,15 +86,10 @@ export function SearchCommandDialog() {
       <section className="flex size-full overflow-hidden pl-3 pt-2">
         {loading && <CommandEmpty>Loading...</CommandEmpty>}
         {!loading && courses.length > 0 ? (
-          <>
-            {/* <CommandCategoriesList
-              category={category}
-              setCategory={setCategory}
-            /> */}
-
-            <ScrollArea className="w-full">
-              <div className="relative size-full !max-h-none pb-10 pr-2 md:pr-3">
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 [&_[cmdk-item]]:shrink-0">
+          <ScrollArea className="w-full">
+            <div className="relative size-full !max-h-none pb-10 pr-2 md:pr-3">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 [&_[cmdk-item]]:shrink-0">
+                <CommandList>
                   {courses.map((course) => (
                     <CommandItem
                       key={course.id}
@@ -121,51 +117,63 @@ export function SearchCommandDialog() {
                           {course.description}
                         </p>
                       </div>
-                      {/* <div className="z-10 shrink-0 overflow-hidden rounded-t-2xl md:h-40">
-                          <div className="md:group-data-selected:-translate-y-5 flex max-w-[200px] cursor-pointer flex-col items-center gap-y-1 transition-transform duration-300 ease-out md:group-hover:-translate-y-5">
-                            <Image
-                              src={course.imageUrl!}
-                              alt={course.title}
-                              width={200}
-                              height={200}
-                              className="size-40 shrink-0 overflow-hidden rounded-2xl object-cover"
-                              priority
-                            />
-                            <p className="shrink-0 truncate text-xs font-normal text-muted-foreground">
-                              {course.title}
-                            </p>
-                          </div>
-                        </div> */}
                     </CommandItem>
                   ))}
-                </div>
-                {/* {category === "trending" && (
-                  <>
-                    <CommandItem className="absolute inset-0 z-0 !bg-transparent !text-transparent">
-                      hidden item
-                    </CommandItem>
-                    <Trending />
-                  </>
-                )}
-
-                {category === "screens" && (
-                  <ItemsLinesHoverCard title="Screens -- Hover Card" />
-                )}
-
-                {category === "ui-elements" && (
-                  <ItemsLinesHoverCard title="UI Elements -- Hover Card" />
-                )}
-
-                {category === "flows" && (
-                  <ItemsLines title="Flows -- NOT Hover Card" />
-                )} */}
+                </CommandList>
               </div>
-            </ScrollArea>
-          </>
+            </div>
+          </ScrollArea>
         ) : !loading && courses.length === 0 ? (
           <CommandEmpty>No results found.</CommandEmpty>
         ) : null}
       </section>
     </CommandDialog>
   );
+}
+{
+  /* <CommandCategoriesList
+  category={category}
+  setCategory={setCategory}
+/> */
+}
+
+{
+  /* <div className="z-10 shrink-0 overflow-hidden rounded-t-2xl md:h-40">
+    <div className="md:group-data-selected:-translate-y-5 flex max-w-[200px] cursor-pointer flex-col items-center gap-y-1 transition-transform duration-300 ease-out md:group-hover:-translate-y-5">
+      <Image
+        src={course.imageUrl!}
+        alt={course.title}
+        width={200}
+        height={200}
+        className="size-40 shrink-0 overflow-hidden rounded-2xl object-cover"
+        priority
+      />
+      <p className="shrink-0 truncate text-xs font-normal text-muted-foreground">
+        {course.title}
+      </p>
+    </div>
+  </div> */
+}
+
+{
+  /* {category === "trending" && (
+  <>
+    <CommandItem className="absolute inset-0 z-0 !bg-transparent !text-transparent">
+      hidden item
+    </CommandItem>
+    <Trending />
+  </>
+)}
+
+{category === "screens" && (
+  <ItemsLinesHoverCard title="Screens -- Hover Card" />
+)}
+
+{category === "ui-elements" && (
+  <ItemsLinesHoverCard title="UI Elements -- Hover Card" />
+)}
+
+{category === "flows" && (
+  <ItemsLines title="Flows -- NOT Hover Card" />
+)} */
 }
