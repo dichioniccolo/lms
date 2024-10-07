@@ -39,9 +39,8 @@ export default function Page() {
                   fornisce una descrizione completa di come{" "}
                   {env.NEXT_PUBLIC_APP_NAME} ("noi", "nostro", o "ci")
                   raccoglie, utilizza e condivide informazioni su di te in
-                  relazione al sito web su{" "}
-                  {env.VERCEL_URL ?? env.NEXT_PUBLIC_APP_DOMAIN}, oltre ai tuoi
-                  diritti e scelte riguardo tali informazioni.
+                  relazione al sito web su {env.NEXT_PUBLIC_APP_DOMAIN}, oltre
+                  ai tuoi diritti e scelte riguardo tali informazioni.
                 </p>
               </div>
               {/* 1. Panoramica ends */}
