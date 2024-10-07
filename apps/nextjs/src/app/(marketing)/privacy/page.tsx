@@ -6,18 +6,18 @@ import { env } from "~/env.mjs";
 export const runtime: ServerRuntime = "edge";
 
 export default function Page() {
-  const updatedAt = "March 14, 2024";
+  const updatedAt = "07 Ottobre 2024";
 
   return (
     <>
       <div className="flex h-48 w-full items-center justify-center bg-gray-400">
         <div className="relative text-center">
           <h1 className="text-3xl font-bold text-white md:text-4xl">
-            Privacy Policy
+            Informativa sulla Privacy
           </h1>
           <div className="mt-4 flex justify-center">
             <div className="rounded-md bg-gray-800 px-2 py-0.5 text-xs text-white">
-              Updated {updatedAt}
+              Aggiornato {updatedAt}
             </div>
           </div>
         </div>
@@ -26,125 +26,127 @@ export default function Page() {
         <div className="flex justify-center">
           <div className="max-w-3/4 relative mx-auto rounded-lg sm:w-2/4">
             <div className="ld-text-gray-500 max-w-none !p-8">
-              {/* 1. Overview beings */}
-              <div className="mb-5 text-xl font-bold">1. Overview</div>
+              {/* 1. Panoramica begins */}
+              <div className="mb-5 text-xl font-bold">1. Panoramica</div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  By accessing the Site, you agree to not only this Privacy
-                  Policy, but also to our Terms of Use and any other written
-                  agreements for using the Site.
+                  Accedendo al Sito, accetti non solo questa Informativa sulla
+                  Privacy, ma anche i nostri Termini di Utilizzo e qualsiasi
+                  altro accordo scritto per l'uso del Sito.
                 </p>
                 <p className="leading-7">
-                  This Privacy Policy (the “Privacy Policy”) provides a
-                  comprehensive description of how {env.NEXT_PUBLIC_APP_NAME}{" "}
-                  (“we,” “our,” or “us”) collects, uses, and shares information
-                  about you in connection with the website at{" "}
-                  {env.NEXT_PUBLIC_APP_DOMAIN}”, as well as your rights and
-                  choices regarding such information.
+                  Questa Informativa sulla Privacy (la "Privacy Policy")
+                  fornisce una descrizione completa di come{" "}
+                  {env.NEXT_PUBLIC_APP_NAME} ("noi", "nostro", o "ci")
+                  raccoglie, utilizza e condivide informazioni su di te in
+                  relazione al sito web su{" "}
+                  {env.VERCEL_URL ?? env.NEXT_PUBLIC_APP_DOMAIN}, oltre ai tuoi
+                  diritti e scelte riguardo tali informazioni.
                 </p>
               </div>
-              {/* 1. Overview ends */}
-              {/* 2. Information Collection beings */}
+              {/* 1. Panoramica ends */}
+              {/* 2. Raccolta delle Informazioni begins */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                2. Information Collection
+                2. Raccolta delle Informazioni
               </div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  We may collect the following information about you when you
-                  use the Site:
+                  Potremmo raccogliere le seguenti informazioni su di te quando
+                  utilizzi il Sito:
                 </p>
                 <ul className="list-inside list-disc">
                   <li className="leading-7">
-                    Information you provide such as your email, feedback,
-                    question and issues reports.
+                    Informazioni che fornisci come la tua email, feedback,
+                    domande e segnalazioni di problemi.
                   </li>
                 </ul>
                 <p className="leading-7">
-                  You may choose to voluntarily provide other information to us
-                  that we have not solicited from you, and, in such instances,
-                  you are solely responsible for such information.
+                  Potresti scegliere di fornirci volontariamente altre
+                  informazioni che non abbiamo richiesto, e, in tali casi, sei
+                  l'unico responsabile di tali informazioni.
                 </p>
                 <p className="leading-7">
-                  We may use tracking technologies to automatically collect
-                  information including the following:
+                  Potremmo utilizzare tecnologie di tracciamento per raccogliere
+                  automaticamente informazioni tra cui le seguenti:
                 </p>
                 <ul className="list-inside list-disc space-y-3">
                   <li className="leading-7">
-                    <b>Log Files</b>, to record events or errors that occur when
-                    using our Site.
+                    <b>File di Log</b>, per registrare eventi o errori che si
+                    verificano durante l'uso del nostro Sito.
                   </li>
                   <li className="leading-7">
-                    <b>Cookies</b>, small data stored on your device that are
-                    necessary for you to browse the Site.
+                    <b>Cookie</b>, piccoli dati memorizzati sul tuo dispositivo
+                    che sono necessari per navigare nel Sito.
                   </li>
                 </ul>
               </div>
-              {/* 2. Information Collection ends */}
-              {/* 3. Use of Information begins */}
+              {/* 2. Raccolta delle Informazioni ends */}
+              {/* 3. Uso delle Informazioni begins */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                3. Use of Information
+                3. Uso delle Informazioni
               </div>
               <p className="leading-7">
-                We may need to use it to operate and manage the Services on this
-                Site (or other places), provide you support, ensure we comply
-                with laws and regulation, and enforce the security of the Site
-                or make other improvements.
+                Potremmo doverle utilizzare per gestire e operare i Servizi su
+                questo Sito (o altri), fornire supporto, assicurarci di
+                rispettare leggi e regolamenti, rafforzare la sicurezza del Sito
+                o apportare altri miglioramenti.
               </p>
-              {/* 3. Use of Information ends */}
-              {/* 4. Third-Parties begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">
-                4. Third-Parties
-              </div>
+              {/* 3. Uso delle Informazioni ends */}
+              {/* 4. Terze Parti begins */}
+              <div className="mb-5 mt-8 text-xl font-bold">4. Terze Parti</div>
               <p className="leading-7">
-                This Privacy Policy does not apply to websites, apps, products,
-                or services that we do not own or control. For example, your
-                interactions with Ethereum wallet are governed by the applicable
-                privacy policies of that particular wallet.
+                Questa Informativa sulla Privacy non si applica a siti web, app,
+                prodotti o servizi che non possediamo o controlliamo. Ad
+                esempio, le tue interazioni con il portafoglio Ethereum sono
+                regolate dalle politiche sulla privacy di quel particolare
+                portafoglio.
               </p>
-              {/* 4. Third-Parties ends */}
-              {/* 5. Analytics begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">5. Analytics</div>
+              {/* 4. Terze Parti ends */}
+              {/* 5. Analitica begins */}
+              <div className="mb-5 mt-8 text-xl font-bold">5. Analitica</div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  We use <b>ClickHouse</b> to collect various events from user
-                  actions to analyse and make decisions for Site improvements.
+                  Utilizziamo <b>ClickHouse</b> per raccogliere vari eventi
+                  dalle azioni degli utenti e analizzarli per migliorare il
+                  Sito.
                 </p>
                 <p className="leading-7">
-                  We collect profile id to identify the user. This makes sure to
-                  give the best experience to the user.
+                  Raccogliamo l'ID del profilo per identificare l'utente. Questo
+                  assicura di offrire la migliore esperienza possibile.
                 </p>
                 <p className="leading-7">
-                  We may change to other third-party analytics service provider.
-                  The Privacy Policy of Analytics subjects to the every
-                  provider. You should review everything before using the Site.
+                  Potremmo passare ad altri fornitori di servizi di analitica di
+                  terze parti. L'Informativa sulla Privacy di tali servizi è
+                  soggetta a ogni fornitore. Dovresti esaminare tutto prima di
+                  utilizzare il Sito.
                 </p>
               </div>
-              {/* 5. Analytics ends */}
-              {/* 6. Your Rights and Choices begins */}
+              {/* 5. Analitica ends */}
+              {/* 6. I Tuoi Diritti e Scelte begins */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                6. Your Rights and Choices
+                6. I Tuoi Diritti e Scelte
               </div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  We may collect the following information about you when you
-                  use the Site:
+                  Potremmo raccogliere le seguenti informazioni su di te quando
+                  utilizzi il Sito:
                 </p>
                 <ul className="list-inside list-disc space-y-2">
                   <li className="leading-7">
-                    <b>Cookies</b>. We will only use strictly necessary cookies.
-                    These cookies are essential for you to browse the Site and
-                    use its features, including accessing secure areas of the
-                    Site.
+                    <b>Cookie</b>. Utilizzeremo solo i cookie strettamente
+                    necessari. Questi cookie sono essenziali per navigare nel
+                    Sito e utilizzarne le funzionalità, inclusi l'accesso alle
+                    aree sicure del Sito.
                   </li>
                   <li className="linkify leading-7">
-                    <b>Do Not Track</b>. Your browser settings may allow you to
-                    automatically transmit a “Do Not Track” signal to the online
-                    services you visit. Note, however, there is no industry
-                    consensus as to what Site and app operators should do with
-                    regard to these signals. Accordingly, unless and until the
-                    law is interpreted to require us to do so, we do not monitor
-                    or take action with respect to “Do Not Track” signals. For
-                    more information on “Do Not Track,” visit{" "}
+                    <b>Do Not Track</b>. Le impostazioni del tuo browser
+                    potrebbero permetterti di trasmettere automaticamente un
+                    segnale "Do Not Track" ai servizi online che visiti.
+                    Tuttavia, non esiste consenso nel settore su cosa fare con
+                    questi segnali. Pertanto, a meno che la legge non ci imponga
+                    di farlo, non monitoriamo o prendiamo provvedimenti riguardo
+                    ai segnali "Do Not Track". Per maggiori informazioni su "Do
+                    Not Track", visita{" "}
                     <Link
                       href="https://allaboutdnt.com"
                       rel="noreferrer"
@@ -156,49 +158,51 @@ export default function Page() {
                   </li>
                 </ul>
               </div>
-              {/* 6. Your Rights and Choices ends */}
-              {/* 7. Data Security begins */}
+              {/* 6. I Tuoi Diritti e Scelte ends */}
+              {/* 7. Sicurezza dei Dati begins */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                7. Data Security
+                7. Sicurezza dei Dati
               </div>
               <p className="leading-7">
-                We implement and maintain reasonable administrative, physical,
-                and technical security safeguards to help protect information
-                about you from loss, theft, misuse, unauthorised access,
-                disclosure, alteration, and destruction. Nevertheless,
-                transmission via the internet is not completely secure and we
-                cannot guarantee the security of information about you.
+                Implementiamo e manteniamo misure di sicurezza amministrative,
+                fisiche e tecniche ragionevoli per aiutare a proteggere le
+                informazioni su di te da perdita, furto, uso improprio, accesso
+                non autorizzato, divulgazione, alterazione e distruzione.
+                Tuttavia, la trasmissione via internet non è completamente
+                sicura e non possiamo garantire la sicurezza delle informazioni
+                su di te.
               </p>
-              {/* 7. Data Security ends */}
-              {/* 8. Children begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">8. Children</div>
+              {/* 7. Sicurezza dei Dati ends */}
+              {/* 8. Minori begins */}
+              <div className="mb-5 mt-8 text-xl font-bold">8. Minori</div>
               <p className="leading-7">
-                The Site is intended for general audiences and are not directed
-                at children. To use the Site, you must legally be able to enter
-                into the Agreement. We do not knowingly collect personal
-                information from children.
+                Il Sito è destinato a un pubblico generale e non è diretto ai
+                minori. Per utilizzare il Sito, devi essere legalmente in grado
+                di stipulare l'Accordo. Non raccogliamo consapevolmente
+                informazioni personali dai minori.
               </p>
-              {/* 8. Children ends */}
-              {/* 9. Changes to Policy begins */}
+              {/* 8. Minori ends */}
+              {/* 9. Modifiche alla Politica begins */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                9. Changes to Policy
+                9. Modifiche alla Politica
               </div>
               <p className="leading-7">
-                We reserve the right to revise and reissue this Privacy Policy
-                at any time. Any changes will be effective immediately upon our
-                posting of the revised Privacy Policy. For the avoidance of
-                doubt, your continued use of the Site indicates your consent to
-                the revised Privacy Policy then posted.
+                Ci riserviamo il diritto di rivedere e ripubblicare questa
+                Informativa sulla Privacy in qualsiasi momento. Eventuali
+                modifiche saranno efficaci immediatamente al momento della
+                pubblicazione della Privacy Policy revisionata. Per evitare
+                dubbi, il tuo uso continuato del Sito indica il tuo consenso
+                alla Privacy Policy revisionata allora pubblicata.
               </p>
-              {/* 9. Changes to Policy ends */}
-              {/* 10. Contact begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">10. Contact</div>
+              {/* 9. Modifiche alla Politica ends */}
+              {/* 10. Contatti begins */}
+              <div className="mb-5 mt-8 text-xl font-bold">10. Contatti</div>
               <p className="leading-7">
-                If you have any questions or comments about this Privacy Policy,
-                our data practices, or our compliance with applicable law,
-                please contact us at info@andreadichio.it
+                Se hai domande o commenti su questa Informativa sulla Privacy,
+                sulle nostre pratiche di dati, o sulla nostra conformità alla
+                legge applicabile, contattaci a info@andreadichio.it.
               </p>
-              {/* 10. Contact ends */}
+              {/* 10. Contatti ends */}
             </div>
           </div>
         </div>

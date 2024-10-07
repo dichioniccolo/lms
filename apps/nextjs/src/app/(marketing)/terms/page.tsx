@@ -1,286 +1,226 @@
 import type { ServerRuntime } from "next";
-import Link from "next/link";
-
-import { env } from "~/env.mjs";
 
 export const runtime: ServerRuntime = "edge";
 
 export default function Page() {
-  const updatedAt = "March 14, 2024";
+  const updatedAt = "07 Ottobre 2024";
 
   return (
     <>
+      {/* Sezione Header */}
       <div className="flex h-48 w-full items-center justify-center bg-gray-400">
         <div className="relative text-center">
           <h1 className="text-3xl font-bold text-white md:text-4xl">
-            Terms & Conditions
+            Termini & Condizioni
           </h1>
           <div className="mt-4 flex justify-center">
             <div className="rounded-md bg-gray-800 px-2 py-0.5 text-xs text-white">
-              Updated {updatedAt}
+              Aggiornato il {updatedAt}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Sezione Contenuto Principale */}
       <div className="relative">
         <div className="flex justify-center">
           <div className="max-w-3/4 relative mx-auto rounded-lg sm:w-2/4">
             <div className="ld-text-gray-500 max-w-none !p-8">
-              {/* 1. Overview beings */}
-              <div className="mb-5 text-xl font-bold">1. Overview</div>
+              {/* 1. Panoramica */}
+              <div className="mb-5 text-xl font-bold">1. Panoramica</div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  The website {env.NEXT_PUBLIC_APP_DOMAIN} (the “Site”) offers
-                  online courses.
+                  Il sito web {process.env.NEXT_PUBLIC_APP_DOMAIN} (il "Sito")
+                  offre corsi online.
                 </p>
                 <p className="leading-7">
-                  By visiting the Site, you agree to be bound by the following
-                  terms and conditions (“Terms”), including those additional
-                  terms and conditions and policies referenced herein and/or
-                  available by hyperlink (collectively, the “Agreement”). The
-                  Agreement applies to all users of the Site, including without
-                  limitation users who are browsers, builders, and/or
-                  contributors of content.
+                  Visitando il Sito, accetti di essere vincolato dai seguenti
+                  termini e condizioni (“Termini”), inclusi quelli aggiuntivi e
+                  politiche qui riferiti e/o disponibili tramite hyperlink
+                  (collettivamente, l’“Accordo”). L'Accordo si applica a tutti
+                  gli utenti del Sito, inclusi a titolo esemplificativo utenti
+                  che sono navigatori, costruttori e/o contributori di
+                  contenuti.
                 </p>
                 <p className="leading-7">
-                  Please read these Terms carefully before accessing or using
-                  the Site. If you do not agree to all the terms of the
-                  Agreement, then you should not access the Site; however, by
-                  accessing the Site, you consent to the Agreement.
+                  Ti preghiamo di leggere attentamente questi Termini prima di
+                  accedere o utilizzare il Sito. Se non accetti tutti i termini
+                  dell'Accordo, non dovresti accedere al Sito; tuttavia,
+                  accedendo al Sito, acconsenti all'Accordo.
                 </p>
                 <p className="leading-7">
-                  Any new features or tools which are added to Site shall also
-                  be subject to the Terms. You can review the most current
-                  version of the Terms at any time on this page. We reserve the
-                  right to update, change or replace any part of these Terms by
-                  posting updates and/or changes to our Site. It is your
-                  responsibility to check this page periodically for changes.
-                  Your continued use of or access to the Site following the
-                  posting of any changes constitutes acceptance of those
-                  changes.
+                  Eventuali nuove funzionalità o strumenti aggiunti al Sito
+                  saranno soggetti ai Termini. Puoi rivedere la versione più
+                  aggiornata dei Termini in qualsiasi momento su questa pagina.
+                  Ci riserviamo il diritto di aggiornare, modificare o
+                  sostituire qualsiasi parte di questi Termini pubblicando
+                  aggiornamenti e/o modifiche sul nostro Sito. È tua
+                  responsabilità controllare periodicamente questa pagina per
+                  eventuali modifiche. L’uso continuato del Sito dopo la
+                  pubblicazione di eventuali modifiche costituisce accettazione
+                  di tali modifiche.
                 </p>
               </div>
-              {/* 1. Overview ends */}
-              {/* 2. General Conditions beings */}
+              {/* 1. Panoramica ends */}
+
+              {/* 2. Condizioni Generali */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                2. General Conditions
+                2. Condizioni Generali
               </div>
               <p className="leading-7">
-                You may not use our Site for any illegal or unauthorised purpose
-                nor may you, in the use of the Service, violate any laws in your
-                jurisdiction (including but not limited to copyright laws). We
-                reserve the right to refuse the services to anyone for any
-                reason at any time. We may stop (permanently or temporarily)
-                providing the services or any features within the Site to you or
-                to users generally.
+                Non puoi utilizzare il nostro Sito per scopi illegali o non
+                autorizzati, né puoi, nell'utilizzo del Servizio, violare alcuna
+                legge nella tua giurisdizione (incluso, ma non limitato alle
+                leggi sul copyright). Ci riserviamo il diritto di rifiutare i
+                servizi a chiunque per qualsiasi motivo in qualsiasi momento.
+                Possiamo interrompere (in modo permanente o temporaneo) la
+                fornitura dei servizi o di qualsiasi funzionalità all'interno
+                del Sito a te o agli utenti in generale.
               </p>
-              {/* 2. General Conditions ends */}
-              {/* 3. Services begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">3. Services</div>
+              {/* 2. Condizioni Generali ends */}
+
+              {/* 3. Servizi */}
+              <div className="mb-5 mt-8 text-xl font-bold">3. Servizi</div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  We reserve the right - but are not obligated to - limit the
-                  provision of Profiles or Services to any person, geographic
-                  region or jurisdiction. We may exercise this right on a
-                  case-by-case basis in our sole discretion.
+                  Ci riserviamo il diritto - ma non l'obbligo - di limitare la
+                  fornitura di Profili o Servizi a qualsiasi persona, regione
+                  geografica o giurisdizione. Potremmo esercitare questo diritto
+                  caso per caso a nostra esclusiva discrezione.
                 </p>
                 <ul className="list-inside list-disc space-y-3">
                   <li className="leading-7">
-                    Your profile your responsibility.
+                    Il tuo profilo, la tua responsabilità.
                   </li>
                   <li className="leading-7">
-                    You are responsible for securing your account.
+                    Sei responsabile della sicurezza del tuo account.
                   </li>
                   <li className="leading-7">
-                    You bear sole responsibility for evaluating the Site and
-                    features before using them.
+                    Sei l'unico responsabile della valutazione del Sito e delle
+                    sue funzionalità prima di utilizzarle.
                   </li>
                 </ul>
-                {/* <p className="leading-7">
-                  Our Site allows you to upload a text, pictures, videos using
-                  hosted on a third-party provider IPFS and Arweave. We are not
-                  responsible for any action or omission taken by IPFS/Arweave
-                  as it pertains to the user interface or otherwise. The use and
-                  access of any third-party products or services, including
-                  through the Site, is at your own risk.
-                </p> */}
               </div>
-              {/* 3. Services ends */}
-              {/* 4. Accuracy, Completeness and Timeliness of information begins */}
-              {/* <div className="mb-5 mt-8 text-xl font-bold">
-                4. Accuracy, Completeness and Timeliness of information
-              </div> */}
-              {/* <div className="space-y-5">
-                <p className="leading-7">
-                  We are not responsible for any mistakes or inaccuracies on
-                  contents published on this Site. Profiles are fully
-                  responsible for what they are doing in the Site.
-                </p>
-                <p className="leading-7">
-                  As a Site, we offer information about the content and
-                  interaction on content published by the users on the Lens
-                  Protocol.
-                </p>
-              </div> */}
-              {/* 4. Accuracy, Completeness and Timeliness of information ends */}
-              {/* 5. Modification of Services begins */}
+              {/* 3. Servizi ends */}
+
+              {/* 4. Modifica dei Servizi */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                4. Modification of Services
+                4. Modifica dei Servizi
               </div>
               <p className="leading-7">
-                We reserve the right at any time to modify or discontinue the
-                Site (or any part or content thereof) without notice at any
-                time. We shall not be liable to you or any third-party for any
-                modification, information change, suspension or discontinuance
-                of the Site.
+                Ci riserviamo il diritto di modificare o interrompere il Sito (o
+                qualsiasi parte o contenuto di esso) in qualsiasi momento senza
+                preavviso. Non saremo responsabili nei tuoi confronti o nei
+                confronti di terze parti per eventuali modifiche, cambiamenti di
+                informazioni, sospensioni o interruzioni del Sito.
               </p>
-              {/* 5. Modification of Services ends */}
-              {/* 6. Third-Party Services & Websites begins */}
-              {/* <div className="mb-5 mt-8 text-xl font-bold">
-                5. Third-Party Services & Websites
+              {/* 4. Modifica dei Servizi ends */}
+
+              {/* 5. Informazioni Personali */}
+              <div className="mb-5 mt-8 text-xl font-bold">
+                5. Informazioni Personali
               </div>
+              <p className="leading-7">
+                L'invio di informazioni personali tramite il Sito è regolato
+                dalla nostra{" "}
+                <a href="/privacy" className="text-blue-500 underline">
+                  Privacy Policy
+                </a>
+                .
+              </p>
+              {/* 5. Informazioni Personali ends */}
+
+              {/* 6. Usi Proibiti */}
+              <div className="mb-5 mt-8 text-xl font-bold">6. Usi Proibiti</div>
               <div className="space-y-5">
                 <p className="leading-7">
-                  We are not responsible for the content or services of any
-                  third-party, including, without limitation, any network, or
-                  apps like Discord, or MetaMask, and we make no representations
-                  regarding the content or accuracy of any third-party services
-                  or materials. Those are governed by the terms of use of the
-                  third-party providers.
+                  Non è consentito utilizzare il Sito per scopi illegali,
+                  violare i diritti di proprietà intellettuale di altre persone,
+                  molestie o comportamenti abusivi, diffondere false
+                  informazioni o virus, spamming o interferire con le
+                  funzionalità di sicurezza del Sito.
                 </p>
-                <p className="leading-7">
-                  Please review carefully the third-party&apos;s policies and
-                  practices and make sure you understand them before you engage
-                  in any transaction. Complaints, claims, concerns, or questions
-                  regarding third-party products should be directed to the
-                  third-party.
-                </p>
-              </div> */}
-              {/* 6. Third-Party Services & Websites ends */}
-              {/* 7. Personal Information begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">
-                5. Personal Information
-              </div>
-              <p className="linkify leading-7">
-                Your submission of personal information through the Site is
-                governed by our <Link href="/privacy">Privacy Policy</Link>.
-              </p>
-              {/* 7. Personal Information ends */}
-              {/* 8. Prohibited Usage begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">
-                6. Prohibited Usage
-              </div>
-              <div className="space-y-5">
-                <p className="leading-7">
-                  You are not allowed to use the Site for anything illegal,
-                  infringing the intellectual property rights of other people,
-                  harassment or otherwise abusive behaviour, spreading false
-                  information or viruses, spamming, or interfering with the
-                  security features of the Site.
-                </p>
-                <p className="leading-7">
-                  You are prohibited from using the Site,
-                </p>
+                <p className="leading-7">È vietato utilizzare il Sito per:</p>
                 <ul className="list-inside list-disc space-y-2">
                   <li className="leading-7">
-                    for any unlawful purpose and to solicit others to perform or
-                    participate in any unlawful acts;
+                    qualsiasi scopo illegale e per sollecitare altri a compiere
+                    o partecipare ad atti illeciti;
                   </li>
                   <li className="leading-7">
-                    to violate any international, federal, provincial or state
-                    regulations, rules, laws, or local ordinances;
+                    violare qualsiasi regolamento internazionale, federale,
+                    provinciale o statale, regole, leggi o ordinanze locali;
                   </li>
                   <li className="leading-7">
-                    to infringe upon or violate our intellectual property rights
-                    or the intellectual property rights of others;
+                    infrangere o violare i nostri diritti di proprietà
+                    intellettuale o i diritti di proprietà intellettuale di
+                    altri;
                   </li>
                   <li className="leading-7">
-                    to harass, abuse, insult, harm, defame, slander, disparage,
-                    intimidate, or discriminate based on gender, sexual
-                    orientation, religion, ethnicity, race, age, national
-                    origin, or disability;
+                    molestare, abusare, insultare, danneggiare, diffamare,
+                    calunniare, denigrare, intimidire o discriminare in base al
+                    genere, orientamento sessuale, religione, etnia, razza, età,
+                    origine nazionale o disabilità;
                   </li>
                   <li className="leading-7">
-                    to submit false or misleading information or to upload or
-                    transmit viruses or any other type of malicious code that
-                    will or may be used in any way that will affect the
-                    functionality or operation of the Site or of any related
-                    website, other websites, or the Internet;
+                    inviare informazioni false o fuorvianti o caricare o
+                    trasmettere virus o qualsiasi altro tipo di codice dannoso
+                    che possa influire sulla funzionalità o sul funzionamento
+                    del Sito o di qualsiasi sito correlato, altri siti web o
+                    Internet;
                   </li>
                   <li className="leading-7">
-                    to collect or track the personal information of others to
-                    spam, phish, pretext, crawl, or scrape;
+                    raccogliere o tracciare le informazioni personali di altri
+                    per spamming, phishing, pretexting, crawling o scraping;
                   </li>
                   <li className="leading-7">
-                    for any obscene or immoral purpose or to interfere with or
-                    circumvent the security features of the Site or any related
-                    website, other websites, or the Internet. We reserve the
-                    right to terminate your use of the Site or any related
-                    website for violating any of the prohibited uses.
+                    qualsiasi scopo osceno o immorale o per interferire con o
+                    aggirare le funzionalità di sicurezza del Sito o di
+                    qualsiasi sito correlato, altri siti web o Internet. Ci
+                    riserviamo il diritto di terminare il tuo utilizzo del Sito
+                    o di qualsiasi sito correlato per la violazione di uno
+                    qualsiasi degli usi proibiti.
                   </li>
                 </ul>
               </div>
-              {/* 8. Prohibited Usage ends */}
-              {/* 10. Refund Policy */}
-              {/* <div className="mb-5 mt-8 text-xl font-bold">
-                10. Refund Policy
-              </div>
-              <div className="space-y-5">
-                <p className="leading-7">
-                  <b>No Refunds on Successful Minting:</b> We do not offer
-                  refunds once profile minting is successful. All transactions
-                  completed successfully are final and not subject to refunds.
-                </p>
-                <p className="linkify leading-7">
-                  <b>Refunds for Failed Minting:</b> In the event that profile
-                  minting fails, customers are eligible to request a refund. To
-                  request a refund, please visit our support center at{' '}
-                </p>
-                <p className="leading-7">
-                  This policy is concise and designed to be clear and
-                  straightforward, ensuring that our customers understand our
-                  refund terms related to profile minting activities.
-                </p>
-              </div> */}
-              {/* 10.Refund Policy */}
-              {/* 11. Disclaimer of Warranties begins */}
+              {/* 6. Usi Proibiti ends */}
+
+              {/* 7. Esclusione di Garanzie */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                7. Disclaimer of Warranties
+                7. Esclusione di Garanzie
               </div>
               <p className="leading-7">
-                The Site are provided to you completely as they are, and could
-                function differently than you expected. You agree to accept the
-                Site as is. You expressly agree that your use of, or inability
-                to use, the Site is at your sole risk. Our liability shall be
-                limited entirely or to the maximum extent permitted by law.
+                Il Sito è fornito "così com'è" e "come disponibile". Non
+                garantiamo che l'uso del Sito sarà ininterrotto, tempestivo,
+                sicuro o privo di errori.
               </p>
-              {/* 11. Disclaimer of Warranties ends */}
-              {/* 12. Termination and Cancellation begins */}
+              {/* 7. Esclusione di Garanzie ends */}
+
+              {/* 8. Legge Applicabile */}
               <div className="mb-5 mt-8 text-xl font-bold">
-                8. Termination and Cancellation
-              </div>
-              <div className="space-y-5">
-                <p className="leading-7">
-                  This Agreement is effective unless and until terminated by
-                  either you or us. You may terminate the Agreement with us at
-                  any time by not accessing the Site.
-                </p>
-                <p className="leading-7">
-                  If in our sole judgment you fail to comply with terms, we
-                  reserve the right to terminate our Agreement with you and deny
-                  you access to the Site.
-                </p>
-              </div>
-              {/* 12. Termination and Cancellation ends */}
-              {/* 13. Contact Information begins */}
-              <div className="mb-5 mt-8 text-xl font-bold">
-                9. Contact Information
+                8. Legge Applicabile
               </div>
               <p className="leading-7">
-                Questions about the Terms should be sent to us at
-                info@andreadichio.it
+                Questi Termini e qualsiasi Accordo separato in base al quale
+                forniamo i Servizi saranno regolati e interpretati in base alle
+                leggi di {process.env.NEXT_PUBLIC_APP_COUNTRY}.
               </p>
-              {/* 13. Contact Information ends */}
+              {/* 8. Legge Applicabile ends */}
+
+              {/* 9. Informazioni di Contatto */}
+              <div className="mb-5 mt-8 text-xl font-bold">
+                9. Informazioni di Contatto
+              </div>
+              <p className="leading-7">
+                Domande sui Termini & Condizioni devono essere inviate a{" "}
+                <a
+                  href={`mailto:${process.env.NEXT_PUBLIC_APP_CONTACT}`}
+                  className="text-blue-500 underline"
+                >
+                  {process.env.NEXT_PUBLIC_APP_CONTACT}
+                </a>
+                .
+              </p>
+              {/* 9. Informazioni di Contatto ends */}
             </div>
           </div>
         </div>

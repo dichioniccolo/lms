@@ -13,6 +13,14 @@
     ],
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "*.ts", "*.mjs", "src"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "*.ts",
+    "*.mjs",
+    "src",
+    "../../packages/ui/src/hooks/use-event-callback.ts",
+    "../../packages/ui/src/hooks/use-local-storage.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -30,7 +30,7 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
 
     const { path } = parseRequest(req);
 
-    if (path === "/") {
+    if (publicRoutes.includes(path)) {
       return NextResponse.next();
     }
 
@@ -47,6 +47,8 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next();
   })(req, null!);
 }
+
+const publicRoutes = ["/", "/terms", "/privacy"];
 
 export const config = {
   matcher: [

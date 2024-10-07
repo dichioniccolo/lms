@@ -79,17 +79,17 @@ export function SearchCommandDialog() {
           className="block pl-0 hover:!bg-transparent md:hidden"
           onClick={searchModal.onClose}
         >
-          Cancel
+          Annulla
         </Button>
       </div>
 
-      <section className="flex size-full overflow-hidden pl-3 pt-2">
+      <section className="flex size-full flex-1 overflow-hidden pl-3 pt-2">
         {loading && <CommandEmpty>Loading...</CommandEmpty>}
         {!loading && courses.length > 0 ? (
-          <ScrollArea className="w-full">
-            <div className="relative size-full !max-h-none pb-10 pr-2 md:pr-3">
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 [&_[cmdk-item]]:shrink-0">
-                <CommandList>
+          <ScrollArea className="flex flex-1">
+            <div className="relative flex size-full !max-h-none flex-1 pb-10 pr-2 md:pr-3">
+              <div className="flex size-full flex-1 [&_[cmdk-item]]:shrink-0">
+                <CommandList className="flex max-h-max flex-1">
                   {courses.map((course) => (
                     <CommandItem
                       key={course.id}

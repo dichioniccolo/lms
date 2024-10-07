@@ -3,9 +3,12 @@ import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 
+import { cookies } from "next/headers";
+
 import { cn } from "@acme/ui";
 
 import { env } from "~/env.mjs";
+import { CookieBanner } from "./(marketing)/_components/cookie-banner";
 import { Providers } from "./providers";
 
 const fontSans = Inter({
@@ -66,10 +69,13 @@ export const viewport: Viewport = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const consent = cookies().get("cookie_consent")?.value ?? "undecided";
+
   return (
     <html lang="en">
       <body className={cn(["font-sans", fontSans.variable])}>
         <Providers>{children}</Providers>
+        <CookieBanner consent={consent} />
       </body>
     </html>
   );
