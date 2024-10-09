@@ -1,5 +1,5 @@
 import type { SQL } from "@acme/db";
-import { and, db, eq, like, schema } from "@acme/db";
+import { and, db, eq, ilike, schema } from "@acme/db";
 
 import { getUserCourseProgress } from "./get-course-progress";
 
@@ -13,7 +13,7 @@ export async function getCourses({
   const where: SQL[] = [eq(schema.courses.published, true)];
 
   if (title) {
-    where.push(like(schema.courses.title, `%${title}%`));
+    where.push(ilike(schema.courses.title, `%${title}%`));
   }
 
   const courses = await db.query.courses.findMany({
