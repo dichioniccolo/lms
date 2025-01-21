@@ -25,6 +25,7 @@
     "@aws-sdk/s3-request-presigner": "^3.533.0",
     "@aws-sdk/signature-v4-crt": "^3.533.0",
     "@hello-pangea/dnd": "^16.5.0",
+    "@sentry/nextjs": "^8",
     "@t3-oss/env-nextjs": "^0.9.2",
     "@upstash/ratelimit": "^1.0.1",
     "@upstash/redis": "^1.28.4",
