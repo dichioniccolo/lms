@@ -23,6 +23,10 @@ export async function getUserCourseProgress(userId: string, courseId: string) {
 
   const publishedChapterIds = publishedChapters.map((x) => x.id);
 
+  if (publishedChapterIds.length === 0) {
+    return 0;
+  }
+
   const completedChapters = await withCount(
     schema.usersChaptersProgresses,
     and(

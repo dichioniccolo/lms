@@ -47,13 +47,15 @@ export const {
       from: "",
       maxAge: 24 * 60 * 60,
       async sendVerificationRequest({ identifier, url }) {
-        await inngest.send({
-          name: "lms/user/login-link",
-          data: {
-            email: identifier,
-            url,
-          },
-        });
+        console.log(url);
+
+        // await inngest.send({
+        //   name: "lms/user/login-link",
+        //   data: {
+        //     email: identifier,
+        //     url,
+        //   },
+        // });
       },
       options: {},
     },
@@ -96,6 +98,10 @@ export const {
 
     jwt: async ({ token, user }) => {
       if (!token.email) {
+        if (user) {
+          token.sub = user?.id ?? "Cannot determine user id";
+        }
+
         return token;
       }
 
@@ -112,7 +118,7 @@ export const {
 
       if (!dbUser) {
         if (user) {
-          token.sub = user?.id;
+          token.sub = user?.id ?? "Cannot determine user id";
         }
 
         return token;
