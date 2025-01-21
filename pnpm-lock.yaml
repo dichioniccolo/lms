@@ -543,6 +543,9 @@ importers:
       cmdk:
         specifier: ^1.0.0
         version: 1.0.4(react-dom@18.3.1)(react@18.3.1)
+      dequal:
+        specifier: ^2.0.3
+        version: 2.0.3
       lucide-react:
         specifier: ^0.357.0
         version: 0.357.0(react@18.3.1)
@@ -7799,6 +7802,11 @@ packages:
   /delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
+    dev: false
+
+  /dequal@2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
     dev: false
 
   /detect-node-es@1.1.0:
