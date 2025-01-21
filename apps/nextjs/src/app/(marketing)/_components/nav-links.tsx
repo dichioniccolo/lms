@@ -13,14 +13,8 @@ const links = [{ name: "Login", path: "/login" }] satisfies {
 export const NavLinks = () => {
   return (
     <>
-      {links.map((link) => (
-        <Button
-          key={link.path}
-          variant="link"
-          size="lg"
-          className="px-0"
-          asChild
-        >
+      {links.map((link, index) => (
+        <Button key={index} variant="link" size="lg" className="px-0" asChild>
           <Link
             href={link.path}
             className="text-muted-foreground hover:text-primary"

@@ -90,9 +90,9 @@ export function SearchCommandDialog() {
             <div className="relative flex size-full !max-h-none flex-1 pb-10 pr-2 md:pr-3">
               <div className="flex size-full flex-1 [&_[cmdk-item]]:shrink-0">
                 <CommandList className="flex max-h-max flex-1">
-                  {courses.map((course) => (
+                  {courses.map((course, index) => (
                     <CommandItem
-                      key={course.id}
+                      key={index}
                       className="group relative flex gap-x-2 rounded-t-2xl border p-0"
                     >
                       <span className="sr-only">{course.title}</span>

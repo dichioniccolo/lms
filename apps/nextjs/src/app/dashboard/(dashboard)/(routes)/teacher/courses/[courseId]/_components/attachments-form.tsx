@@ -64,9 +64,9 @@ export function AttachmentsForm({ courseId, attachments }: Props) {
           )}
           {attachments.length > 0 && (
             <div className="space-y-2">
-              {attachments.map((attachment) => (
+              {attachments.map((attachment, index) => (
                 <AttachmentForm
-                  key={attachment.id}
+                  key={index}
                   courseId={courseId}
                   attachment={attachment}
                 />

@@ -61,24 +61,29 @@ export function VideoPlayer({
           <Loader2 className="size-8 animate-spin text-secondary" />
         </div>
       )}
-      {locked || !videoUrl ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800 text-secondary">
-          <Lock className="size-8" />
-          <p className="text-center">
-            Devi comprare il corso per essere abilitato a visualizzare il video.
-          </p>
-        </div>
-      ) : (
-        <Video
-          src={videoUrl}
-          onCompleted={() =>
-            action({
-              courseId,
-              chapterId,
-              completed: true,
-            })
-          }
-        />
+      {mounted && (
+        <>
+          {locked || !videoUrl ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-y-2 bg-slate-800 text-secondary">
+              <Lock className="size-8" />
+              <p className="text-center">
+                Devi comprare il corso per essere abilitato a visualizzare il
+                video.
+              </p>
+            </div>
+          ) : (
+            <Video
+              src={videoUrl}
+              onCompleted={() =>
+                action({
+                  courseId,
+                  chapterId,
+                  completed: true,
+                })
+              }
+            />
+          )}
+        </>
       )}
     </div>
   );

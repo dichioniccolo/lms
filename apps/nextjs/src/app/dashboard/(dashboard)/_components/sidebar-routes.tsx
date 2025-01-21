@@ -48,8 +48,8 @@ export function SidebarRoutes() {
 
   return (
     <div className="flex w-full flex-col">
-      {routes.map((route) => (
-        <SidebarItem key={route.href} route={route} />
+      {routes.map((route, index) => (
+        <SidebarItem key={index} route={route} />
       ))}
     </div>
   );

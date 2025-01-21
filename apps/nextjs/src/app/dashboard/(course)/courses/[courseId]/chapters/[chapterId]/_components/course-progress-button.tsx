@@ -33,7 +33,7 @@ export function CourseProgressButton({
         confetti.open();
       }
 
-      toast.success("Progress updated");
+      toast.success("Aggiornato con successo");
 
       router.refresh();
     },

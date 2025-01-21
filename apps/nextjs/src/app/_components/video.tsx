@@ -17,7 +17,7 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import ReactPlayer from "react-player";
+import ReactPlayer, { ReactPlayerProps } from "react-player";
 
 import { cn } from "@acme/ui";
 import { AspectRatio } from "@acme/ui/components/ui/aspect-ratio";
@@ -37,9 +37,12 @@ interface Props {
 
 const playbacks = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
+// Extract the instance type of ReactPlayer
+type ReactPlayerInstance = InstanceType<typeof ReactPlayer>;
+
 export function Video({ src, onCompleted }: Props) {
   const fullScreenRef = useRef<ElementRef<"div">>(null);
-  const videoRef = useRef<ElementRef<typeof ReactPlayer>>(null);
+  const videoRef = useRef<ReactPlayerInstance | null>(null);
 
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
@@ -278,18 +281,20 @@ export function Video({ src, onCompleted }: Props) {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button onClickCapture={onPictureInPicture}>
-                  <PictureInPicture />
-                </button>
+                {ReactPlayer.canEnablePIP(src) && (
+                  <button onClickCapture={onPictureInPicture}>
+                    <PictureInPicture />
+                  </button>
+                )}
                 {!fullScreen && (
                   <DropdownMenu>
                     <DropdownMenuTrigger onClick={enableMovingHover}>
                       <ListVideo />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent onMouseEnter={enableMovingHover}>
-                      {playbacks.map((rate) => (
+                      {playbacks.map((rate, index) => (
                         <DropdownMenuItem
-                          key={rate}
+                          key={index}
                           onClick={() => setPlaybackRate(rate)}
                         >
                           {rate === 1 ? "Normal" : `${rate}x`}
@@ -318,7 +323,7 @@ export function Video({ src, onCompleted }: Props) {
           className="aspect-video outline-none active:outline-none"
         >
           <ReactPlayer
-            ref={videoRef}
+            ref={(player) => (videoRef.current = player)}
             width="100%"
             height="100%"
             url={src}

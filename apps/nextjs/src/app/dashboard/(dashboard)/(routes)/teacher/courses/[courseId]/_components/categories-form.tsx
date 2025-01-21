@@ -81,9 +81,9 @@ export function CategoriesForm({
                       <Button variant="outline">Open</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
-                      {availableCategories.map((category) => (
+                      {availableCategories.map((category, index) => (
                         <DropdownMenuCheckboxItem
-                          key={category.id}
+                          key={index}
                           checked={
                             !!form
                               .watch("categories")

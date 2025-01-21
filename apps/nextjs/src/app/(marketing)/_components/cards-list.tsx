@@ -6,8 +6,8 @@ export async function CardsList() {
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(max(var(--min-column-width),var(--max-column-width)),1fr))] content-start gap-x-[--column-gap] gap-y-8 [--column-gap:12px] [--max-column-count:5] [--max-column-width:calc((100%-var(--total-gap-width))/var(--max-column-count))] [--min-column-width:300px] [--total-gap-width:calc((var(--max-column-count)-1)*var(--column-gap))] sm:gap-y-10 sm:[--column-gap:24px] sm:[--min-column-width:324px] md:[--min-column-width:384px]">
-      {courses.map((course) => (
-        <CourseCard key={course.id} course={course} />
+      {courses.map((course, index) => (
+        <CourseCard key={index} course={course} />
       ))}
     </div>
   );

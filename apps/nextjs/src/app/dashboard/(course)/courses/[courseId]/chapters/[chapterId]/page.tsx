@@ -79,12 +79,12 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
               <>
                 {/* <Separator /> */}
                 <div className="w-60 p-4">
-                  {attachments.map((attachment) => (
+                  {attachments.map((attachment, index) => (
                     <a
+                      key={index}
                       href={attachment.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      key={attachment.id}
                       className="flex w-full items-center rounded-md border bg-sky-200 p-3 text-sky-700 hover:underline"
                     >
                       <File />

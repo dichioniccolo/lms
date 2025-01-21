@@ -26,7 +26,7 @@ export function ChaptersList({ courseId, items, action }: Props) {
 
   useEffect(() => {
     setChapters(
-      items.toSorted((a, b) => (a.position ?? 9999) - (b.position ?? 9999)),
+      [...items].sort((a, b) => (a.position ?? 9999) - (b.position ?? 9999)),
     );
   }, [items]);
 
@@ -74,11 +74,7 @@ export function ChaptersList({ courseId, items, action }: Props) {
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {chapters.map((chapter, index) => (
-              <Draggable
-                key={chapter.id}
-                draggableId={chapter.id}
-                index={index}
-              >
+              <Draggable key={index} draggableId={chapter.id} index={index}>
                 {(provided) => (
                   <div
                     className={cn(

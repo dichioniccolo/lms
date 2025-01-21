@@ -1,3 +1,5 @@
+"use client";
+
 import { CourseProgress } from "~/app/_components/course-progress";
 import { CourseSidebarItem } from "./course-sidebar-item";
 
@@ -33,9 +35,9 @@ export function CourseSidebar({ course, purchased, courseProgress }: Props) {
         )}
       </div>
       <div className="flex w-full flex-col overflow-y-auto">
-        {course.chapters.map((chapter) => (
+        {course.chapters.map((chapter, index) => (
           <CourseSidebarItem
-            key={chapter.id}
+            key={index}
             courseId={course.id}
             chapter={chapter}
             purchased={purchased}
