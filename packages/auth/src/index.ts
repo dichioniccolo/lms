@@ -47,15 +47,13 @@ export const {
       from: "",
       maxAge: 24 * 60 * 60,
       async sendVerificationRequest({ identifier, url }) {
-        console.log(url);
-
-        // await inngest.send({
-        //   name: "lms/user/login-link",
-        //   data: {
-        //     email: identifier,
-        //     url,
-        //   },
-        // });
+        await inngest.send({
+          name: "lms/user/login-link",
+          data: {
+            email: identifier,
+            url,
+          },
+        });
       },
       options: {},
     },
@@ -98,11 +96,7 @@ export const {
 
     jwt: async ({ token, user }) => {
       if (!token.email) {
-        if (user) {
-          token.sub = user?.id ?? "Cannot determine user id";
-        }
-
-        return token;
+        throw new Error("Unable to sign in with this email address");
       }
 
       const dbUser = await db.query.users.findFirst({
@@ -118,7 +112,7 @@ export const {
 
       if (!dbUser) {
         if (user) {
-          token.sub = user?.id ?? "Cannot determine user id";
+          token.sub = user?.id;
         }
 
         return token;
