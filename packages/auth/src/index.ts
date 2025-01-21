@@ -96,7 +96,7 @@ export const {
 
     jwt: async ({ token, user }) => {
       if (!token.email) {
-        throw new Error("Unable to sign in with this email address");
+        return token;
       }
 
       const dbUser = await db.query.users.findFirst({
