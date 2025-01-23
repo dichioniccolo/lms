@@ -31,6 +31,10 @@ export function useServerAction<const State, const Schema extends z.ZodTypeAny>(
         startTransition(() => {
           actionParam(...params)
             .then((data) => {
+              if (!data) {
+                return;
+              }
+
               if (data.status === SubmissionStatus.SUCCESS) {
                 options?.onSuccess?.(data.state);
               }
