@@ -8,11 +8,11 @@ export default async function Layout({ children }: PropsWithChildren) {
   const user = await getCurrentUser();
 
   if (!user) {
-    return redirect("/login");
+    redirect("/login");
   }
 
   if (!isTeacher(user.role)) {
-    return redirect("/");
+    redirect("/");
   }
 
   return <>{children}</>;

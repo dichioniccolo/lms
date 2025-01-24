@@ -23,7 +23,7 @@ export default async function Page({ params: { courseId, chapterId } }: Props) {
   const { data: chapter } = await getChapter({ courseId, chapterId });
 
   if (!chapter) {
-    return redirect("/dashboard");
+    redirect("/dashboard");
   }
 
   const requiredFields = [chapter.title, chapter.description, chapter.videoUrl];

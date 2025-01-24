@@ -33,14 +33,14 @@ export default async function Page({ params: { courseId } }: Props) {
   });
 
   if (!course) {
-    return redirect("/dashboard");
+    redirect("/dashboard");
   }
 
   const chapter = course.chapters[0];
 
   if (!chapter) {
-    return redirect("/dashboard");
+    redirect("/dashboard");
   }
 
-  return redirect(`/dashboard/courses/${course.id}/chapters/${chapter.id}`);
+  redirect(`/dashboard/courses/${course.id}/chapters/${chapter.id}`);
 }

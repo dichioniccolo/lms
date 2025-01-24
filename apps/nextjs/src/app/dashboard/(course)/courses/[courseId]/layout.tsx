@@ -15,7 +15,7 @@ export default async function Layout({
   const session = await auth();
 
   if (!session) {
-    return redirect("/");
+    redirect("/");
   }
 
   const course = await db
@@ -55,7 +55,7 @@ export default async function Layout({
     .then((x) => x[0]);
 
   if (!course) {
-    return redirect("/");
+    redirect("/");
   }
 
   const chapters = await db.query.chapters.findMany({

@@ -29,7 +29,7 @@ export default async function Page({ params: { courseId } }: Props) {
   const { data: course } = await getCourse({ courseId });
 
   if (!course) {
-    return redirect("/dashboard/teacher/courses");
+    redirect("/dashboard/teacher/courses");
   }
 
   const categories = await db.query.categories.findMany({

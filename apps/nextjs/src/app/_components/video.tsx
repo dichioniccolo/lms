@@ -17,7 +17,7 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import ReactPlayer, { ReactPlayerProps } from "react-player";
+import ReactPlayer from "react-player";
 
 import { cn } from "@acme/ui";
 import { AspectRatio } from "@acme/ui/components/ui/aspect-ratio";
