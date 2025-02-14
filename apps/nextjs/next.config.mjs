@@ -115,6 +115,9 @@ const config = {
       path: false,
       stream: false,
       dns: false,
+      crypto: false,
+      net: false,
+      tls: false,
     };
 
     return config;
