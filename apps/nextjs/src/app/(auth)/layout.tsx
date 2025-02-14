@@ -1,6 +1,15 @@
 import type { PropsWithChildren } from "react";
+import { redirect } from "next/navigation";
 
-export default function Layout({ children }: PropsWithChildren) {
+import { auth } from "@acme/auth";
+
+export default async function Layout({ children }: PropsWithChildren) {
+  const session = await auth();
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="min-h-screen">
       {children}

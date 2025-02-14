@@ -5,46 +5,50 @@ import { auth } from "@acme/auth";
 
 import { parseRequest } from "./lib/utils";
 
-export default function middleware(req: NextRequest, event: NextFetchEvent) {
-  return auth(async (req) => {
-    // if (env.NODE_ENV === "production") {
-    //   const ip = req.ip ?? "127.0.0.1";
-
-    //   const { success, pending, limit, remaining, reset } =
-    //     await ratelimit.limit(ip);
-
-    //   event.waitUntil(pending);
-
-    //   if (!success) {
-    //     const res = NextResponse.json("Rate limit exceeded", { status: 429 });
-
-    //     res.headers.set("X-RateLimit-Limit", limit.toString());
-    //     res.headers.set("X-RateLimit-Remaining", remaining.toString());
-    //     res.headers.set("X-RateLimit-Reset", reset.toString());
-
-    //     return res;
-    //   }
-    // }
-
-    const { path } = parseRequest(req);
-
-    if (publicRoutes.includes(path)) {
-      return NextResponse.next();
-    }
-
-    if (!req.auth?.user && path !== "/login") {
-      const url = new URL("/login", req.url);
-      if (path !== "/dashboard") url.searchParams.set("redirect", path);
-      return NextResponse.redirect(url);
-    }
-
-    if (!!req.auth?.user && path === "/login") {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
-
-    return NextResponse.next();
-  })(req, null!);
+export default function middleware() {
+  return NextResponse.next();
 }
+
+// export default function middleware(req: NextRequest, event: NextFetchEvent) {
+//   return auth(async (req) => {
+//     // if (env.NODE_ENV === "production") {
+//     //   const ip = req.ip ?? "127.0.0.1";
+
+//     //   const { success, pending, limit, remaining, reset } =
+//     //     await ratelimit.limit(ip);
+
+//     //   event.waitUntil(pending);
+
+//     //   if (!success) {
+//     //     const res = NextResponse.json("Rate limit exceeded", { status: 429 });
+
+//     //     res.headers.set("X-RateLimit-Limit", limit.toString());
+//     //     res.headers.set("X-RateLimit-Remaining", remaining.toString());
+//     //     res.headers.set("X-RateLimit-Reset", reset.toString());
+
+//     //     return res;
+//     //   }
+//     // }
+
+//     const { path } = parseRequest(req);
+
+//     if (publicRoutes.includes(path)) {
+//       return NextResponse.next();
+//     }
+
+//     if (!req.auth?.user && path !== "/login") {
+//       const url = new URL("/login", req.url);
+//       if (path !== "/dashboard") url.searchParams.set("redirect", path);
+//       return NextResponse.redirect(url);
+//     }
+
+//     if (!!req.auth?.user && path === "/login") {
+//       return NextResponse.redirect(new URL("/dashboard", req.url));
+//     }
+
+//     return NextResponse.next();
+//   })(req, null!);
+// }
 
 const publicRoutes = ["/", "/terms", "/privacy"];
 

@@ -18,7 +18,7 @@ interface Props {
   };
 }
 
-export const runtime: ServerRuntime = "edge";
+// export const runtime: ServerRuntime = "edge";
 
 export default async function Page({ params: { courseId, chapterId } }: Props) {
   const result = await getChapter(courseId, chapterId);

@@ -8,13 +8,13 @@ import { Navbar } from "./_components/navbar";
 import { Sidebar } from "./_components/sidebar";
 import { DashboardProviders } from "./providers";
 
-export const runtime: ServerRuntime = "edge";
+// export const runtime: ServerRuntime = "edge";
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
 
   if (!session) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   return (

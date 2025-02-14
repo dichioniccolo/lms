@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-export const runtime: ServerRuntime = "edge";
+// export const runtime: ServerRuntime = "edge";
 
 export default async function Page({ params: { courseId } }: Props) {
   const course = await db.query.courses.findFirst({

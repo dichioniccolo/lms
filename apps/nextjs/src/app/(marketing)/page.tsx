@@ -4,7 +4,7 @@ import { HeroComponent } from "../_components/hero-component";
 import { CardsList } from "./_components/cards-list";
 import { CategoriesList } from "./_components/categories-list";
 
-export const runtime: ServerRuntime = "edge";
+// export const runtime: ServerRuntime = "edge";
 
 export default function Page() {
   return (

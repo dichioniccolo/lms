@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 //   params: { courseId: string; chapterId: string };
 // }
 
-export const runtime: ServerRuntime = "edge";
+// export const runtime: ServerRuntime = "edge";
 
 // const CHUNK_SIZE_IN_BYTES = 1024 * 1024 * 4; // 10 MB
 

@@ -7,7 +7,7 @@ import { Logo } from "@acme/ui/icons/logo";
 import { env } from "~/env.mjs";
 import { SignInForm } from "./_components/sign-in-form";
 
-export const runtime: ServerRuntime = "edge";
+// export const runtime: ServerRuntime = "edge";
 
 const title = `Login on ${env.NEXT_PUBLIC_APP_NAME}`;
 const description = "Sign in to your account to access your courses and more.";
