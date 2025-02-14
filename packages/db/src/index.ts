@@ -1,5 +1,8 @@
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+// import { neon } from "@neondatabase/serverless";
+// import { drizzle } from "drizzle-orm/neon-http";
+
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 
 import { env } from "./env.mjs";
 import * as accounts from "./schema/accounts/schema";
@@ -30,10 +33,16 @@ export const schema = {
 
 export * from "drizzle-orm";
 
-const client = neon(env.DATABASE_URL_POSTGRES);
+// const client = neon(env.DATABASE_URL_POSTGRES);
 
-// @ts-expect-error error TS2322: Type 'Neon' is not assignable to type 'Client'.
-export const db = drizzle(client, { schema });
+// export const db = drizzle(client, { schema });
+const pool = new Pool({
+  connectionString: env.DATABASE_URL_POSTGRES,
+});
+
+export const db = drizzle(pool, {
+  schema,
+});
 
 export { createId } from "@paralleldrive/cuid2";
 

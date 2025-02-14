@@ -2,13 +2,13 @@ import { z } from "zod";
 
 export const RequiredString = z
   .string({
-    required_error: "Cannot be empty",
+    required_error: "Richiesto",
     invalid_type_error: "Must be a string",
   })
-  .min(1, { message: "Cannot be empty" });
+  .min(1, { message: "Richiesto" });
 
 export const RequiredEmail = RequiredString.email({
-  message: "Invalid email address",
+  message: "Inserisci indirizzo email",
 });
 
 export const UserAuthSchema = z.object({
