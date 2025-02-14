@@ -14,7 +14,7 @@ export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
 
   if (!session) {
-    redirect("/auth/login");
+    redirect("/login");
   }
 
   return (

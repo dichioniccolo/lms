@@ -15,7 +15,7 @@ export default async function Layout({
   const session = await auth();
 
   if (!session) {
-    redirect("/auth/login");
+    redirect("/login");
   }
 
   const course = await db
