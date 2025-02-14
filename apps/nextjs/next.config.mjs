@@ -112,6 +112,9 @@ const config = {
       ...config.resolve.fallback,
 
       fs: false, // the solution
+      path: false,
+      stream: false,
+      dns: false,
     };
 
     return config;
